@@ -1,28 +1,178 @@
 {
-"Actor": {
-  "types": ["character"],
-  "character": {
-    "biography": "",
-    "health": {
-      "value": 10,
-      "min": 0,
-      "max": 10
+  "Actor": {
+    "types": [
+      "pc",
+      "npc"
+    ],
+    "pc": {
+      "description": "",
+      "languages": "",
+      "goal": "",
+      "level": 1,
+      "xp": 0,
+      "hp": {
+        "current": 0,
+        "bonus": 0
+      },
+      "str": {
+        "score": 10
+      },
+      "dex": {
+        "score": 10
+      },
+      "con": {
+        "score": 10
+      },
+      "int": {
+        "score": 10
+      },
+      "wis": {
+        "score": 10
+      },
+      "cha": {
+        "score": 10
+      },
+      "hardiness": {
+        "base": 15,
+        "bonus": 0
+      },
+      "evasion": {
+        "base": 15,
+        "bonus": 0
+      },
+      "spirit": {
+        "base": 15,
+        "bonus": 0
+      },
+      "facts": [],
+      "armor": {
+        "type": "",
+        "shield": false,
+        "bonus": 0,
+        "desc": "",
+        "penalizeHardiness": false,
+        "penalizeEvasion": false,
+        "penalizeSpirit": false
+      },
+      "effort": {
+        "total": 0,
+        "active": 0,
+        "scene": 0,
+        "day": 0
+      },
+      "influence": {
+        "total": 0,
+        "spent": 0
+      },
+      "dominion": {
+        "total": 0,
+        "spent": 0,
+        "income": 0
+      },
+      "wealth": {
+        "total": 0,
+        "description": ""
+      },
+      "notes": ""
     },
-    "effort": {
-      "value": 5,
-      "min": 0,
-      "max": 5
+    "npc": {
+      "description": "",
+      "goal": "",
+      "move": 30,
+      "save": 15,
+      "morale": 9,
+      "ac": 10,
+      "hd": {
+        "current": 0,
+        "max": 0
+      },
+      "actions": 1,
+      "attacks": 1,
+      "range": "",
+      "area": "",
+      "toHitBonus": 0,
+      "damage": "",
+      "effort": {
+        "total": 0,
+        "active": 0,
+        "scene": 0,
+        "day": 0
+      },
+      "notes": ""
+    }
+  },
+  "Item": {
+    "types": [
+      "autoHitAttack",
+      "multiDieDamageRoll",
+      "attack",
+      "project",
+      "item",
+      "boundWord",
+      "divineGift",
+      "divineMiracle",
+      "artifact",
+      "treasure",
+      "invocation",
+      "tactic"
+    ],
+    "autoHitAttack": {
+      "damage": "",
+      "bonus": 0
     },
-    "attributes": {}
+    "multiDieDamageRoll": {
+      "numDice": 1,
+      "diceType": ""
+    },
+    "attack": {
+      "attr": "",
+      "hitBonus": 0,
+      "range": "",
+      "area": "",
+      "damageDie": "",
+      "damageBonus": 0
+    },
+    "project": {
+      "difficulty": "",
+      "scope": "",
+      "resistance": 0,
+      "completed": false,
+      "committedDominion": 0,
+      "committedInfluence": 0
+    },
+    "item": {
+      "description": ""
+    },
+    "boundWord": {
+      "description": ""
+    },
+    "divineGift": {
+      "description": "",
+      "commitment": "",
+      "greater": false
+    },
+    "divineMiracle": {
+      "description": "",
+      "effort": 0
+    },
+    "artifact": {
+      "description": "",
+      "dominionCost": 0,
+      "effort": 0,
+      "bound": false,
+      "effortSpent": 0,
+      "powers": []
+    },
+    "treasure": {
+      "description": "",
+      "value": 0
+    },
+    "invocation": {
+      "description": "",
+      "level": ""
+    },
+    "tactic": {
+      "description": ""
+    }
   }
-},
-"Item": {
-  "types": ["item"],
-  "item": {
-    "description": "",
-    "quantity": 1,
-    "weight": 0,
-    "attributes": {}
-  }
-}
 }
