@@ -47,5 +47,10 @@ export class GodboundActorSheet extends ActorSheet {
       this.actor.deleteOwnedItem(li.data("itemId"));
       li.slideUp(200, () => this.render(false));
     });
+
+    html.blur(ev => {
+      delete(_templateCache[this.options.template]);
+      this.render(true);
+    })
   }
 }

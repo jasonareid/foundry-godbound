@@ -1,8 +1,14 @@
-.worldbuilding {
+.godbound {
+
   .window-content {
     height: 100%;
     padding: 5px;
     overflow-y: hidden;
+    background: url('/systems/godbound/assets/parchment.jpg');
+  }
+
+  form {
+    background: inherit;
   }
 
   .sheet-header {
@@ -36,17 +42,26 @@
         margin: 0;
       }
     }
-  }
-
-  .resource {
-    width: 50%;
-    height: 40px;
-    margin-top: 10px;
-    float: left;
-    text-align: center;
-    input {
-      width: 100px;
-      height: 28px;
+    .tabular {
+      display:table;
+      > * {
+        display:table-row;
+        :first-child {
+          width: 25%;
+          text-align: right;
+          padding-right: 8px;
+        }
+        :last-child {
+            width: 100%;
+        }
+        > * {
+          display: table-cell;
+          vertical-align: top;
+        }
+      }
+    }
+    textarea {
+      height:50px;
     }
   }
 

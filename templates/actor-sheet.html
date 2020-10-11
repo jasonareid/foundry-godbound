@@ -1,19 +1,20 @@
-<form class="{{cssClass}}" autocomplete="off">
+<form class="{{cssClass}} flexcol" autocomplete="off">
 
     {{!-- Sheet Header --}}
     <header class="sheet-header">
         <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100"/>
-        <div class="header-fields">
-            <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Name"/></h1>
-            <div class="resource">
-                <input type="text" name="data.hp.current" value="{{data.hp.current}}" data-dtype="Number"/>
-                <span> / </span>
-                <span>{{data.computed.hp.max}}</span>
+        <div class="header-fields tabular">
+            <div>
+                <label for="name" style="display: table-cell">Name:</label> <input style="display:table-cell" id="name" name="name" type="text" value="{{actor.name}}"/>
             </div>
-            <div class="resource">
-                <span>{{data.computed.effort.available}}</span>
-                <span> / </span>
-                <span>{{data.effort.total}}</span>
+            <div>
+                <label for="description">Description:</label> <textarea id="description" name="data.description">{{data.description}}</textarea>
+            </div>
+            <div>
+                <label for="languages">Languages:</label> <input id="languages" name="data.languages" type="text" value="{{data.languages}}"/>
+            </div>
+            <div>
+                <label for="goal">Goals:</label> <textarea id="goal" name="data.goal">{{data.goal}}</textarea>
             </div>
         </div>
     </header>
