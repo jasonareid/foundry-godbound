@@ -1,55 +1,189 @@
-<form class="{{cssClass}} flexcol" autocomplete="off">
-
-    {{!-- Sheet Header --}}
-    <header class="sheet-header">
-        <div class="summary">
-            <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100"
-                 width="100"/>
-            <div class="header-fields tabular">
-                <div>
-                    <label for="name">Name:</label> <input id="name" name="name" type="text" value="{{actor.name}}"/>
-                </div>
-                <div>
-                    <label for="description">Description:</label> <textarea id="description" name="data.description">{{data.description}}</textarea>
-                </div>
-                <div>
-                    <label for="languages">Languages:</label> <input id="languages" name="data.languages" type="text" value="{{data.languages}}"/>
-                </div>
-                <div>
-                    <label for="goal">Goals:</label> <textarea id="goal" name="data.goal">{{data.goal}}</textarea>
-                </div>
-                <div>
-                    <label for="level">Level:</label>
-                    <div>
-                        <input id="level" name="data.level" type="text" value="{{data.level}}" class="shares"/>
-                        <label for="xp" style="padding-left:16px">XP:</label>
-                        <input id="xp" name="data.xp" type="text" value="{{data.xp}}" class="shares"/>
-                    </div>
-                </div>
-                <div>
-
-                </div>
-            </div>
-        </div>
-    </header>
+<form class="{{cssClass}}" autocomplete="off">
 
     {{!-- Sheet Tab Navigation --}}
     <nav class="sheet-tabs tabs" data-group="primary">
-        <a class="item" data-tab="Attrs">Attrs</a>
-        <a class="item" data-tab="Words">Words</a>
-        <a class="item" data-tab="Combat">Combat</a>
-        <a class="item" data-tab="Wealth">Wealth</a>
-        <a class="item" data-tab="Artifacts">Artifacts</a>
-        <a class="item" data-tab="Projects">Projects</a>
-        <a class="item" data-tab="Notes">Notes</a>
+        <a class="item" data-tab="attrs">Attrs</a>
+        <a class="item" data-tab="words">Words</a>
+        <a class="item" data-tab="combat">Combat</a>
+        <a class="item" data-tab="wealth">Wealth</a>
+        <a class="item" data-tab="artifacts">Artifacts</a>
+        <a class="item" data-tab="projects">Projects</a>
+        <a class="item" data-tab="notes" style="flex-grow:2">Facts & Notes</a>
     </nav>
 
     {{!-- Sheet Body --}}
     <section class="sheet-body">
 
-        {{!-- Biography Tab --}}
-        <div class="tab biography" data-group="primary" data-tab="description">
-            {{editor content=data.biography target="data.biography" button=true owner=owner editable=editable}}
+        <div class="tab attrs" data-group="primary" data-tab="attrs">
+            <div class="container col">
+
+                <div class="container row sheet-header">
+                    <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100"
+                         width="100"/>
+                    <div class="header-fields tabular">
+                        <div>
+                            <label for="name">Name:</label> <input id="name" name="name" type="text" value="{{actor.name}}"/>
+                        </div>
+                        <div>
+                            <label for="description">Description:</label> <textarea id="description" name="data.description">{{data.description}}</textarea>
+                        </div>
+                        <div>
+                            <label for="languages">Languages:</label> <input id="languages" name="data.languages" type="text" value="{{data.languages}}"/>
+                        </div>
+                        <div>
+                            <label for="goal">Goals:</label> <textarea id="goal" name="data.goal">{{data.goal}}</textarea>
+                        </div>
+                        <div>
+                            <label for="level">Level:</label>
+                            <div>
+                                <input id="level" name="data.level" type="text" value="{{data.level}}" class="shares"/>
+                                <label for="xp" style="padding-left:16px">XP:</label>
+                                <input id="xp" name="data.xp" type="text" value="{{data.xp}}" class="shares"/>
+                            </div>
+                        </div>
+                        <div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container row">
+                    <div class="container col">
+                        <div>
+                            <h3>Attributes</h3>
+                            <table class="headered">
+                                <thead>
+                                <tr>
+                                    <td></td>
+                                    <td>Score</td>
+                                    <td>Mod</td>
+                                    <td>Check</td>
+                                    <td>Roll</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>Str</td>
+                                    <td><input type="text" name="data.attributes.str.score" value="{{data.attributes.str.score}}" data-dtype="Number" /></td>
+                                    <td>{{data.computed.attributes.str.mod}}</td>
+                                    <td>{{data.computed.attributes.str.check}}</td>
+                                    <td><i class="fas fa-dice-d20"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>Dex</td>
+                                    <td><input type="text" name="data.attributes.dex.score" value="{{data.attributes.dex.score}}" data-dtype="Number" /></td>
+                                    <td>{{data.computed.attributes.dex.mod}}</td>
+                                    <td>{{data.computed.attributes.dex.check}}</td>
+                                    <td><i class="fas fa-dice-d20"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>Con</td>
+                                    <td><input type="text" name="data.attributes.con.score" value="{{data.attributes.con.score}}" data-dtype="Number" /></td>
+                                    <td>{{data.computed.attributes.con.mod}}</td>
+                                    <td>{{data.computed.attributes.con.check}}</td>
+                                    <td><i class="fas fa-dice-d20"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>Int</td>
+                                    <td><input type="text" name="data.attributes.int.score" value="{{data.attributes.int.score}}" data-dtype="Number" /></td>
+                                    <td>{{data.computed.attributes.int.mod}}</td>
+                                    <td>{{data.computed.attributes.int.check}}</td>
+                                    <td><i class="fas fa-dice-d20"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>Wis</td>
+                                    <td><input type="text" name="data.attributes.wis.score" value="{{data.attributes.wis.score}}" data-dtype="Number" /></td>
+                                    <td>{{data.computed.attributes.wis.mod}}</td>
+                                    <td>{{data.computed.attributes.wis.check}}</td>
+                                    <td><i class="fas fa-dice-d20"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>Cha</td>
+                                    <td><input type="text" name="data.attributes.cha.score" value="{{data.attributes.cha.score}}" data-dtype="Number" /></td>
+                                    <td>{{data.computed.attributes.cha.mod}}</td>
+                                    <td>{{data.computed.attributes.cha.check}}</td>
+                                    <td><i class="fas fa-dice-d20"></i></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="container col">
+                        <div>
+                            <h3>Saving Throws</h3>
+                            <table class="headered">
+                                <thead>
+                                <tr>
+                                    <td></td>
+                                    <td>Base</td>
+                                    <td>Bonus</td>
+                                    <td>Penalty</td>
+                                    <td>Roll</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>Hardiness</td>
+                                    <td>{{data.computed.saves.hardiness.base}}</td>
+                                    <td><input type="text" name="data.saves.hardiness.bonus" value="{{data.saves.hardiness.bonus}}" data-dtype="Number" /></td>
+                                    <td>{{data.computed.saves.hardiness.penalty}}</td>
+                                    <td><i class="fas fa-dice-d20"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>Evasion</td>
+                                    <td>{{data.computed.saves.evasion.base}}</td>
+                                    <td><input type="text" name="data.saves.evasion.bonus" value="{{data.saves.evasion.bonus}}" data-dtype="Number" /></td>
+                                    <td>{{data.computed.saves.evasion.penalty}}</td>
+                                    <td><i class="fas fa-dice-d20"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>Spirit</td>
+                                    <td>{{data.computed.saves.spirit.base}}</td>
+                                    <td><input type="text" name="data.saves.spirit.bonus" value="{{data.saves.spirit.bonus}}" data-dtype="Number" /></td>
+                                    <td>{{data.computed.saves.spirit.penalty}}</td>
+                                    <td><i class="fas fa-dice-d20"></i></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div>
+                            <h3>Defense</h3>
+                            <table>
+                                <tbody>
+                                <tr>
+                                    <td style="width:30%">Current HP</td>
+                                    <td style="width:20%"><input type="text" name="data.hp.current" value="{{data.hp.current}}" data-dtype="Number" /></td>
+                                    <td style="width:10%">AC</td>
+                                    <td>{{data.computed.armor.ac}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Bonus HP</td>
+                                    <td colspan="3"><input type="text" name="data.hp.bonus" value="{{data.hp.bonus}}" data-dtype="Number" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Max HP</td>
+                                    <td colspan="3" style="padding-left: 4px;">{{data.computed.hp.max}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="tab notes" data-group="primary" data-tab="notes">
+            <div class="container col">
+                <div>
+                    <h3>Facts:</h3>
+                    {{editor content=data.facts target="data.facts" button=true owner=owner editable=editable}}
+                </div>
+                <div>
+                    <h3>Notes:</h3>
+                    {{editor content=data.notes target="data.notes" button=true owner=owner editable=editable}}
+                </div>
+            </div>
         </div>
 
         {{!-- Owned Items Tab --}}
