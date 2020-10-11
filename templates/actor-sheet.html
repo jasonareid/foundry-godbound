@@ -6,14 +6,14 @@
         <div class="header-fields">
             <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Name"/></h1>
             <div class="resource">
-                <input type="text" name="data.health.value" value="{{data.health.value}}" data-dtype="Number"/>
+                <input type="text" name="data.hp.current" value="{{data.hp.current}}" data-dtype="Number"/>
                 <span> / </span>
-                <input type="text" name="data.health.max" value="{{data.health.max}}" data-dtype="Number"/>
+                <span>{{data.computed.hp.max}}</span>
             </div>
             <div class="resource">
-                <input type="text" name="data.effort.value" value="{{data.effort.value}}" data-dtype="Number"/>
+                <span>{{data.computed.effort.available}}</span>
                 <span> / </span>
-                <input type="text" name="data.effort.max" value="{{data.effort.max}}" data-dtype="Number"/>
+                <span>{{data.effort.total}}</span>
             </div>
         </div>
     </header>
