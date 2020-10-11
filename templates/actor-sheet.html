@@ -2,27 +2,46 @@
 
     {{!-- Sheet Header --}}
     <header class="sheet-header">
-        <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100"/>
-        <div class="header-fields tabular">
-            <div>
-                <label for="name" style="display: table-cell">Name:</label> <input style="display:table-cell" id="name" name="name" type="text" value="{{actor.name}}"/>
-            </div>
-            <div>
-                <label for="description">Description:</label> <textarea id="description" name="data.description">{{data.description}}</textarea>
-            </div>
-            <div>
-                <label for="languages">Languages:</label> <input id="languages" name="data.languages" type="text" value="{{data.languages}}"/>
-            </div>
-            <div>
-                <label for="goal">Goals:</label> <textarea id="goal" name="data.goal">{{data.goal}}</textarea>
+        <div class="summary">
+            <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100"
+                 width="100"/>
+            <div class="header-fields tabular">
+                <div>
+                    <label for="name">Name:</label> <input id="name" name="name" type="text" value="{{actor.name}}"/>
+                </div>
+                <div>
+                    <label for="description">Description:</label> <textarea id="description" name="data.description">{{data.description}}</textarea>
+                </div>
+                <div>
+                    <label for="languages">Languages:</label> <input id="languages" name="data.languages" type="text" value="{{data.languages}}"/>
+                </div>
+                <div>
+                    <label for="goal">Goals:</label> <textarea id="goal" name="data.goal">{{data.goal}}</textarea>
+                </div>
+                <div>
+                    <label for="level">Level:</label>
+                    <div>
+                        <input id="level" name="data.level" type="text" value="{{data.level}}" class="shares"/>
+                        <label for="xp" style="padding-left:16px">XP:</label>
+                        <input id="xp" name="data.xp" type="text" value="{{data.xp}}" class="shares"/>
+                    </div>
+                </div>
+                <div>
+
+                </div>
             </div>
         </div>
     </header>
 
     {{!-- Sheet Tab Navigation --}}
     <nav class="sheet-tabs tabs" data-group="primary">
-        <a class="item" data-tab="description">Description</a>
-        <a class="item" data-tab="items">Items</a>
+        <a class="item" data-tab="Attrs">Attrs</a>
+        <a class="item" data-tab="Words">Words</a>
+        <a class="item" data-tab="Combat">Combat</a>
+        <a class="item" data-tab="Wealth">Wealth</a>
+        <a class="item" data-tab="Artifacts">Artifacts</a>
+        <a class="item" data-tab="Projects">Projects</a>
+        <a class="item" data-tab="Notes">Notes</a>
     </nav>
 
     {{!-- Sheet Body --}}
@@ -36,7 +55,7 @@
         {{!-- Owned Items Tab --}}
         <div class="tab items" data-group="primary" data-tab="items">
             <ol class="item-list">
-            {{#each actor.items as |item id|}}
+                {{#each actor.items as |item id|}}
                 <li class="item flexrow" data-item-id="{{item._id}}">
                     <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
                     <h4 class="item-name">{{item.name}}</h4>
@@ -45,7 +64,7 @@
                         <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
                     </div>
                 </li>
-            {{/each}}
+                {{/each}}
             </ol>
         </div>
     </section>

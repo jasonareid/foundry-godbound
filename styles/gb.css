@@ -3,6 +3,13 @@
   /* Items List */
   /* Attributes */
 }
+.godbound input,
+.godbound textarea {
+  background: rgba(0, 0, 0, 0.01);
+}
+.godbound input.shares {
+  width: auto;
+}
 .godbound .window-content {
   height: 100%;
   padding: 5px;
@@ -13,13 +20,14 @@
   background: inherit;
 }
 .godbound .sheet-header {
-  height: 100px;
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+.godbound .sheet-header .summary {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
   justify-content: flex-start;
-  margin-bottom: 10px;
 }
 .godbound .sheet-header .profile-img {
   flex: 0 0 100px;
@@ -30,50 +38,72 @@
   flex: 1;
   height: 100px;
 }
-.godbound .sheet-header h1.charname {
-  height: 50px;
-  padding: 0px;
-  margin: 5px 0;
-  border-bottom: 0;
-}
-.godbound .sheet-header h1.charname input {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-}
 .godbound .sheet-header .tabular {
   display: table;
 }
 .godbound .sheet-header .tabular > * {
   display: table-row;
 }
-.godbound .sheet-header .tabular > * :first-child {
-  width: 25%;
-  text-align: right;
-  padding-right: 8px;
-}
-.godbound .sheet-header .tabular > * :last-child {
-  width: 100%;
-}
 .godbound .sheet-header .tabular > * > * {
   display: table-cell;
   vertical-align: top;
 }
+.godbound .sheet-header .tabular > * > *:first-child {
+  width: 20%;
+  text-align: right;
+  padding-right: 8px;
+  padding-top: 4px;
+}
+.godbound .sheet-header .tabular > * > *:last-child {
+  width: 100%;
+  margin-bottom: 4px;
+}
 .godbound .sheet-header textarea {
+  font-family: inherit;
+  font-size: inherit;
   height: 50px;
 }
+.godbound .sheet-header > * {
+  width: 100%;
+}
+.godbound .fieldRow {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+}
+.godbound .fieldRow input {
+  width: 20%;
+}
+.godbound .fieldRow > * {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .godbound .tabs {
-  height: 40px;
-  border-top: 1px solid #AAA;
-  border-bottom: 1px solid #AAA;
+  position: absolute;
+  transform: rotate(90deg);
+  top: 365px;
+  right: -220px;
+  width: 424px;
+  z-index: -1;
 }
 .godbound .tabs .item {
-  line-height: 40px;
-  font-weight: bold;
+  padding: 2px 10px 0;
+  margin-left: -5px;
+  text-indent: 4px;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 80px;
+  box-shadow: 0 0 6px 1px rgba(0, 0, 0, 0.9);
+  font-size: 12px;
+  filter: brightness(0.9);
+  background: url('/systems/godbound/assets/parchment.jpg');
 }
 .godbound .tabs .item.active {
   text-decoration: underline;
   text-shadow: none;
+  filter: brightness(1);
+  z-index: 10;
 }
 .godbound .sheet-body {
   overflow: hidden;
@@ -143,11 +173,11 @@
   line-height: 28px;
   border: none;
 }
-.worldbuilding.sheet.actor {
+.godbound.sheet.actor {
   min-width: 560px;
   min-height: 420px;
 }
-.worldbuilding.sheet.item {
+.godbound.sheet.item {
   min-width: 460px;
   min-height: 400px;
 }
