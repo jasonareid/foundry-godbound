@@ -1,7 +1,7 @@
 if(!window.ACTOR_SHEET_DEV_MACRO_FN) {
     window.ACTOR_SHEET_DEV_MACRO_FN = () => {
         setTimeout(() => {
-            delete _templateCache["systems/godbound/templates/actor-sheet.html"];
+            delete _templateCache["systems/godbound/templates/actor/pc-sheet.html"];
             game.actors.entities[0].sheet.render(true);
 
             var links = document.getElementsByTagName("link");

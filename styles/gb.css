@@ -101,6 +101,9 @@
   font-size: inherit;
   height: 50px;
 }
+.godbound .sheet-header textarea.tall {
+  height: 128px;
+}
 .godbound .tabs {
   position: absolute;
   transform: rotate(90deg);
@@ -184,6 +187,6 @@
 }
 .godbound.sheet.item {
   min-width: 460px;
-  min-height: 400px;
+  min-height: 240px;
 }
 /*# sourceMappingURL=gb.css.map */

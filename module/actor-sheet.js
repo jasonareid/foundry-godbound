@@ -8,7 +8,6 @@ export class GodboundActorSheet extends ActorSheet {
 	static get defaultOptions() {
 	  return mergeObject(super.defaultOptions, {
   	  classes: ["godbound", "sheet", "actor"],
-  	  template: "systems/godbound/templates/actor-sheet.html",
       width: 600,
       height: 600,
       tabs: [{navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "attrs"}],
@@ -16,6 +15,10 @@ export class GodboundActorSheet extends ActorSheet {
     });
   }
 
+  get template() {
+    const path = "systems/godbound/templates/actor";
+    return `${path}/${this.actor.data.type}-sheet.html`;
+  }
   /* -------------------------------------------- */
 
   /** @override */

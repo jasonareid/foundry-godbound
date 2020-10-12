@@ -5,16 +5,21 @@
 export class GodboundItemSheet extends ItemSheet {
 
   /** @override */
-	static get defaultOptions() {
-	  return mergeObject(super.defaultOptions, {
-			classes: ["godbound", "sheet", "item"],
-			template: "systems/godbound/templates/item-sheet.html",
-			width: 520,
-			height: 480,
-      tabs: [{navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description"}]
-		});
+  static get defaultOptions() {
+    console.log("************Getting default item sheet options");
+    return mergeObject(super.defaultOptions, {
+        classes: ["godbound", "sheet", "item"],
+        width: 520,
+        height: 'auto',
+        resizable: true
+      }
+    );
   }
 
+  get template() {
+    const path = "systems/godbound/templates/item";
+    return `${path}/${this.item.data.type}-sheet.html`;
+  }
   /* -------------------------------------------- */
 
   /** @override */
@@ -23,18 +28,6 @@ export class GodboundItemSheet extends ItemSheet {
     data.dtypes = ["String", "Number", "Boolean"];
     return data;
   }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  setPosition(options={}) {
-    const position = super.setPosition(options);
-    const sheetBody = this.element.find(".sheet-body");
-    const bodyHeight = position.height - 192;
-    sheetBody.css("height", bodyHeight);
-    return position;
-  }
-
   /* -------------------------------------------- */
 
   /** @override */
