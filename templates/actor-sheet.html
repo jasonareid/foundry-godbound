@@ -210,47 +210,67 @@
                         </tr>
                     </tbody>
                 </table>
-                <div class="container row" style="margin-left: auto; margin-right: auto;">
+                <div class="container row" style="margin-left: auto; margin-right: auto;font-size: 16px;">
                     <div>
-                    Commit Effort
-                    <i class="fas fa-minus effortSpend" data-effort-category="active" data-effort-change="-1"></i>
-                    {{data.effort.active}}
-                    <i class="fas fa-plus effortSpend" data-effort-category="active" data-effort-change="1"></i>
+                        <span style="padding-right: 4px;">Round:</span>
+                        <i class="fas fa-minus effortSpend" data-effort-category="active" data-effort-change="-1"></i>
+                        {{data.effort.active}}
+                        <i class="fas fa-plus effortSpend" data-effort-category="active" data-effort-change="1"></i>
                     </div>
-                    <div>
-                    Scene
-                    <i class="fas fa-minus effortSpend" data-effort-category="scene" data-effort-change="-1"></i>
-                    {{data.effort.scene}}
-                    <i class="fas fa-plus effortSpend" data-effort-category="scene" data-effort-change="1"></i>
+                    <div style="margin-left: 32px;">
+                        <span style="padding-right: 4px;">Scene:</span>
+                        <i class="fas fa-minus effortSpend" data-effort-category="scene" data-effort-change="-1"></i>
+                        {{data.effort.scene}}
+                        <i class="fas fa-plus effortSpend" data-effort-category="scene" data-effort-change="1"></i>
                     </div>
-                    <div>
-                    Day
-                    <i class="fas fa-minus effortSpend" data-effort-category="day" data-effort-change="-1"></i>
-                    {{data.effort.day}}
-                    <i class="fas fa-plus effortSpend" data-effort-category="day" data-effort-change="1"></i>
+                    <div style="margin-left: 32px;">
+                        <span style="padding-right: 4px;">Day:</span>
+                        <i class="fas fa-minus effortSpend" data-effort-category="day" data-effort-change="-1"></i>
+                        {{data.effort.day}}
+                        <i class="fas fa-plus effortSpend" data-effort-category="day" data-effort-change="1"></i>
                     </div>
                 </div>
             </div>
-            <div class="container row">
-                <div class="container col">
-                    <h2 style="display:flex;justify-content: space-between;">
-                        <span>Words</span>
-                        <i class="fas fa-plus itemAdder" data-item-type="boundWord"></i>
-                    </h2>
-                    <ol class="item-list">
-                        {{#each actor.items as |item id|}}
-                        {{#ifeq item.type "boundWord"}}
-                        <li class="item flexrow" data-item-id="{{item._id}}">
-                            <h4 class="item-name">{{item.name}}</h4>
-                            <div class="item-controls">
-                                <a class="item-control item-chat" title="Chat Effect"><i class="fas fa-comment"></i></a>
-                            </div>
-                        </li>
-                        {{/ifeq}}
-                        {{/each}}
-                    </ol>
+            <div class="container row" style="margin-top: 24px;">
+                <div class="container col" style="width:50%;">
+                    <div class="container col">
+                        <h2 style="display:flex;justify-content: space-between;">
+                            <span>Words</span>
+                            <i class="fas fa-plus itemAdder" data-item-type="boundWord"></i>
+                        </h2>
+                        <ol class="item-list">
+                            {{#each actor.items as |item id|}}
+                            {{#ifeq item.type "boundWord"}}
+                            <li class="item flexrow" data-item-id="{{item._id}}">
+                                <h4 class="item-name">{{item.name}}</h4>
+                                <div class="item-controls">
+                                    <a class="item-control item-chat" title="Chat Effect"><i class="fas fa-comment"></i></a>
+                                </div>
+                            </li>
+                            {{/ifeq}}
+                            {{/each}}
+                        </ol>
+                    </div>
+                    <div class="container col">
+                        <h2 style="display:flex;justify-content: space-between;">
+                            <span>Miracles</span>
+                            <i class="fas fa-plus itemAdder" data-item-type="divineMiracle"></i>
+                        </h2>
+                        <ol class="item-list">
+                            {{#each actor.items as |item id|}}
+                            {{#ifeq item.type "divineMiracle"}}
+                            <li class="item flexrow" data-item-id="{{item._id}}">
+                                <h4 class="item-name">{{item.name}}</h4>
+                                <div class="item-controls">
+                                    <a class="item-control item-chat" title="Chat Effect"><i class="fas fa-comment"></i></a>
+                                </div>
+                            </li>
+                            {{/ifeq}}
+                            {{/each}}
+                        </ol>
+                    </div>
                 </div>
-                <div class="container col">
+                <div class="container col" style="width:50%;">
                     <h2 style="display:flex;justify-content: space-between;">
                         <span>Gifts</span>
                         <i class="fas fa-plus itemAdder" data-item-type="divineGift"></i>
@@ -258,24 +278,6 @@
                     <ol class="item-list">
                         {{#each actor.items as |item id|}}
                         {{#ifeq item.type "divineGift"}}
-                        <li class="item flexrow" data-item-id="{{item._id}}">
-                            <h4 class="item-name">{{item.name}}</h4>
-                            <div class="item-controls">
-                                <a class="item-control item-chat" title="Chat Effect"><i class="fas fa-comment"></i></a>
-                            </div>
-                        </li>
-                        {{/ifeq}}
-                        {{/each}}
-                    </ol>
-                </div>
-                <div class="container col">
-                    <h2 style="display:flex;justify-content: space-between;">
-                        <span>Miracles</span>
-                        <i class="fas fa-plus itemAdder" data-item-type="divineMiracle"></i>
-                    </h2>
-                    <ol class="item-list">
-                        {{#each actor.items as |item id|}}
-                        {{#ifeq item.type "divineMiracle"}}
                         <li class="item flexrow" data-item-id="{{item._id}}">
                             <h4 class="item-name">{{item.name}}</h4>
                             <div class="item-controls">

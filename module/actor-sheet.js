@@ -41,6 +41,14 @@ export class GodboundActorSheet extends ActorSheet {
       item.sheet.render(true);
     });
 
+    html.find('.item-chat').click(ev => {
+      const li = $(ev.currentTarget).parents('.item');
+      const item = this.actor.getOwnedItem(li.data("itemId"));
+      ChatMessage.create({
+        content: `<div><h3>${item.name}</h3><p>${item.data.data.description}</p></div>`,
+      });
+    });
+
     html.find('.itemAdder').click(async ev => {
       const $i = $(ev.currentTarget);
       const names = {

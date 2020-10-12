@@ -153,7 +153,10 @@
     },
     "divineGift": {
       "description": "",
-      "commitment": "",
+      "constant": false,
+      "round": false,
+      "scene": false,
+      "day": false,
       "greater": false
     },
     "divineMiracle": {
