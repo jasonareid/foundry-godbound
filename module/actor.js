@@ -9,6 +9,16 @@ export class GodboundActor extends Actor {
           diceType: 8
         }
       });
+      await gbActor.createOwnedItem({name: 'Succeed on Save', type: 'divineMiracle', data: {
+          description: "Succeed on a Failed Save",
+          effort: 1
+        }
+      });
+      await gbActor.createOwnedItem({name: 'Suppress Effect', type: 'divineMiracle', data: {
+          description: "Suppress an Appropriate Effect",
+          effort: 1
+        }
+      });
     } else if(gbActor.data.type === 'npc') {
 
     }
@@ -105,6 +115,13 @@ export class GodboundActor extends Actor {
             data.effort.day
         )
     ;
+    data.computed.effort.spent = data.effort.total - data.computed.effort.available;
+
+    data.computed.influence = {};
+    data.computed.influence.available = data.influence.total - data.influence.spent;
+
+    data.computed.dominion = {};
+    data.computed.dominion.available = data.dominion.total - data.dominion.spent;
 
     data.computed.hp = {};
     data.computed.hp.max = 8 + data.computed.attributes.con.mod + (

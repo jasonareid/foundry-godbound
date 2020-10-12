@@ -45,4 +45,54 @@ Hooks.once("init", async function () {
         default: true,
         config: true
     });
+
+    Handlebars.registerHelper('concat', function() {
+        var outStr = '';
+        for (var arg in arguments) {
+            if (typeof arguments[arg] != 'object') {
+                outStr += arguments[arg];
+            }
+        }
+        return outStr;
+    });
+
+    Handlebars.registerHelper('orderedEach', function(obj, keys, options) {
+        let accum = '';
+        for(let i = 0; i < keys.length; i++) {
+            let value = obj[keys[i]];
+            if(value) {
+                accum += options.fn(value);
+            }
+        }
+        return accum;
+    });
+
+    Handlebars.registerHelper('toLowerCase', function(str) {
+        return str.toLowerCase();
+    });
+
+    Handlebars.registerHelper('cap', function(str) {
+        return Capitalize(str);
+    });
+
+    Handlebars.registerHelper("ifeq", function(arg1, arg2, options) {
+        if (arg1 === arg2) {
+            return options.fn(this);
+        }
+    });
+
+    Handlebars.registerHelper('times', function(n, options) {
+        var accum = '';
+        for(var i = 0; i < n; ++i)
+            accum += options.fn(i);
+        return accum;
+    });
+
+    Handlebars.registerHelper('add', function(a1, a2) {
+        return a1 + a2;
+    });
+
+    Handlebars.registerHelper('json', function(context) {
+        return JSON.stringify(context);
+    });
 });

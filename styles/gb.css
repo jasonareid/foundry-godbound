@@ -64,7 +64,7 @@
 .godbound .sheet-header {
   display: flex;
   flex-direction: column;
-  margin-bottom: 32px;
+  padding-bottom: 32px;
 }
 .godbound .sheet-header .profile-img {
   flex: 0 0 100px;
@@ -173,9 +173,10 @@
 }
 .godbound .item-list .item-name {
   margin: 0;
+  cursor: pointer;
 }
 .godbound .item-list .item-controls {
-  flex: 0 0 36px;
+  flex: 0 0 0;
 }
 .godbound.sheet.actor {
   min-width: 560px;

@@ -35,12 +35,21 @@ export class GodboundActorSheet extends ActorSheet {
     if (!this.options.editable) return;
 
     // Update Inventory Item
-    html.find('.item-edit').click(ev => {
-      const li = $(ev.currentTarget).parents(".item");
+    html.find('.item-name').click(ev => {
+      const li = $(ev.currentTarget).parents('.item');
       const item = this.actor.getOwnedItem(li.data("itemId"));
       item.sheet.render(true);
     });
 
+    html.find('.itemAdder').click(async ev => {
+      const $i = $(ev.currentTarget);
+      const names = {
+        boundWord: 'Word',
+        divineGift: 'Gift',
+        divineMiracle: 'Miracle'
+      }
+      this.actor.createOwnedItem({name: names[$i.data('itemType')], type: $i.data('itemType')}, {renderSheet: true});
+    })
     // Delete Inventory Item
     html.find('.item-delete').click(ev => {
       const li = $(ev.currentTarget).parents(".item");
@@ -48,9 +57,15 @@ export class GodboundActorSheet extends ActorSheet {
       li.slideUp(200, () => this.render(false));
     });
 
-    html.blur(ev => {
-      delete(_templateCache[this.options.template]);
-      this.render(true);
+    html.find('.effortSpend').click(ev => {
+      const $i = $(ev.currentTarget);
+      let effortCategory = $i.data('effortCategory');
+      let effortChange = parseInt($i.data('effortChange'));
+      if(effortChange > 0 && this.actor.data.data.computed.effort.available >= effortChange) {
+        this.actor.update({data: {effort: {[effortCategory]: this.actor.data.data.effort[effortCategory] + effortChange}}});
+      } else if(effortChange < 0 && this.actor.data.data.effort[effortCategory] >= effortChange * -1) {
+        this.actor.update({data: {effort: {[effortCategory]: this.actor.data.data.effort[effortCategory] + effortChange}}});
+      }
     })
   }
 }
