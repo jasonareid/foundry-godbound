@@ -304,20 +304,25 @@
             </div>
         </div>
 
-        {{!-- Owned Items Tab --}}
-        <div class="tab items" data-group="primary" data-tab="items">
-            <ol class="item-list">
-                {{#each actor.items as |item id|}}
-                <li class="item flexrow" data-item-id="{{item._id}}">
-                    <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
-                    <h4 class="item-name">{{item.name}}</h4>
-                    <div class="item-controls">
-                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-                    </div>
-                </li>
-                {{/each}}
-            </ol>
+        <div class="tab wealth" data-group="primary" data-tab="wealth">
+            <div class="container col">
+                <h2 style="display:flex;justify-content: space-between;">
+                    <span>Wealth</span>
+                    <i class="fas fa-plus itemAdder" data-item-type="treasure"></i>
+                </h2>
+                <ol class="item-list">
+                    {{#each actor.items as |item id|}}
+                    {{#ifeq item.type "treasure"}}
+                    <li class="item flexrow" data-item-id="{{item._id}}">
+                        <h4 class="item-name">{{item.name}}</h4>
+                        <div class="item-controls">
+                            <a class="item-control item-chat" title="Chat Description"><i class="fas fa-comment"></i></a>
+                        </div>
+                    </li>
+                    {{/ifeq}}
+                    {{/each}}
+                </ol>
+            </div>
         </div>
     </section>
 </form>
