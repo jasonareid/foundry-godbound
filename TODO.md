@@ -1,6 +1,4 @@
 * Rolls for saves
-  * Prompts for Straight/+4/-4
-* Rolls for stats
 * Divine Gifts
   * Checkboxes for gifts
   * Icons for Round / Scene / Day

@@ -6,49 +6,62 @@
   h3 {
     font-size: 16px;
   }
+
   .container {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
+
     &.row {
       flex-direction: row;
       align-items: flex-start;
+
       > * {
         margin-left: 8px;
         margin-right: 8px;
+
         &:first-child {
           margin-left: 0;
         }
+
         &:last-child {
           margin-right: 0;
         }
       }
     }
+
     &.col {
       flex-direction: column;
       justify-content: flex-start;
+
       > * {
         margin-top: 8px;
         margin-bottom: 8px;
+
         &:first-child {
           margin-top: 0;
         }
+
         &:last-child {
           margin-bottom: 0;
         }
       }
     }
+
     > * {
       flex-grow: 1;
       width: auto;
     }
   }
+
   input, textarea {
     background: rgba(0, 0, 0, 0.01);
   }
+
   input.shares {
     width: auto;
   }
+
   .window-content {
     height: 100%;
     padding: 5px;
@@ -76,19 +89,24 @@
       flex: 1;
       height: 100px;
     }
+
     .tabular {
-      display:table;
+      display: table;
+
       > * {
-        display:table-row;
+        display: table-row;
+
         > * {
           display: table-cell;
           vertical-align: top;
+
           &:first-child {
             width: 20%;
             text-align: right;
             padding-right: 8px;
             padding-top: 4px;
           }
+
           &:last-child {
             width: 100%;
             margin-bottom: 4px;
@@ -96,10 +114,12 @@
         }
       }
     }
+
     textarea {
       font-family: inherit;
       font-size: inherit;
-      height:50px;
+      height: 50px;
+
       &.tall {
         height: 128px;
       }
@@ -107,6 +127,7 @@
   }
 
   /* Sheet Tabs */
+
   .tabs {
     position: absolute;
     transform: rotate(90deg);
@@ -137,6 +158,7 @@
 
   .sheet-body {
     overflow: hidden;
+
     .tab {
       height: 100%;
       overflow-y: auto;
@@ -144,18 +166,22 @@
 
     table {
       font-size: 14px;
+
       input {
         width: 24px;
       }
+
       &.headered {
         td {
           text-align: center;
+
           &:first-child {
             text-align: right;
             padding-right: 0;
           }
         }
       }
+
       td:first-child {
         text-align: right;
         padding-right: 8px;
@@ -167,12 +193,14 @@
     height: 128px;
     background: rgba(0, 0, 0, 0.01);
   }
+
   .editor {
     border: 1px solid #000;
     border-radius: 3px;
   }
 
   /* Items List */
+
   .item-list {
     list-style: none;
     margin: 7px 0;
@@ -184,6 +212,7 @@
       line-height: 24px;
       padding: 3px 0;
       border-bottom: 1px solid #BBB;
+
       img {
         flex: 0 0 24px;
         margin-right: 5px;
@@ -199,8 +228,66 @@
       flex: 0 0 0;
     }
   }
-}
 
+
+}
+.godbound.chat-block {
+  margin: 0;
+
+  .chat-header {
+    height: 46px;
+    margin: 4px 0;
+    border: 1px solid black;
+    border-radius: 3px;
+    color: black;
+    padding: 2px;
+    box-shadow: 0 0 2px #fff inset;
+
+    .chat-title {
+      margin: 4px 0;
+      height: 30px;
+      overflow: hidden;
+
+      h2 {
+        border: none;
+        line-height: 34px;
+        margin: 0;
+        text-indent: 10px;
+        font-size: 16px;
+        word-break: break-all;
+      }
+    }
+
+    .chat-img {
+      flex: 0 0 42px;
+      background-size: cover;
+    }
+  }
+
+  .chat-target {
+    text-align: right;
+    font-style: italic;
+    padding: 2px;
+  }
+
+  .chat-details {
+    padding: 4px;
+    font-size: 13px;
+  }
+
+  .roll-result {
+    font-size: 13px;
+    text-align: center;
+  }
+
+  .roll-result.roll-success {
+    color: #18520b;
+  }
+
+  .roll-result.roll-fail {
+    color: #aa0200;
+  }
+}
 .godbound.sheet.actor {
   min-width: 560px;
   min-height: 420px;

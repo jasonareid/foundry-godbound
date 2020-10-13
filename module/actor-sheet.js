@@ -2,6 +2,8 @@
  * Extend the basic ActorSheet with some very simple modifications
  * @extends {ActorSheet}
  */
+import {PlayerRollDialog} from "./playerRollDialog.js";
+
 export class GodboundActorSheet extends ActorSheet {
 
   /** @override */
@@ -77,6 +79,52 @@ export class GodboundActorSheet extends ActorSheet {
       } else if(effortChange < 0 && this.actor.data.data.effort[effortCategory] >= effortChange * -1) {
         this.actor.update({data: {effort: {[effortCategory]: this.actor.data.data.effort[effortCategory] + effortChange}}});
       }
+    });
+
+    html.find('.attr-roll').click(ev => {
+      let attr = $(ev.currentTarget).data('attr');
+      PlayerRollDialog.create(this.actor, {attr}, async (data) => {
+        let template = 'systems/godbound/templates/chat/roll-result.html';
+        let chatData = {
+          user: game.user._id,
+          speaker: this.actor,
+        };
+        let templateData = {
+          title: "Attribute Check",
+          flavor: `${this.actor.name} checks ${attr}`,
+          data: data,
+        }
+        let roll = new Roll('1d20 + @attr + @difficulty', {
+          attr: this.actor.data.data.attributes[attr].score,
+          difficulty: data.modifier,
+        });
+        roll.roll();
+        console.log(roll);
+        let result = {
+          isSuccess: roll.total > 20,
+          isFailure: roll.total <= 20,
+          details: templateData.flavor,
+          target: 21,
+        }
+        templateData.roll = await roll.render();
+        templateData.result = result;
+        templateData.data.actor = this.actor;
+        chatData.content = await renderTemplate(template, templateData);
+        // Dice So Nice
+        if (game.dice3d) {
+          await game.dice3d.showForRoll(
+            roll,
+            game.user,
+            true,
+            chatData.whisper,
+            chatData.blind
+          );
+          ChatMessage.create(chatData);
+        } else {
+          chatData.sound = CONFIG.sounds.dice;
+          ChatMessage.create(chatData);
+        }
+      });
     })
   }
 }
