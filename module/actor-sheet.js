@@ -3,6 +3,7 @@
  * @extends {ActorSheet}
  */
 import {PlayerRollDialog} from "./playerRollDialog.js";
+import {Capitalize} from "./misc.js";
 
 export class GodboundActorSheet extends ActorSheet {
 
@@ -83,15 +84,15 @@ export class GodboundActorSheet extends ActorSheet {
 
     html.find('.attr-roll').click(ev => {
       let attr = $(ev.currentTarget).data('attr');
-      PlayerRollDialog.create(this.actor, {attr}, async (data) => {
+      PlayerRollDialog.create(this.actor, {rollType: `${Capitalize(attr)} check`}, async (data) => {
         let template = 'systems/godbound/templates/chat/roll-result.html';
         let chatData = {
           user: game.user._id,
           speaker: this.actor,
         };
         let templateData = {
-          title: "Attribute Check",
-          flavor: `${this.actor.name} checks ${attr}`,
+          title: `${Capitalize(attr)} Check (${data.modifier < 1 ? 'Hard' : data.modifier > 1 ? 'Easy' : 'Normal'})`,
+          flavor: `By ${this.actor.name}`,
           data: data,
         }
         let roll = new Roll('1d20 + @attr + @difficulty', {
@@ -99,12 +100,55 @@ export class GodboundActorSheet extends ActorSheet {
           difficulty: data.modifier,
         });
         roll.roll();
-        console.log(roll);
+        let target = 21;
         let result = {
-          isSuccess: roll.total > 20,
-          isFailure: roll.total <= 20,
-          details: templateData.flavor,
-          target: 21,
+          isSuccess: roll.total >= target,
+          isFailure: roll.total < target,
+          target: target,
+        }
+        templateData.roll = await roll.render();
+        templateData.result = result;
+        templateData.data.actor = this.actor;
+        chatData.content = await renderTemplate(template, templateData);
+        // Dice So Nice
+        if (game.dice3d) {
+          await game.dice3d.showForRoll(
+            roll,
+            game.user,
+            true,
+            chatData.whisper,
+            chatData.blind
+          );
+          ChatMessage.create(chatData);
+        } else {
+          chatData.sound = CONFIG.sounds.dice;
+          ChatMessage.create(chatData);
+        }
+      });
+    })
+
+    html.find('.save-roll').click(ev => {
+      let save = $(ev.currentTarget).data('save');
+      PlayerRollDialog.create(this.actor, {rollType: `${Capitalize(save)} save`}, async (data) => {
+        let template = 'systems/godbound/templates/chat/roll-result.html';
+        let chatData = {
+          user: game.user._id,
+          speaker: this.actor,
+        };
+        let templateData = {
+          title: `${Capitalize(save)} Save (${data.modifier < 1 ? 'Hard' : data.modifier > 1 ? 'Easy' : 'Normal'})`,
+          flavor: `By ${this.actor.name}`,
+          data: data,
+        }
+        let roll = new Roll('1d20 + @difficulty', {
+          difficulty: data.modifier,
+        });
+        roll.roll();
+        let target = this.actor.data.data.computed.saves[save].save;
+        let result = {
+          isSuccess: roll.total >= target,
+          isFailure: roll.total < target,
+          target: target,
         }
         templateData.roll = await roll.render();
         templateData.result = result;
