@@ -165,7 +165,8 @@
     },
     "divineMiracle": {
       "description": "",
-      "effort": 1
+      "effort": 1,
+      "smite": false
     },
     "artifact": {
       "description": "",
