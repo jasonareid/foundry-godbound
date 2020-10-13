@@ -183,7 +183,7 @@
   cursor: pointer;
 }
 .godbound .item-list .item-controls {
-  flex: 0 0 0;
+  flex: 0 0 auto;
 }
 .godbound.chat-block {
   margin: 0;

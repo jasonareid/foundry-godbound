@@ -281,6 +281,15 @@
                         <li class="item flexrow" data-item-id="{{item._id}}">
                             <h4 class="item-name">{{item.name}}</h4>
                             <div class="item-controls">
+                                {{#if item.data.round}}
+                                <a class="item-control item-round-effort" title="Commit Effort for Round"><i class="fas fa-stopwatch"></i></a>
+                                {{/if}}
+                                {{#if item.data.scene}}
+                                <a class="item-control item-scene-effort" title="Commit Effort for Scene"><i class="fas fa-clock"></i></a>
+                                {{/if}}
+                                {{#if item.data.day}}
+                                <a class="item-control item-day-effort" title="Commit Effort for Day"><i class="fas fa-sun"></i></a>
+                                {{/if}}
                                 <a class="item-control item-chat" title="Chat Effect"><i class="fas fa-comment"></i></a>
                             </div>
                         </li>

@@ -1,7 +1,3 @@
-* Rolls for saves
-* Divine Gifts
-  * Checkboxes for gifts
-  * Icons for Round / Scene / Day
 * Divine Miracles
 * Divine Wrath & Corona of Fury Defaults
 * Armor
@@ -16,3 +12,4 @@
 * Cults
 * NPC Sheets
 * Tactics
+* Make divine gift commitments look nicer

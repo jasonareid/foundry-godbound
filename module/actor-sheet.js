@@ -55,6 +55,39 @@ export class GodboundActorSheet extends ActorSheet {
       });
     });
 
+    html.find('.item-day-effort').click(ev => {
+      const li = $(ev.currentTarget).parents('.item');
+      const item = this.actor.getOwnedItem(li.data("itemId"));
+      if(this.actor.data.data.computed.effort.available >= 1) {
+        this.actor.update({data: {effort: {['day']: this.actor.data.data.effort['day'] + 1}}});
+        ChatMessage.create({
+          content: `<div><h3>${item.name}</h3><h4>${this.actor.name}: Effort for Day</h4><p>${item.data.data.description}</p></div>`,
+        });
+      }
+    });
+
+    html.find('.item-scene-effort').click(ev => {
+      const li = $(ev.currentTarget).parents('.item');
+      const item = this.actor.getOwnedItem(li.data("itemId"));
+      if(this.actor.data.data.computed.effort.available >= 1) {
+        this.actor.update({data: {effort: {['scene']: this.actor.data.data.effort['scene'] + 1}}});
+        ChatMessage.create({
+          content: `<div><h3>${item.name}</h3><h4>${this.actor.name}: Effort for Scene</h4><p>${item.data.data.description}</p></div>`,
+        });
+      }
+    });
+
+    html.find('.item-round-effort').click(ev => {
+      const li = $(ev.currentTarget).parents('.item');
+      const item = this.actor.getOwnedItem(li.data("itemId"));
+      if(this.actor.data.data.computed.effort.available >= 1) {
+        this.actor.update({data: {effort: {['active']: this.actor.data.data.effort['active'] + 1}}});
+        ChatMessage.create({
+          content: `<div><h3>${item.name}</h3><h4>${this.actor.name}: Round-by-Round Effort</h4><p>${item.data.data.description}</p></div>`,
+        });
+      }
+    });
+
     html.find('.itemAdder').click(async ev => {
       const $i = $(ev.currentTarget);
       const names = {
