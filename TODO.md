@@ -1,8 +1,7 @@
-* Divine Miracles
-* Divine Wrath & Corona of Fury Defaults
 * Armor
   * Dropdowns for Armor
 * Attacks
+* Roll formulas in chat messages
 * Auto Hit Attacks
 * Multi Die Damage Rolls
 * Artifacts

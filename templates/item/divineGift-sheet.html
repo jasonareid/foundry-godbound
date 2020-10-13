@@ -17,18 +17,32 @@
                             <textarea id="description" name="data.description" class="tall">{{data.description}}</textarea>
                         </div>
                         <div>
-                            <label>Effort:</label>
-                            <div style="display: flex; align-items: center">
-                                <input type="checkbox" name="data.constant" {{checked data.constant}} />Constant
-                                <input type="checkbox" name="data.round" {{checked data.round}} />Round
-                                <input type="checkbox" name="data.scene" {{checked data.scene}} />Scene
-                                <input type="checkbox" name="data.day" {{checked data.day}} />Day
-                            </div>
-                        </div>
-                        <div>
                             <label>Greater:</label>
                             <div>
                                 <input type="checkbox" name="data.greater" {{checked data.greater}} />
+                            </div>
+                        </div>
+                        <div>
+                            <label>Activation:</label>
+                            <div style="display: flex; align-items: center">
+                                <input type="checkbox" name="data.constant" {{checked data.constant}} />Constant
+                                <input type="checkbox" name="data.instant" {{checked data.instant}} />Instant
+                                <input type="checkbox" name="data.onTurn" {{checked data.onTurn}} />On Turn
+                            </div>
+                        </div>
+                        <div>
+                            <label></label>
+                            <div style="display: flex; align-items: center">
+                                <input type="checkbox" name="data.action" {{checked data.action}} />Action
+                                <input type="checkbox" name="data.smite" {{checked data.smite}} />Smite
+                            </div>
+                        </div>
+                        <div>
+                            <label>Effort:</label>
+                            <div style="display: flex; align-items: center">
+                                <input type="checkbox" name="data.round" {{checked data.round}} />Round
+                                <input type="checkbox" name="data.scene" {{checked data.scene}} />Scene
+                                <input type="checkbox" name="data.day" {{checked data.day}} />Day
                             </div>
                         </div>
                         <div>

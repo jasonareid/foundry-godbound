@@ -58,7 +58,7 @@
       },
       "effort": {
         "total": 0,
-        "active": 0,
+        "round": 0,
         "scene": 0,
         "day": 0
       },
@@ -96,7 +96,7 @@
       "damage": "",
       "effort": {
         "total": 0,
-        "active": 0,
+        "round": 0,
         "scene": 0,
         "day": 0
       },
@@ -154,6 +154,10 @@
     "divineGift": {
       "description": "",
       "constant": false,
+      "instant": false,
+      "onTurn": false,
+      "action": false,
+      "smite": false,
       "round": false,
       "scene": false,
       "day": false,

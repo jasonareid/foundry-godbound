@@ -58,10 +58,14 @@ export class GodboundActorSheet extends ActorSheet {
     html.find('.item-day-effort').click(ev => {
       const li = $(ev.currentTarget).parents('.item');
       const item = this.actor.getOwnedItem(li.data("itemId"));
-      if(this.actor.data.data.computed.effort.available >= 1) {
-        this.actor.update({data: {effort: {['day']: this.actor.data.data.effort['day'] + 1}}});
+      let effortCost = 1;
+      if(item.type === 'divineMiracle') {
+        effortCost = item.data.data.effort;
+      }
+      if(this.actor.data.data.computed.effort.available >= effortCost) {
+        this.actor.update({data: {effort: {day: this.actor.data.data.effort.day + effortCost}}});
         ChatMessage.create({
-          content: `<div><h3>${item.name}</h3><h4>${this.actor.name}: Effort for Day</h4><p>${item.data.data.description}</p></div>`,
+          content: `<div><h3>${item.name}</h3><h4>${this.actor.name}: ${effortCost} Effort for Day</h4><p>${item.data.data.description}</p></div>`,
         });
       }
     });
@@ -70,7 +74,7 @@ export class GodboundActorSheet extends ActorSheet {
       const li = $(ev.currentTarget).parents('.item');
       const item = this.actor.getOwnedItem(li.data("itemId"));
       if(this.actor.data.data.computed.effort.available >= 1) {
-        this.actor.update({data: {effort: {['scene']: this.actor.data.data.effort['scene'] + 1}}});
+        this.actor.update({data: {effort: {scene: this.actor.data.data.effort.scene + 1}}});
         ChatMessage.create({
           content: `<div><h3>${item.name}</h3><h4>${this.actor.name}: Effort for Scene</h4><p>${item.data.data.description}</p></div>`,
         });
@@ -81,7 +85,7 @@ export class GodboundActorSheet extends ActorSheet {
       const li = $(ev.currentTarget).parents('.item');
       const item = this.actor.getOwnedItem(li.data("itemId"));
       if(this.actor.data.data.computed.effort.available >= 1) {
-        this.actor.update({data: {effort: {['active']: this.actor.data.data.effort['active'] + 1}}});
+        this.actor.update({data: {effort: {round: this.actor.data.data.effort.round + 1}}});
         ChatMessage.create({
           content: `<div><h3>${item.name}</h3><h4>${this.actor.name}: Round-by-Round Effort</h4><p>${item.data.data.description}</p></div>`,
         });
