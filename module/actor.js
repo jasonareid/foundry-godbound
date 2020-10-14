@@ -127,7 +127,7 @@ export class GodboundActor extends Actor {
         data.computed.effort = {};
         data.computed.effort.available =
             data.effort.total - (
-                data.effort.round +
+                data.effort.atWill +
                 data.effort.scene +
                 data.effort.day
             )
@@ -165,7 +165,7 @@ export class GodboundActor extends Actor {
         data.computed.effort = {};
         data.computed.effort.available =
             data.effort.total - (
-                data.effort.round +
+                data.effort.atWill +
                 data.effort.scene +
                 data.effort.day
             )

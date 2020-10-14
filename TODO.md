@@ -1,7 +1,7 @@
 * Roll formulas in chat messages
 * Combat Powers
+* Turn At Wills into Toggles
 * Succeed at saves in chat
-* Rename Round to at will
 * Artifacts
 * Projects
 * Add Cult to tabs

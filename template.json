@@ -59,7 +59,7 @@
       },
       "effort": {
         "total": 0,
-        "round": 0,
+        "atWill": 0,
         "scene": 0,
         "day": 0
       },
@@ -97,7 +97,7 @@
       "damage": "",
       "effort": {
         "total": 0,
-        "round": 0,
+        "atWill": 0,
         "scene": 0,
         "day": 0
       },
@@ -156,7 +156,7 @@
       "onTurn": false,
       "action": false,
       "smite": false,
-      "round": false,
+      "atWill": false,
       "scene": false,
       "day": false,
       "greater": false
