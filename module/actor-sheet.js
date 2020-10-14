@@ -224,6 +224,16 @@ export class GodboundActorSheet extends ActorSheet {
       }
     });
 
+    html.find('.autoattack-roll').click(ev => {
+      const li = $(ev.currentTarget).parents('.item');
+      const item = this.actor.getOwnedItem(li.data("itemId"));
+      if(item.data.data.damageBonus < 0) {
+        this.actor.rollDamage(item.name, `${item.data.data.damageRoll}${item.data.data.damageBonus}`)
+      } else {
+        this.actor.rollDamage(item.name, `${item.data.data.damageRoll}+${item.data.data.damageBonus}`);
+      }
+    });
+
     html.find('.save-roll').click(ev => {
       let save = $(ev.currentTarget).data('save');
       PlayerRollDialog.create(this.actor, {rollType: `${Capitalize(save)} save`}, async (data) => {

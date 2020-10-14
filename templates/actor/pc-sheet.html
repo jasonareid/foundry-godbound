@@ -343,17 +343,15 @@
                 </h2>
                 <select name="data.armor.type" id="armorType">
                     {{#select data.armor.type}}
-                    <option value="none">None (skin or clothing)</option>
-                    <option value="light">Light (leathers or hides)</option>
-                    <option value="medium">Medium (mail or lt plate; -4 to 1 save)</option>
-                    <option value="heavy">Heavy (hvy plate; -4 to 2 saves)</option>
-                    <option value="divine">Divine Gift (3AC)</option>
+                    <option value="none">None AC 9(skin or clothing)</option>
+                    <option value="light">Light AC 7 (leathers or hides)</option>
+                    <option value="medium">Medium AC 5 (mail or lt plate; -4 to 1 save)</option>
+                    <option value="heavy">Heavy AC 3 (hvy plate; -4 to 2 saves)</option>
+                    <option value="divine">Divine Gift AC 3)</option>
                     {{/select}}
                 </select>
                 <div style="display:flex;align-items:center;justify-content: flex-start">
-                    <label style="margin-right:4px;">AC</label> {{data.computed.armor.baseAc}}
-
-                    <input id="armorShield" type="checkbox" name="data.armor.shield" {{checked data.armor.shield}} style="margin-left:16px;margin-right:0" />
+                    <input id="armorShield" type="checkbox" name="data.armor.shield" {{checked data.armor.shield}} style="margin-right:0" />
                     <label for="armorShield">Shield</label>
 
                     <select name="data.armor.attribute" id="armorAttribute"  style="margin-left:16px" >
@@ -370,84 +368,86 @@
                     <label for="armorBonus"  style="margin-left:16px" >Bonus</label>
                     <input id="armorBonus" type="text" name="data.armor.bonus" value="{{data.armor.bonus}}" data-dtype="Number" class="compact" style="margin-left:4px;"/>
 
-                    <label  style="margin-left:16px;margin-right:4px;" >Total</label> {{data.computed.armor.ac}}
+                    <label  style="margin-left:16px;margin-right:4px;font-weight:bold;" >AC</label> <span style="font-weight:bold">{{data.computed.armor.ac}}</span>
 
                     <input id="penalizeHardiness" type="checkbox" name="data.armor.penalizeHardiness" {{checked data.armor.penalizeHardiness}} style="margin-left:32px;margin-right:0" />
-                    <label for="penalizeHardiness">Hardiness</label>
+                    <label for="penalizeHardiness">-Hardiness</label>
                     <input id="penalizeEvasion" type="checkbox" name="data.armor.penalizeEvasion" {{checked data.armor.penalizeEvasion}} style="margin-left:16px;margin-right:0" />
-                    <label for="penalizeEvasion">Evasion</label>
+                    <label for="penalizeEvasion">-Evasion</label>
                     <input id="penalizeSpirit" type="checkbox" name="data.armor.penalizeSpirit" {{checked data.armor.penalizeSpirit}} style="margin-left:16px;margin-right:0" />
-                    <label for="penalizeSpirit">Spirit</label>
+                    <label for="penalizeSpirit">-Spirit</label>
 
-                </div>
-            </div>
-            <div class="container col" style="margin-top:32px;">
-                <h2 style="display:flex;justify-content: space-between;">
-                    <span>Attacks</span>
-                    <i class="fas fa-plus itemAdder" data-item-type="attack"></i>
-                </h2>
-                <ol class="item-list">
-                    {{#each actor.items as |item id|}}
-                    {{#ifeq item.type "attack"}}
-                    <li class="item flexrow" data-item-id="{{item._id}}">
-                        <h4 class="item-name">
-                            {{item.name}}
-                            {{#ifneq item.data.hitBonus 0}}
-                                +{{item.data.hitBonus}},
-                            {{/ifneq}}
-                            {{#ifneq item.data.damageBonus 0}}
-                                {{item.data.damageRoll}}+{{item.data.damageBonus}},
-                            {{/ifneq}}
-                            {{#ifeq item.data.damageBonus 0}}
-                                {{item.data.damageRoll}},
-                            {{/ifeq}}
-                            {{item.data.range}},
-                            {{item.data.area}}
-                        </h4>
-                        <div class="item-controls">
-                            <a class="attack-roll" title="Roll"><i class="fas fa-dice-d20"></i></a>
-                            <a class="item-control item-chat" title="Chat Description"><i class="fas fa-comment"></i></a>
-                        </div>
-                    </li>
-                    {{/ifeq}}
-                    {{/each}}
-                </ol>
-                <div>
-                    <label for="toHitBonus">To Hit Bonus:</label>
-                    <input id="toHitBonus" name="data.toHitBonus" value="{{data.toHitBonus}}" type="text" data-dtype="Number" class="compact" style="margin-left:8px;" />
                 </div>
             </div>
             <div class="container row" style="margin-top:32px;">
-                <div class="container col">
-                    <h2 style="display:flex;justify-content: space-between;">
-                        <span>Auto Attacks</span>
-                        <i class="fas fa-plus itemAdder" data-item-type="autoHitAttack"></i>
-                    </h2>
-                    <ol class="item-list">
-                        {{#each actor.items as |item id|}}
-                        {{#ifeq item.type "autoHitAttack"}}
-                        <li class="item flexrow" data-item-id="{{item._id}}">
-                            <h4 class="item-name">
-                                {{item.name}}
+                <div class="container col" style="width:50%;">
+                    <div class="container col">
+                        <h2 style="display:flex;justify-content: space-between;">
+                            <span>Attacks</span>
+                            <i class="fas fa-plus itemAdder" data-item-type="attack"></i>
+                        </h2>
+                        <ol class="item-list">
+                            {{#each actor.items as |item id|}}
+                            {{#ifeq item.type "attack"}}
+                            <li class="item flexrow" data-item-id="{{item._id}}">
+                                <h4 class="item-name">
+                                    {{item.name}}
+                                    {{#ifneq item.data.hitBonus 0}}
+                                    +{{item.data.hitBonus}},
+                                    {{/ifneq}}
+                                    {{#ifneq item.data.damageBonus 0}}
+                                    {{item.data.damageRoll}}+{{item.data.damageBonus}},
+                                    {{/ifneq}}
+                                    {{#ifeq item.data.damageBonus 0}}
+                                    {{item.data.damageRoll}},
+                                    {{/ifeq}}
+                                    {{item.data.range}},
+                                    {{item.data.area}}
+                                </h4>
+                                <div class="item-controls">
+                                    <a class="attack-roll" title="Roll"><i class="fas fa-dice-d20"></i></a>
+                                </div>
+                            </li>
+                            {{/ifeq}}
+                            {{/each}}
+                        </ol>
+                        <div>
+                            <label for="toHitBonus">To Hit Bonus:</label>
+                            <input id="toHitBonus" name="data.toHitBonus" value="{{data.toHitBonus}}" type="text" data-dtype="Number" class="compact" style="margin-left:8px;" />
+                        </div>
+                    </div>
 
-                                {{#ifneq item.data.damageBonus 0}}
-                                    {{item.data.damageRoll}}+{{item.data.damageBonus}}
-                                {{/ifneq}}
+                    <div class="container col">
+                        <h2 style="display:flex;justify-content: space-between;">
+                            <span>Auto Attacks</span>
+                            <i class="fas fa-plus itemAdder" data-item-type="autoHitAttack"></i>
+                        </h2>
+                        <ol class="item-list">
+                            {{#each actor.items as |item id|}}
+                            {{#ifeq item.type "autoHitAttack"}}
+                            <li class="item flexrow" data-item-id="{{item._id}}">
+                                <h4 class="item-name">
+                                    {{item.name}}
 
-                                {{#ifeq item.data.damageBonus 0}}
-                                    {{item.data.damageRoll}}
-                                {{/ifeq}}
-                            </h4>
-                            <div class="item-controls">
-                                <a class="autoattack-roll" title="Roll"><i class="fas fa-dice-d20"></i></a>
-                                <a class="item-control item-chat" title="Chat Description"><i class="fas fa-comment"></i></a>
-                            </div>
-                        </li>
-                        {{/ifeq}}
-                        {{/each}}
-                    </ol>
+                                    {{#ifneq item.data.damageBonus 0}}
+                                        {{item.data.damageRoll}}+{{item.data.damageBonus}}
+                                    {{/ifneq}}
+
+                                    {{#ifeq item.data.damageBonus 0}}
+                                        {{item.data.damageRoll}}
+                                    {{/ifeq}}
+                                </h4>
+                                <div class="item-controls">
+                                    <a class="autoattack-roll" title="Roll"><i class="fas fa-dice-d20"></i></a>
+                                </div>
+                            </li>
+                            {{/ifeq}}
+                            {{/each}}
+                        </ol>
+                    </div>
                 </div>
-                <div class="container col">
+
+                <div class="container col" style="width:50%;">
                     <h2 style="display:flex;justify-content: space-between;">
                         <span>Combat Powers</span>
                         <i class="fas fa-plus itemAdder" data-item-type="attack"></i>
@@ -458,7 +458,6 @@
                         <li class="item flexrow" data-item-id="{{item._id}}">
                             <h4 class="item-name">{{item.name}}</h4>
                             <div class="item-controls">
-                                <a class="combatPower-roll" title="Roll"><i class="fas fa-dice-d20"></i></a>
                                 <a class="item-control item-chat" title="Chat Description"><i class="fas fa-comment"></i></a>
                             </div>
                         </li>
