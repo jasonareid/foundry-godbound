@@ -81,6 +81,12 @@ Hooks.once("init", async function () {
         }
     });
 
+    Handlebars.registerHelper("ifneq", function(arg1, arg2, options) {
+        if (arg1 !== arg2) {
+            return options.fn(this);
+        }
+    });
+
     Handlebars.registerHelper('times', function(n, options) {
         var accum = '';
         for(var i = 0; i < n; ++i)

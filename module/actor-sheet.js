@@ -97,7 +97,16 @@ export class GodboundActorSheet extends ActorSheet {
       const names = {
         boundWord: 'Word',
         divineGift: 'Gift',
-        divineMiracle: 'Miracle'
+        divineMiracle: 'Miracle',
+        attack: 'Attack',
+        autoHitAttack: 'Attack',
+        multiDieDamageRoll: 'Attack',
+        project: 'Project',
+        item: 'Item',
+        artifact: 'Artifact',
+        treasure: 'Treasure',
+        invocation: 'Invocation',
+        tactic: 'Tactic,'
       }
       this.actor.createOwnedItem({name: names[$i.data('itemType')], type: $i.data('itemType')}, {renderSheet: true});
     })

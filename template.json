@@ -45,6 +45,7 @@
           "bonus": 0
         }
       },
+      "toHitBonus": 1,
       "facts": "",
       "armor": {
         "type": "none",
@@ -119,22 +120,19 @@
       "tactic"
     ],
     "autoHitAttack": {
-      "numDice": 1,
-      "diceType": 6,
-      "bonus": 0
+      "damageRoll": "1d8",
+      "damageBonus": 0
     },
     "multiDieDamageRoll": {
-      "numDice": 1,
-      "diceType": 6,
-      "bonus": 0
+      "damageRoll": "1d8",
+      "damageBonus": 0
     },
     "attack": {
-      "attr": "",
+      "attr": "str",
       "hitBonus": 0,
-      "range": "",
-      "area": "",
-      "numDice": 1,
-      "diceType": 6,
+      "range": "Melee / 30ft",
+      "area": "Single Target",
+      "damageRoll": "1d8",
       "damageBonus": 0
     },
     "project": {

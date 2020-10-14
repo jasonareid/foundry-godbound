@@ -93,7 +93,7 @@ export class GodboundActor extends Actor {
         data.computed.armor.baseAc = 5;
         break;
       case "heavy":
-      case "divineGift":
+      case "divine":
         data.computed.armor.baseAc = 3;
         break;
       default:

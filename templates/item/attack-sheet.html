@@ -1,30 +1,71 @@
 <form class="{{cssClass}}" autocomplete="off">
-    <header class="sheet-header">
-        <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
-        <div class="header-fields">
-            <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
-            <div class="resource">
-            	<label>Quantity</label>
-                <input type="text" name="data.quantity" value="{{data.quantity}}" data-dtype="Number"/>
-            </div>
-            <div class="resource">
-            	<label>Weight</label>
-                <input type="text" name="data.weight" value="{{data.weight}}" data-dtype="Number"/>
-            </div>
-        </div>
-    </header>
-
-    {{!-- Sheet Tab Navigation --}}
-    <nav class="sheet-tabs tabs" data-group="primary">
-        <a class="item" data-tab="description">Description</a>
-    </nav>
-
     {{!-- Sheet Body --}}
     <section class="sheet-body">
+        <div class="tab attrs active" data-group="primary" data-tab="attrs">
+            <div class="container col">
+                <h2>Attack</h2>
+                <div class="container row sheet-header">
+                    <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" height="100"
+                         width="100"/>
+                    <div class="header-fields tabular">
+                        <div>
+                            <label for="name">Name:</label>
+                            <input id="name" name="name" type="text" value="{{item.name}}"/>
+                        </div>
+                        <div>
+                            <label for="attr">Attr:</label>
+                            <select name="data.attr" id="attr" >
+                                {{#select item.data.attr}}
+                                <option value="str">Str</option>
+                                <option value="dex">Dex</option>
+                                <option value="con">Con</option>
+                                <option value="int">Int</option>
+                                <option value="wis">Wis</option>
+                                <option value="cha">Cha</option>
+                                {{/select}}
+                            </select>
+                        </div>
+                        <div>
+                            <label for="hitBonus">Hit Bonus:</label>
+                            <input id="hitBonus" name="data.hitBonus" type="text" value="{{item.data.hitBonus}}" data-dtype="Number"/>
+                        </div>
+                        <div>
+                            <label for="range">Range:</label>
+                            <input id="range" name="data.range" type="text" value="{{item.data.range}}"/>
+                        </div>
+                        <div>
+                            <label for="area">Area:</label>
+                            <input id="area" name="data.area" type="text" value="{{item.data.area}}"/>
+                        </div>
+                        <div>
+                            <label for="attr">Damage:</label>
+                            <div style="display: flex; align-items: center">
+                                <select name="data.damageRoll" id="damageRoll" >
+                                    {{#select item.data.damageRoll}}
+                                    <option value="1d4">1d4</option>
+                                    <option value="1d6">1d6</option>
+                                    <option value="1d8">1d8</option>
+                                    <option value="1d10">1d10</option>
+                                    <option value="1d12">1d12</option>
+                                    <option value="1d20">1d20</option>
+                                    {{/select}}
+                                </select>
+                                +
+                                <input id="damageBonus" name="data.damageBonus" type="text" value="{{item.data.damageBonus}}" data-dtype="Number" style="width:16px;"/>
+                            </div>
+                        </div>
+                        <div>
+                            <label style="vertical-align: center">Actions:</label>
+                            <div class="item-controls" style="padding-top:4px;">
+                                <a class="item-control item-chat" title="Chat Effect"><i class="fas fa-comment"></i></a>
+                                <a class="item-control item-maybe-delete" title="Maybe Delete"><i class="fas fa-trash"></i></a>
+                                <a class="item-control item-delete" title="Delete" style="color:red;margin-left:16px;display:none;"><i class="fas fa-trash"></i></a>
+                            </div>
 
-        {{!-- Description Tab --}}
-        <div class="tab" data-group="primary" data-tab="description">
-            {{editor content=data.description target="data.description" button=true owner=owner editable=editable}}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 </form>

@@ -1,9 +1,9 @@
-* Armor
-  * Dropdowns for Armor
-* Attacks
+* Roll attacks
+* Roll damage
 * Roll formulas in chat messages
-* Auto Hit Attacks
-* Multi Die Damage Rolls
+* Combat Powers
+* To Hit Bonus
+* Wealth Total + Description
 * Artifacts
 * Projects
 * Add Cult to tabs
