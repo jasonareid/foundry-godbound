@@ -162,6 +162,21 @@
       "greater": false,
       "combatPower": false
     },
+    "artifactPower": {
+      "description": "",
+      "constant": false,
+      "instant": false,
+      "onTurn": false,
+      "action": false,
+      "smite": false,
+      "atWill": false,
+      "scene": false,
+      "day": false,
+      "greater": false,
+      "combatPower": false,
+      "artifactId": "",
+      "effortCost": 1
+    },
     "divineMiracle": {
       "description": "",
       "effort": 1,
@@ -173,8 +188,7 @@
       "dominionCost": 0,
       "effort": 0,
       "bound": false,
-      "effortSpent": 0,
-      "powers": []
+      "effortSpent": 0
     },
     "treasure": {
       "description": "",
