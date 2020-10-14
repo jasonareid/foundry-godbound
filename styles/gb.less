@@ -73,6 +73,34 @@
     background: inherit;
   }
 
+  .tabular {
+    display: table;
+
+    > * {
+      display: table-row;
+
+      > * {
+        display: table-cell;
+        vertical-align: top;
+
+        &:first-child {
+          width: 20%;
+          text-align: right;
+          padding-right: 8px;
+          padding-top: 4px;
+        }
+
+        &:last-child {
+          width: 100%;
+          margin-bottom: 4px;
+        }
+      }
+      > div:last-child {
+        padding-bottom: 4px;
+      }
+    }
+  }
+
   .sheet-header {
     display: flex;
     flex-direction: column;
@@ -88,31 +116,6 @@
     .header-fields {
       flex: 1;
       height: 100px;
-    }
-
-    .tabular {
-      display: table;
-
-      > * {
-        display: table-row;
-
-        > * {
-          display: table-cell;
-          vertical-align: top;
-
-          &:first-child {
-            width: 20%;
-            text-align: right;
-            padding-right: 8px;
-            padding-top: 4px;
-          }
-
-          &:last-child {
-            width: 100%;
-            margin-bottom: 4px;
-          }
-        }
-      }
     }
 
     textarea {
@@ -232,8 +235,11 @@
     }
   }
 
-
+  input.compact {
+    width: 24px;
+  }
 }
+
 .godbound.chat-block {
   margin: 0;
 

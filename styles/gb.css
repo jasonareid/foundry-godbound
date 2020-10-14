@@ -61,6 +61,29 @@
 .godbound form {
   background: inherit;
 }
+.godbound .tabular {
+  display: table;
+}
+.godbound .tabular > * {
+  display: table-row;
+}
+.godbound .tabular > * > * {
+  display: table-cell;
+  vertical-align: top;
+}
+.godbound .tabular > * > *:first-child {
+  width: 20%;
+  text-align: right;
+  padding-right: 8px;
+  padding-top: 4px;
+}
+.godbound .tabular > * > *:last-child {
+  width: 100%;
+  margin-bottom: 4px;
+}
+.godbound .tabular > * > div:last-child {
+  padding-bottom: 4px;
+}
 .godbound .sheet-header {
   display: flex;
   flex-direction: column;
@@ -75,26 +98,6 @@
 .godbound .sheet-header .header-fields {
   flex: 1;
   height: 100px;
-}
-.godbound .sheet-header .tabular {
-  display: table;
-}
-.godbound .sheet-header .tabular > * {
-  display: table-row;
-}
-.godbound .sheet-header .tabular > * > * {
-  display: table-cell;
-  vertical-align: top;
-}
-.godbound .sheet-header .tabular > * > *:first-child {
-  width: 20%;
-  text-align: right;
-  padding-right: 8px;
-  padding-top: 4px;
-}
-.godbound .sheet-header .tabular > * > *:last-child {
-  width: 100%;
-  margin-bottom: 4px;
 }
 .godbound .sheet-header textarea {
   font-family: inherit;
@@ -186,6 +189,9 @@
 }
 .godbound .item-list .item-controls {
   flex: 0 0 auto;
+}
+.godbound input.compact {
+  width: 24px;
 }
 .godbound.chat-block {
   margin: 0;

@@ -368,7 +368,7 @@
                     </select>
 
                     <label for="armorBonus"  style="margin-left:16px" >Bonus</label>
-                    <input id="armorBonus" type="text" name="data.armor.bonus" value="{{data.armor.bonus}}" data-dtype="Number" style="width:16px;margin-left:4px;"/>
+                    <input id="armorBonus" type="text" name="data.armor.bonus" value="{{data.armor.bonus}}" data-dtype="Number" class="compact" style="margin-left:4px;"/>
 
                     <label  style="margin-left:16px;margin-right:4px;" >Total</label> {{data.computed.armor.ac}}
 
@@ -414,7 +414,7 @@
                 </ol>
                 <div>
                     <label for="toHitBonus">To Hit Bonus:</label>
-                    <input id="toHitBonus" name="data.toHitBonus" value="{{data.toHitBonus}}" type="text" data-dtype="Number" style="width:16px;margin-left:8px;" />
+                    <input id="toHitBonus" name="data.toHitBonus" value="{{data.toHitBonus}}" type="text" data-dtype="Number" class="compact" style="margin-left:8px;" />
                 </div>
             </div>
             <div class="container row" style="margin-top:32px;">
@@ -471,16 +471,31 @@
         </div>
 
         <div class="tab wealth" data-group="primary" data-tab="wealth">
+            <div class="container col" style="margin-bottom:32px;">
+                <h2>Wealth</h2>
+                <div class="tabular">
+                    <div>
+                        <label for="wealthTotal">Wealth Total:</label>
+                        <div>
+                            <input id="wealthTotal" name="data.wealth.total" value="{{data.wealth.total}}" type="text" data-dtype="Number" class="compact" />
+                        </div>
+                    </div>
+                    <div>
+                        <label for="wealthDescription">Description:</label>
+                        <textarea id="wealthDescription" name="data.wealth.description">{{data.wealth.description}}</textarea>
+                    </div>
+                </div>
+            </div>
             <div class="container col">
                 <h2 style="display:flex;justify-content: space-between;">
-                    <span>Wealth</span>
+                    <span>Treasure</span>
                     <i class="fas fa-plus itemAdder" data-item-type="treasure"></i>
                 </h2>
                 <ol class="item-list">
                     {{#each actor.items as |item id|}}
                     {{#ifeq item.type "treasure"}}
                     <li class="item flexrow" data-item-id="{{item._id}}">
-                        <h4 class="item-name">{{item.name}}</h4>
+                        <h4 class="item-name">{{item.name}} (Value {{item.data.value}})</h4>
                         <div class="item-controls">
                             <a class="item-control item-chat" title="Chat Description"><i class="fas fa-comment"></i></a>
                         </div>
