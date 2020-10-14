@@ -456,14 +456,51 @@
                         {{#each actor.items as |item id|}}
                         {{#if item.data.combatPower}}
                         <li class="item flexrow" data-item-id="{{item._id}}">
-                            <h4 class="item-name">{{item.name}}</h4>
+                            <h4 class="item-name">
+                                {{item.name}}
+                                <span class="item-tags">
+                                {{#if item.data.greater}}
+                                Gr
+                                {{/if}}
+                                {{#if item.data.constant}}
+                                C
+                                {{/if}}
+                                {{#if item.data.instant}}
+                                I
+                                {{/if}}
+                                {{#if item.data.onTurn}}
+                                T
+                                {{/if}}
+                                {{#if item.data.action}}
+                                A
+                                {{/if}}
+                                {{#if item.data.smite}}
+                                Sm
+                                {{/if}}
+                                </span>
+                            </h4>
                             <div class="item-controls">
+                                {{#ifeq item.type "divineMiracle"}}
+                                    <a class="item-control item-day-effort" title="Commit Effort for Day"><i class="fas fa-sun"></i></a>
+                                {{/ifeq}}
+                                {{#ifeq item.type "divineGift"}}
+                                    {{#if item.data.atWill}}
+                                    <a class="item-control item-atWill-effort" title="Commit Effort At Will"><i class="fas fa-stopwatch"></i></a>
+                                    {{/if}}
+                                    {{#if item.data.scene}}
+                                    <a class="item-control item-scene-effort" title="Commit Effort for Scene"><i class="fas fa-clock"></i></a>
+                                    {{/if}}
+                                    {{#if item.data.day}}
+                                    <a class="item-control item-day-effort" title="Commit Effort for Day"><i class="fas fa-sun"></i></a>
+                                    {{/if}}
+                                {{/ifeq}}
                                 <a class="item-control item-chat" title="Chat Description"><i class="fas fa-comment"></i></a>
                             </div>
                         </li>
                         {{/if}}
                         {{/each}}
                     </ol>
+                    <h3>Free Effort: {{data.computed.effort.available}}</h3>
                 </div>
 
             </div>

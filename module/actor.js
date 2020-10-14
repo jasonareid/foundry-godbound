@@ -256,6 +256,24 @@ export class GodboundActor extends Actor {
         return `<span class="damage-formula-roll" data-formula="${replacement}" data-actor-id="${this.id}" data-damage-source="${itemName}">${replacement}</span>`;
     }
 
+    canSpendEffort(amount) {
+        if(this.data.data.computed.effort.available >= amount) {
+            return true;
+        } else {
+            ui.notifications.warn("Not enough effort");
+            return false;
+        }
+    }
+
+    canReclaimEffort(amount, type) {
+        if(this.data.data.effort[type] >= amount * -1) {
+            return true;
+        } else {
+            ui.notifications.warn(`Cannot reclaim that ${amount} ${type} effort`);
+            return false;
+        }
+    }
+
     replaceItemMacros(itemName, description) {
         if(!description) return description;
 

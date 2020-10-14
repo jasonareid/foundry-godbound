@@ -1,4 +1,3 @@
-* Fancy UI for Combat Powers / Effort expenditure
 * Succeed at saves in chat
 * Artifacts
 * Projects

@@ -66,7 +66,7 @@ export class GodboundActorSheet extends ActorSheet {
       if(item.type === 'divineMiracle') {
         effortCost = item.data.data.effort;
       }
-      if(this.actor.data.data.computed.effort.available >= effortCost) {
+      if(this.actor.canSpendEffort(effortCost)) {
         this.actor.update({data: {effort: {day: this.actor.data.data.effort.day + effortCost}}});
         ChatMessage.create({
           content: `<div><h3>${item.name}</h3><h4>${this.actor.name}: ${effortCost} Effort for Day</h4><p>${this._replaceMacros(item.name, item.data.data.description)}</p></div>`,
@@ -77,7 +77,8 @@ export class GodboundActorSheet extends ActorSheet {
     html.find('.item-scene-effort').click(ev => {
       const li = $(ev.currentTarget).parents('.item');
       const item = this.actor.getOwnedItem(li.data("itemId"));
-      if(this.actor.data.data.computed.effort.available >= 1) {
+      let effortCost = 1;
+      if(this.actor.canSpendEffort(effortCost)) {
         this.actor.update({data: {effort: {scene: this.actor.data.data.effort.scene + 1}}});
         ChatMessage.create({
           content: `<div><h3>${item.name}</h3><h4>${this.actor.name}: Effort for Scene</h4><p>${this._replaceMacros(item.name, item.data.data.description)}</p></div>`,
@@ -88,7 +89,8 @@ export class GodboundActorSheet extends ActorSheet {
     html.find('.item-atWill-effort').click(ev => {
       const li = $(ev.currentTarget).parents('.item');
       const item = this.actor.getOwnedItem(li.data("itemId"));
-      if(this.actor.data.data.computed.effort.available >= 1) {
+      let effortCost = 1;
+      if(this.actor.canSpendEffort(effortCost)) {
         this.actor.update({data: {effort: {atWill: this.actor.data.data.effort.atWill + 1}}});
         ChatMessage.create({
           content: `<div><h3>${item.name}</h3><h4>${this.actor.name}: At Will Effort</h4><p>${this._replaceMacros(item.name, item.data.data.description)}</p></div>`,
@@ -125,9 +127,9 @@ export class GodboundActorSheet extends ActorSheet {
       const $i = $(ev.currentTarget);
       let effortCategory = $i.data('effortCategory');
       let effortChange = parseInt($i.data('effortChange'));
-      if(effortChange > 0 && this.actor.data.data.computed.effort.available >= effortChange) {
+      if(effortChange > 0 && this.actor.canSpendEffort(effortChange)) {
         this.actor.update({data: {effort: {[effortCategory]: this.actor.data.data.effort[effortCategory] + effortChange}}});
-      } else if(effortChange < 0 && this.actor.data.data.effort[effortCategory] >= effortChange * -1) {
+      } else if(effortChange < 0 && this.actor.canReclaimEffort(effortChange, effortCategory)) {
         this.actor.update({data: {effort: {[effortCategory]: this.actor.data.data.effort[effortCategory] + effortChange}}});
       }
     });
