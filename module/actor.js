@@ -26,14 +26,16 @@ export class GodboundActor extends Actor {
                 name: 'Divine Wrath', type: 'divineMiracle', data: {
                     description: "You smite a chosen foe within sight with the energies of the Word, inflicting @RollDmg[leveld8] damage. You are always immune to the wrath of your own bound Words, as are other entities that wield similar powers. As a Smite power, Divine Wrath cannot be used two rounds in a row.",
                     effort: 1,
-                    smite: true
+                    smite: true,
+                    combatPower: true,
                 }
             });
             await gbActor.createOwnedItem({
                 name: 'Corona of Fury', type: 'divineMiracle', data: {
                     description: "Commit Effort to the end of the scene. You hurl a torrent of your Word’s energy at a group of foes, affecting all within a 30-foot radius of a target point within sight of you. Each victim takes @RollDmg[halfLeveld8] damage. The fury can selectively spare allies within the area, but the victims then get an appropriate saving throw to resist the effect. You are always immune to the furies of your own bound Words, as are other entities that wield similar powers. Corona of Fury cannot be used two rounds in a row.",
                     effort: 1,
-                    smite: true
+                    smite: true,
+                    combatPower: true,
                 }
             });
         } else if (gbActor.data.type === 'npc') {

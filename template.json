@@ -159,12 +159,14 @@
       "atWill": false,
       "scene": false,
       "day": false,
-      "greater": false
+      "greater": false,
+      "combatPower": false
     },
     "divineMiracle": {
       "description": "",
       "effort": 1,
-      "smite": false
+      "smite": false,
+      "combatPower": false
     },
     "artifact": {
       "description": "",

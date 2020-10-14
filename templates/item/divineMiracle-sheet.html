@@ -21,8 +21,11 @@
                             <input id="effort" name="data.effort" type="text" value="{{data.effort}}" data-dtype="Number"/>
                         </div>
                         <div>
-                            <label for="effort">Smite:</label>
-                            <input type="checkbox" name="data.smite" {{checked data.smite}} />
+                            <label></label>
+                            <div style="display: flex; align-items: center">
+                                <input type="checkbox" name="data.combatPower" {{checked data.combatPower}} style="margin-left:0" />Combat Power
+                                <input type="checkbox" name="data.smite" {{checked data.smite}} style="margin-left:16px;" />Smite
+                            </div>
                         </div>
                         <div>
                             <label style="vertical-align: center">Actions:</label>
