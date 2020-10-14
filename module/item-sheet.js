@@ -30,6 +30,13 @@ export class GodboundItemSheet extends ItemSheet {
   }
   /* -------------------------------------------- */
 
+  _replaceMacros(description) {
+    if(!this.item.actor) {
+      return description;
+    }
+    return this.item.actor.replaceItemMacros(this.item.name, description);
+  }
+
   /** @override */
 	activateListeners(html) {
     super.activateListeners(html);
@@ -37,7 +44,7 @@ export class GodboundItemSheet extends ItemSheet {
     html.find('.item-chat').click(ev => {
       const item = this.item;
       ChatMessage.create({
-        content: `<div><h3>${item.name}</h3><p>${item.data.data.description}</p></div>`,
+        content: `<div><h3>${item.name}</h3><p>${this._replaceMacros(item.data.data.description)}</p></div>`,
       });
     });
 

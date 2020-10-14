@@ -248,4 +248,29 @@ export class GodboundActor extends Actor {
             ChatMessage.create(chatData);
         }
     }
+
+    _replaceRollDmgMacro(itemName, formula) {
+        let replacement = formula.replace('halfLevel', Math.ceil(this.data.data.level / 2));
+        replacement = replacement.replace('level', this.data.data.level);
+        return `<span class="damage-formula-roll" data-formula="${replacement}" data-actor-id="${this.id}" data-damage-source="${itemName}">${replacement}</span>`;
+    }
+
+    replaceItemMacros(itemName, description) {
+        let segments = description.split(/(@.*?\[.*?])/g);
+        let result = [];
+        for(let i = 0; i < segments.length; i++) {
+            let parsed = segments[i].match(/@(.*?)\[(.*?)]/);
+            if(!parsed) {
+                result.push(segments[i]);
+            } else {
+                let macro = segments[i];
+                if(parsed[1] === 'RollDmg') {
+                    result.push(this._replaceRollDmgMacro(itemName, parsed[2]));
+                } else {
+                    result.push(macro);
+                }
+            }
+        }
+        return result.join('');
+    }
 }

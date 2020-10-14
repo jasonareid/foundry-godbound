@@ -33,6 +33,10 @@ export class GodboundActorSheet extends ActorSheet {
 
   /* -------------------------------------------- */
 
+  _replaceMacros(itemName, description) {
+    return this.actor.replaceItemMacros(itemName, description);
+  }
+
   /** @override */
 	activateListeners(html) {
     super.activateListeners(html);
@@ -51,7 +55,7 @@ export class GodboundActorSheet extends ActorSheet {
       const li = $(ev.currentTarget).parents('.item');
       const item = this.actor.getOwnedItem(li.data("itemId"));
       ChatMessage.create({
-        content: `<div><h3>${item.name}</h3><p>${item.data.data.description}</p></div>`,
+        content: `<div><h3>${item.name}</h3><p>${this._replaceMacros(item.name, item.data.data.description)}</p></div>`,
       });
     });
 
@@ -65,7 +69,7 @@ export class GodboundActorSheet extends ActorSheet {
       if(this.actor.data.data.computed.effort.available >= effortCost) {
         this.actor.update({data: {effort: {day: this.actor.data.data.effort.day + effortCost}}});
         ChatMessage.create({
-          content: `<div><h3>${item.name}</h3><h4>${this.actor.name}: ${effortCost} Effort for Day</h4><p>${item.data.data.description}</p></div>`,
+          content: `<div><h3>${item.name}</h3><h4>${this.actor.name}: ${effortCost} Effort for Day</h4><p>${this._replaceMacros(item.name, item.data.data.description)}</p></div>`,
         });
       }
     });
@@ -76,7 +80,7 @@ export class GodboundActorSheet extends ActorSheet {
       if(this.actor.data.data.computed.effort.available >= 1) {
         this.actor.update({data: {effort: {scene: this.actor.data.data.effort.scene + 1}}});
         ChatMessage.create({
-          content: `<div><h3>${item.name}</h3><h4>${this.actor.name}: Effort for Scene</h4><p>${item.data.data.description}</p></div>`,
+          content: `<div><h3>${item.name}</h3><h4>${this.actor.name}: Effort for Scene</h4><p>${this._replaceMacros(item.name, item.data.data.description)}</p></div>`,
         });
       }
     });
@@ -87,7 +91,7 @@ export class GodboundActorSheet extends ActorSheet {
       if(this.actor.data.data.computed.effort.available >= 1) {
         this.actor.update({data: {effort: {atWill: this.actor.data.data.effort.atWill + 1}}});
         ChatMessage.create({
-          content: `<div><h3>${item.name}</h3><h4>${this.actor.name}: At Will Effort</h4><p>${item.data.data.description}</p></div>`,
+          content: `<div><h3>${item.name}</h3><h4>${this.actor.name}: At Will Effort</h4><p>${this._replaceMacros(item.name, item.data.data.description)}</p></div>`,
         });
       }
     });
