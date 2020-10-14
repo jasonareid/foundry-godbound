@@ -178,7 +178,6 @@ export class GodboundActorSheet extends ActorSheet {
     html.find('.attack-roll').click(async ev => {
       const li = $(ev.currentTarget).parents('.item');
       const item = this.actor.getOwnedItem(li.data("itemId"));
-      console.log(item);
       let template = 'systems/godbound/templates/chat/attack-roll-result.html';
       let chatData = {
         user: game.user._id,
@@ -198,13 +197,11 @@ export class GodboundActorSheet extends ActorSheet {
         itemBonus: item.data.data.hitBonus
       });
       roll.roll();
-      console.log(roll);
       templateData.roll = await roll.render();
       templateData.result = {
         total: roll.total,
       };
       templateData.data.actor = this.actor;
-      console.log(templateData);
       chatData.content = await renderTemplate(template, templateData);
       chatData.roll = roll;
       chatData.isRoll = true;

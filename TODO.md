@@ -1,8 +1,5 @@
-* Roll attacks
-* Roll damage
 * Roll formulas in chat messages
 * Combat Powers
-* To Hit Bonus
 * Wealth Total + Description
 * Artifacts
 * Projects

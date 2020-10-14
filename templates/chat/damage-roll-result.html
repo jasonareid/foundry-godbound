@@ -1,0 +1,13 @@
+<section class="godbound chat-message">
+    <div class="godbound chat-block">
+        <div class="flexrow chat-header">
+            <div class="chat-title"><h3>{{title}}</h3></div>
+            <div class="chat-img" style="background-image:url('{{data.actor.img}}')"></div>
+        </div>
+        <div class="blindable" data-blind="{{data.roll.blindroll}}">
+            <div>{{{roll}}}</div>
+            <div>Normal Damage: {{result.normalDamage}}</div>
+            <div>Straight Damage: {{result.straightDamage}}</div>
+        </div>
+    </div>
+</section>

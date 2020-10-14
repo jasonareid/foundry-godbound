@@ -1,172 +1,251 @@
 export class GodboundActor extends Actor {
 
-  static async create(data, options) {
-    let gbActor = await super.create(data, options);
+    static async create(data, options) {
+        let gbActor = await super.create(data, options);
 
-    if (gbActor.data.type === 'pc') {
-      await gbActor.createOwnedItem({name: 'Fray Die', type: 'autoHitAttack', data: {
-          numDice: 1,
-          diceType: 8
+        if (gbActor.data.type === 'pc') {
+            await gbActor.createOwnedItem({
+                name: 'Fray Die', type: 'autoHitAttack', data: {
+                    numDice: 1,
+                    diceType: 8
+                }
+            });
+            await gbActor.createOwnedItem({
+                name: 'Succeed on Save', type: 'divineMiracle', data: {
+                    description: "Succeed on a Failed Save",
+                    effort: 1
+                }
+            });
+            await gbActor.createOwnedItem({
+                name: 'Suppress Effect', type: 'divineMiracle', data: {
+                    description: "Suppress an Appropriate Effect",
+                    effort: 1
+                }
+            });
+            await gbActor.createOwnedItem({
+                name: 'Divine Wrath', type: 'divineMiracle', data: {
+                    description: "You smite a chosen foe within sight with the energies of the Word, inflicting @RollDmg[leveld8] damage. You are always immune to the wrath of your own bound Words, as are other entities that wield similar powers. As a Smite power, Divine Wrath cannot be used two rounds in a row.",
+                    effort: 1,
+                    smite: true
+                }
+            });
+            await gbActor.createOwnedItem({
+                name: 'Corona of Fury', type: 'divineMiracle', data: {
+                    description: "Commit Effort to the end of the scene. You hurl a torrent of your Word’s energy at a group of foes, affecting all within a 30-foot radius of a target point within sight of you. Each victim takes @RollDmg[halfLeveld8] damage. The fury can selectively spare allies within the area, but the victims then get an appropriate saving throw to resist the effect. You are always immune to the furies of your own bound Words, as are other entities that wield similar powers. Corona of Fury cannot be used two rounds in a row.",
+                    effort: 1,
+                    smite: true
+                }
+            });
+        } else if (gbActor.data.type === 'npc') {
+
         }
-      });
-      await gbActor.createOwnedItem({name: 'Succeed on Save', type: 'divineMiracle', data: {
-          description: "Succeed on a Failed Save",
-          effort: 1
+    }
+
+    prepareData() {
+        super.prepareData();
+        const actorData = this.data;
+
+        // Make separate methods for each Actor type (character, npc, etc.) to keep
+        // things organized.
+        if (actorData.type === 'pc') this._preparePcData(actorData);
+
+        if (actorData.type === 'npc') this._prepareNpcData(actorData);
+    }
+
+    _preparePcData(actorData) {
+        const data = actorData.data;
+
+        // Make a new Object that holds computed data and keeps it separate from anything else
+        data.computed = {};
+
+        data.computed.attributes = {};
+        for (let k of Object.keys(data.attributes)) {
+            const computedAtt = {};
+            const srcAtt = data.attributes[k];
+            const score = srcAtt.score;
+            if (score <= 3) {
+                computedAtt.mod = -3;
+            } else if (score <= 5) {
+                computedAtt.mod = -2;
+            } else if (score <= 8) {
+                computedAtt.mod = -1;
+            } else if (score >= 19) {
+                computedAtt.mod = 4;
+            } else if (score >= 18) {
+                computedAtt.mod = 3;
+            } else if (score >= 16) {
+                computedAtt.mod = 2;
+            } else if (score >= 13) {
+                computedAtt.mod = 1;
+            } else {
+                computedAtt.mod = 0;
+            }
+            computedAtt.check = 21 - score;
+            data.computed.attributes[k] = computedAtt;
         }
-      });
-      await gbActor.createOwnedItem({name: 'Suppress Effect', type: 'divineMiracle', data: {
-          description: "Suppress an Appropriate Effect",
-          effort: 1
+
+        data.computed.saves = {};
+        this._prepareSave(data.saves, data.computed.saves, data.computed.attributes, 'hardiness', 'str', 'con');
+        this._prepareSave(data.saves, data.computed.saves, data.computed.attributes, 'evasion', 'dex', 'int');
+        this._prepareSave(data.saves, data.computed.saves, data.computed.attributes, 'spirit', 'wis', 'cha');
+
+        data.computed.armor = {};
+        switch (data.armor.type) {
+            case "light":
+                data.computed.armor.baseAc = 7;
+                break;
+            case "medium":
+                data.computed.armor.baseAc = 5;
+                break;
+            case "heavy":
+            case "divine":
+                data.computed.armor.baseAc = 3;
+                break;
+            default:
+                data.computed.armor.baseAc = 9;
         }
-      });
-      await gbActor.createOwnedItem({name: 'Divine Wrath', type: 'divineMiracle', data: {
-          description: "You smite a chosen foe within sight with the energies of the Word, inflicting @RollDmg[leveld8] damage. You are always immune to the wrath of your own bound Words, as are other entities that wield similar powers. As a Smite power, Divine Wrath cannot be used two rounds in a row.",
-          effort: 1,
-          smite: true
+        let ac = data.computed.armor.baseAc;
+        if (data.armor.shield) {
+            ac -= 1;
         }
-      });
-      await gbActor.createOwnedItem({name: 'Corona of Fury', type: 'divineMiracle', data: {
-          description: "Commit Effort to the end of the scene. You hurl a torrent of your Word’s energy at a group of foes, affecting all within a 30-foot radius of a target point within sight of you. Each victim takes @RollDmg[halfLeveld8] damage. The fury can selectively spare allies within the area, but the victims then get an appropriate saving throw to resist the effect. You are always immune to the furies of your own bound Words, as are other entities that wield similar powers. Corona of Fury cannot be used two rounds in a row.",
-          effort: 1,
-          smite: true
+        ac -= data.armor.bonus;
+        ac -= data.computed.attributes[data.armor.attribute].mod;
+        data.computed.armor.ac = ac;
+        if (data.armor.penalizeHardiness) {
+            data.computed.saves.hardiness.penalty = 4;
+            data.computed.saves.hardiness.save += 4;
         }
-      });
-    } else if(gbActor.data.type === 'npc') {
+        if (data.armor.penalizeEvasion) {
+            data.computed.saves.evasion.penalty = 4;
+            data.computed.saves.evasion.save += 4;
+        }
+        if (data.armor.penalizeSpirit) {
+            data.computed.saves.spirit.penalty = 4;
+            data.computed.saves.spirit.save += 4;
+        }
 
-    }
-  }
+        data.computed.effort = {};
+        data.computed.effort.available =
+            data.effort.total - (
+                data.effort.round +
+                data.effort.scene +
+                data.effort.day
+            )
+        ;
+        data.computed.effort.spent = data.effort.total - data.computed.effort.available;
 
-  prepareData() {
-    super.prepareData();
-    const actorData = this.data;
+        data.computed.influence = {};
+        data.computed.influence.available = data.influence.total - data.influence.spent;
 
-    // Make separate methods for each Actor type (character, npc, etc.) to keep
-    // things organized.
-    if (actorData.type === 'pc') this._preparePcData(actorData);
+        data.computed.dominion = {};
+        data.computed.dominion.available = data.dominion.total - data.dominion.spent;
 
-    if (actorData.type === 'npc') this._prepareNpcData(actorData);
-  }
-
-  _preparePcData(actorData) {
-    const data = actorData.data;
-
-    // Make a new Object that holds computed data and keeps it separate from anything else
-    data.computed = {};
-
-    data.computed.attributes = {};
-    for(let k of Object.keys(data.attributes)) {
-      const computedAtt = {};
-      const srcAtt = data.attributes[k];
-      const score = srcAtt.score;
-      if(score <= 3) {
-        computedAtt.mod = -3;
-      } else if(score <= 5) {
-        computedAtt.mod = -2;
-      } else if(score <= 8) {
-        computedAtt.mod = -1;
-      } else if(score >= 19) {
-        computedAtt.mod = 4;
-      } else if(score >= 18) {
-        computedAtt.mod = 3;
-      } else if(score >= 16) {
-        computedAtt.mod = 2;
-      } else if(score >= 13) {
-        computedAtt.mod = 1;
-      } else {
-        computedAtt.mod = 0;
-      }
-      computedAtt.check = 21 - score;
-      data.computed.attributes[k] = computedAtt;
+        data.computed.hp = {};
+        data.computed.hp.max = 8 + data.computed.attributes.con.mod + (
+            (data.level - 1) * (4 + Math.ceil(data.computed.attributes.con.mod / 2))
+        );
     }
 
-    data.computed.saves = {};
-    this._prepareSave(data.saves, data.computed.saves, data.computed.attributes, 'hardiness', 'str', 'con');
-    this._prepareSave(data.saves, data.computed.saves, data.computed.attributes, 'evasion', 'dex', 'int');
-    this._prepareSave(data.saves, data.computed.saves, data.computed.attributes, 'spirit', 'wis', 'cha');
-
-    data.computed.armor = {};
-    switch(data.armor.type) {
-      case "light":
-        data.computed.armor.baseAc = 7;
-        break;
-      case "medium":
-        data.computed.armor.baseAc = 5;
-        break;
-      case "heavy":
-      case "divine":
-        data.computed.armor.baseAc = 3;
-        break;
-      default:
-        data.computed.armor.baseAc = 9;
-    }
-    let ac = data.computed.armor.baseAc;
-    if(data.armor.shield) {
-      ac -= 1;
-    }
-    ac -= data.armor.bonus;
-    ac -= data.computed.attributes[data.armor.attribute].mod;
-    data.computed.armor.ac = ac;
-    if(data.armor.penalizeHardiness) {
-      data.computed.saves.hardiness.penalty = 4;
-      data.computed.saves.hardiness.save += 4;
-    }
-    if(data.armor.penalizeEvasion) {
-      data.computed.saves.evasion.penalty = 4;
-      data.computed.saves.evasion.save += 4;
-    }
-    if(data.armor.penalizeSpirit) {
-      data.computed.saves.spirit.penalty = 4;
-      data.computed.saves.spirit.save += 4;
+    _prepareSave(src, dest, atts, name, att1, att2) {
+        dest[name] = {};
+        dest[name].base = 15 - Math.max(
+            atts[att1].mod,
+            atts[att2].mod
+        );
+        dest[name].penalty = 0;
+        dest[name].save = dest[name].base - src[name].bonus;
     }
 
-    data.computed.effort = {};
-    data.computed.effort.available =
-        data.effort.total - (
-            data.effort.round +
-            data.effort.scene +
-            data.effort.day
-        )
-    ;
-    data.computed.effort.spent = data.effort.total - data.computed.effort.available;
+    _prepareNpcData(actorData) {
+        const data = actorData.data;
 
-    data.computed.influence = {};
-    data.computed.influence.available = data.influence.total - data.influence.spent;
+        // Make a new Object that holds computed data and keeps it separate from anything else
+        data.computed = {};
 
-    data.computed.dominion = {};
-    data.computed.dominion.available = data.dominion.total - data.dominion.spent;
+        data.computed.effort = {};
+        data.computed.effort.available =
+            data.effort.total - (
+                data.effort.round +
+                data.effort.scene +
+                data.effort.day
+            )
+        ;
+    }
 
-    data.computed.hp = {};
-    data.computed.hp.max = 8 + data.computed.attributes.con.mod + (
-        (data.level - 1) * (4 + Math.ceil(data.computed.attributes.con.mod / 2))
-    );
-  }
+    _extractBonus(roll) {
+        let runningTotal = 0;
+        for(let i = 0; i < roll.dice.length; i++) {
+            for(let j = 0; j < roll.dice[i].rolls.length; j++) {
+                runningTotal += roll.dice[i].rolls[j].roll;
+            }
+        }
+        return roll.total - runningTotal;
+    }
 
-  _prepareSave(src, dest, atts, name, att1, att2) {
-    dest[name] = {};
-    dest[name].base = 15 - Math.max(
-        atts[att1].mod,
-        atts[att2].mod
-    );
-    dest[name].penalty = 0;
-    dest[name].save = dest[name].base - src[name].bonus;
-  }
-  _prepareNpcData(actorData) {
-    const data = actorData.data;
+    _sortedDiceResults(roll) {
+        let results = [];
+        for(let i = 0; i < roll.dice.length; i++) {
+            for(let j = 0; j < roll.dice[i].rolls.length; j++) {
+                results.push(roll.dice[i].rolls[j].roll);
+            }
+        }
+        results.sort().reverse();
+        return results;
+    }
 
-    // Make a new Object that holds computed data and keeps it separate from anything else
-    data.computed = {};
+    _toNormalDamage(roll) {
+        let bonus = this._extractBonus(roll);
+        let results = this._sortedDiceResults(roll);
+        results[0] = results[0] + bonus;
+        let runningTotal = 0;
+        for(let i = 0; i < results.length; i++) {
+            let roll = results[i];
+            if(roll < 2) {
+            } else if(roll < 6) {
+                runningTotal += 1;
+            } else if(roll < 10) {
+                runningTotal += 2;
+            } else {
+                runningTotal += 4;
+            }
+        }
+        return runningTotal;
+    }
 
-    data.computed.effort = {};
-    data.computed.effort.available =
-        data.effort.total - (
-            data.effort.round +
-            data.effort.scene +
-            data.effort.day
-        )
-    ;
-  }
-
-  rollDamage(source, formula) {
-    console.log(`Rolling damage for ${this.name} from ${source} for ${formula}`);
-  }
+    async rollDamage(source, formula) {
+        console.log(`Rolling damage for ${this.name} from ${source} for ${formula}`);
+        let template = 'systems/godbound/templates/chat/damage-roll-result.html';
+        let chatData = {
+            user: game.user._id,
+            speaker: this,
+        };
+        let templateData = {
+            title: `Damage via ${source}`,
+            data: {},
+        };
+        let roll = new Roll(formula);
+        roll.roll();
+        templateData.roll = await roll.render();
+        templateData.result = {
+            straightDamage: roll.total,
+            normalDamage: this._toNormalDamage(roll),
+        };
+        templateData.data.actor = this;
+        chatData.content = await renderTemplate(template, templateData);
+        chatData.roll = roll;
+        chatData.isRoll = true;
+        if (game.dice3d) {
+            await game.dice3d.showForRoll(
+                roll,
+                game.user,
+                true,
+                chatData.whisper,
+                chatData.blind
+            );
+            ChatMessage.create(chatData);
+        } else {
+            chatData.sound = CONFIG.sounds.dice;
+            ChatMessage.create(chatData);
+        }
+    }
 }
