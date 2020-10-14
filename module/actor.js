@@ -215,14 +215,13 @@ export class GodboundActor extends Actor {
     }
 
     async rollDamage(source, formula) {
-        console.log(`Rolling damage for ${this.name} from ${source} for ${formula}`);
         let template = 'systems/godbound/templates/chat/damage-roll-result.html';
         let chatData = {
             user: game.user._id,
             speaker: this,
         };
         let templateData = {
-            title: `Damage via ${source}`,
+            title: `${source}`,
             data: {},
         };
         let roll = new Roll(formula);
@@ -258,6 +257,8 @@ export class GodboundActor extends Actor {
     }
 
     replaceItemMacros(itemName, description) {
+        if(!description) return description;
+
         let segments = description.split(/(@.*?\[.*?])/g);
         let result = [];
         for(let i = 0; i < segments.length; i++) {

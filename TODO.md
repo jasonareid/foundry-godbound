@@ -13,3 +13,4 @@
 * Turn At Wills into Toggles
 * Post Chat message Prompt for Save
 * Color successful & failed checks & saves
+* Put some blood on the damage roll message
