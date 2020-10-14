@@ -1,4 +1,3 @@
-* Succeed at saves in chat
 * Artifacts
 * Projects
 * Add Cult to tabs

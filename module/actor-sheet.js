@@ -125,7 +125,6 @@ export class GodboundActorSheet extends ActorSheet {
         };
         let templateData = {
           title: `${Capitalize(attr)} Check (${data.modifier < 1 ? 'Hard' : data.modifier > 1 ? 'Easy' : 'Normal'})`,
-          flavor: `By ${this.actor.name}`,
           data: data,
         }
         let roll = new Roll('1d20 + @attr + @difficulty', {
