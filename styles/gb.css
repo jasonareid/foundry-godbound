@@ -204,7 +204,7 @@
   height: 30px;
   overflow: hidden;
 }
-.godbound.chat-block .chat-header .chat-title h2 {
+.godbound.chat-block .chat-header .chat-title h3 {
   border: none;
   line-height: 34px;
   margin: 0;
@@ -234,6 +234,11 @@
 }
 .godbound.chat-block .roll-result.roll-fail {
   color: #aa0200;
+}
+.godbound.chat-block .damage-formula-roll {
+  text-decoration: underline;
+  cursor: pointer;
+  color: darkred;
 }
 .godbound.sheet.actor {
   min-width: 560px;

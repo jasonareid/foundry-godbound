@@ -165,4 +165,8 @@ export class GodboundActor extends Actor {
         )
     ;
   }
+
+  rollDamage(source, formula) {
+    console.log(`Rolling damage for ${this.name} from ${source} for ${formula}`);
+  }
 }

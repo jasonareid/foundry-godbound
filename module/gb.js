@@ -101,4 +101,15 @@ Hooks.once("init", async function () {
     Handlebars.registerHelper('json', function(context) {
         return JSON.stringify(context);
     });
+
+    $(document).on('click', '.damage-formula-roll', ev => {
+        let span = $(ev.currentTarget);
+        let formula = span.data('formula');
+        let actorId = span.data('actorId');
+        let damageSource = span.data('damageSource');
+        let actor = game.actors.get(actorId);
+        if (actor) {
+            actor.rollDamage(damageSource, formula);
+        }
+    });
 });

@@ -156,6 +156,8 @@ export class GodboundActorSheet extends ActorSheet {
         templateData.result = result;
         templateData.data.actor = this.actor;
         chatData.content = await renderTemplate(template, templateData);
+        chatData.roll = roll;
+        chatData.isRoll = true;
         // Dice So Nice
         if (game.dice3d) {
           await game.dice3d.showForRoll(
@@ -172,6 +174,54 @@ export class GodboundActorSheet extends ActorSheet {
         }
       });
     })
+
+    html.find('.attack-roll').click(async ev => {
+      const li = $(ev.currentTarget).parents('.item');
+      const item = this.actor.getOwnedItem(li.data("itemId"));
+      console.log(item);
+      let template = 'systems/godbound/templates/chat/attack-roll-result.html';
+      let chatData = {
+        user: game.user._id,
+        speaker: this.actor,
+      };
+      let attrBonus = this.actor.data.data.computed.attributes[item.data.data.attr].mod;
+      let templateData = {
+        title: `Attack with ${item.name}`,
+        flavor: `By ${this.actor.name}`,
+        damage: `${item.data.data.damageRoll}+${attrBonus+item.data.data.damageBonus}`,
+        damageSource: item.name,
+        data: {},
+      };
+      let roll = new Roll('1d20 + @attrBonus + @toHitBonus + @itemBonus', {
+        attrBonus: attrBonus,
+        toHitBonus: this.actor.data.data.toHitBonus,
+        itemBonus: item.data.data.hitBonus
+      });
+      roll.roll();
+      console.log(roll);
+      templateData.roll = await roll.render();
+      templateData.result = {
+        total: roll.total,
+      };
+      templateData.data.actor = this.actor;
+      console.log(templateData);
+      chatData.content = await renderTemplate(template, templateData);
+      chatData.roll = roll;
+      chatData.isRoll = true;
+      if (game.dice3d) {
+        await game.dice3d.showForRoll(
+            roll,
+            game.user,
+            true,
+            chatData.whisper,
+            chatData.blind
+        );
+        ChatMessage.create(chatData);
+      } else {
+        chatData.sound = CONFIG.sounds.dice;
+        ChatMessage.create(chatData);
+      }
+    });
 
     html.find('.save-roll').click(ev => {
       let save = $(ev.currentTarget).data('save');
@@ -200,6 +250,8 @@ export class GodboundActorSheet extends ActorSheet {
         templateData.result = result;
         templateData.data.actor = this.actor;
         chatData.content = await renderTemplate(template, templateData);
+        chatData.roll = roll;
+        chatData.isRoll = true;
         // Dice So Nice
         if (game.dice3d) {
           await game.dice3d.showForRoll(
