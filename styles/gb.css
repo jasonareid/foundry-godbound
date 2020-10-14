@@ -241,7 +241,8 @@
 .godbound.chat-block .roll-result.roll-fail {
   color: #aa0200;
 }
-.godbound.chat-block .damage-formula-roll {
+.godbound.chat-block .damage-formula-roll,
+.godbound.chat-block .instant-auto-save {
   text-decoration: underline;
   cursor: pointer;
   color: darkred;

@@ -5,6 +5,7 @@
 import {PlayerRollDialog} from "./playerRollDialog.js";
 import {Capitalize} from "./misc.js";
 
+
 export class GodboundActorSheet extends ActorSheet {
 
   /** @override */
@@ -32,11 +33,6 @@ export class GodboundActorSheet extends ActorSheet {
   }
 
   /* -------------------------------------------- */
-
-  _replaceMacros(itemName, description) {
-    return this.actor.replaceItemMacros(itemName, description);
-  }
-
   /** @override */
 	activateListeners(html) {
     super.activateListeners(html);
@@ -55,7 +51,7 @@ export class GodboundActorSheet extends ActorSheet {
       const li = $(ev.currentTarget).parents('.item');
       const item = this.actor.getOwnedItem(li.data("itemId"));
       ChatMessage.create({
-        content: `<div><h3>${item.name}</h3><p>${this._replaceMacros(item.name, item.data.data.description)}</p></div>`,
+        content: `<div><h3>${item.name}</h3><p>${this.actor.replaceItemMacros(item.name, item.data.data.description)}</p></div>`,
       });
     });
 
@@ -66,36 +62,21 @@ export class GodboundActorSheet extends ActorSheet {
       if(item.type === 'divineMiracle') {
         effortCost = item.data.data.effort;
       }
-      if(this.actor.canSpendEffort(effortCost)) {
-        this.actor.update({data: {effort: {day: this.actor.data.data.effort.day + effortCost}}});
-        ChatMessage.create({
-          content: `<div><h3>${item.name}</h3><h4>${this.actor.name}: ${effortCost} Effort for Day</h4><p>${this._replaceMacros(item.name, item.data.data.description)}</p></div>`,
-        });
-      }
+      this.actor.commitEffortForDay(effortCost, item);
     });
 
     html.find('.item-scene-effort').click(ev => {
       const li = $(ev.currentTarget).parents('.item');
       const item = this.actor.getOwnedItem(li.data("itemId"));
       let effortCost = 1;
-      if(this.actor.canSpendEffort(effortCost)) {
-        this.actor.update({data: {effort: {scene: this.actor.data.data.effort.scene + 1}}});
-        ChatMessage.create({
-          content: `<div><h3>${item.name}</h3><h4>${this.actor.name}: Effort for Scene</h4><p>${this._replaceMacros(item.name, item.data.data.description)}</p></div>`,
-        });
-      }
+      this.actor.commitEffortForScene(effortCost, item);
     });
 
     html.find('.item-atWill-effort').click(ev => {
       const li = $(ev.currentTarget).parents('.item');
       const item = this.actor.getOwnedItem(li.data("itemId"));
       let effortCost = 1;
-      if(this.actor.canSpendEffort(effortCost)) {
-        this.actor.update({data: {effort: {atWill: this.actor.data.data.effort.atWill + 1}}});
-        ChatMessage.create({
-          content: `<div><h3>${item.name}</h3><h4>${this.actor.name}: At Will Effort</h4><p>${this._replaceMacros(item.name, item.data.data.description)}</p></div>`,
-        });
-      }
+      this.actor.commitEffortAtWill(effortCost, item);
     });
 
     html.find('.itemAdder').click(async ev => {
@@ -239,7 +220,7 @@ export class GodboundActorSheet extends ActorSheet {
     html.find('.save-roll').click(ev => {
       let save = $(ev.currentTarget).data('save');
       PlayerRollDialog.create(this.actor, {rollType: `${Capitalize(save)} save`}, async (data) => {
-        let template = 'systems/godbound/templates/chat/roll-result.html';
+        let template = 'systems/godbound/templates/chat/saving-throw-result.html';
         let chatData = {
           user: game.user._id,
           speaker: this.actor,

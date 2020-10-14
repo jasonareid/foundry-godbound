@@ -274,6 +274,42 @@ export class GodboundActor extends Actor {
         }
     }
 
+    async commitEffortForDay(effortCost, item) {
+        if (this.canSpendEffort(effortCost)) {
+            await this.update({data: {effort: {day: this.data.data.effort.day + effortCost}}});
+            ChatMessage.create({
+                content: `<div><h3>${item.name}</h3><h4>${this.name}: ${effortCost} Effort for Day</h4><p>${this.replaceItemMacros(item.name, item.data.data.description)}</p></div>`,
+            });
+        }
+    }
+    async commitEffortForScene(effortCost, item) {
+        if (this.canSpendEffort(effortCost)) {
+            await this.update({data: {effort: {scene: this.data.data.effort.scene + 1}}});
+            ChatMessage.create({
+                content: `<div><h3>${item.name}</h3><h4>${this.name}: Effort for Scene</h4><p>${this.replaceItemMacros(item.name, item.data.data.description)}</p></div>`,
+            });
+        }
+    }
+
+    async commitEffortAtWill(effortCost, item) {
+        if(this.canSpendEffort(effortCost)) {
+            await this.update({data: {effort: {atWill: this.data.data.effort.atWill + 1}}});
+            ChatMessage.create({
+                content: `<div><h3>${item.name}</h3><h4>${this.name}: At Will Effort</h4><p>${this.replaceItemMacros(item.name, item.data.data.description)}</p></div>`,
+            });
+        }
+    }
+
+    async autoSave() {
+        let items = this.items.filter(i => i.name === 'Succeed on Save');
+        if(items.length < 1) {
+            ui.notifications.error("Cannot find Succeed on Save Miracle");
+        } else {
+            let ownedItem = this.getOwnedItem(items[0].id);
+            await this.commitEffortForDay(1, ownedItem);
+        }
+    }
+
     replaceItemMacros(itemName, description) {
         if(!description) return description;
 

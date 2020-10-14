@@ -1,0 +1,25 @@
+<section class="godbound chat-message">
+    <div class="godbound chat-block">
+        <div class="flexrow chat-header">
+            <div class="chat-title"><h3>{{title}}</h3></div>
+            {{#if data.item}}
+            <div class="chat-img" style="background-image:url('{{data.item.img}}')"></div>
+            {{else}}
+            <div class="chat-img" style="background-image:url('{{data.actor.img}}')"></div>
+            {{/if}}
+        </div>
+        <div class="blindable" data-blind="{{data.roll.blindroll}}">
+            <div class="chat-details">{{{flavor}}}</div>
+            {{#if result.isFailure}}
+                <div class='roll-result roll-fail'><b>Failure</b> ({{result.target}})</div>
+            {{/if}}
+            {{#if result.isSuccess}}
+                <div class='roll-result roll-success'><b>Success</b>({{result.target}})</div>
+            {{/if}}
+            {{#if roll}}<div>{{{roll}}}</div>{{/if}}
+            {{#if result.isFailure}}
+                <div><span class="instant-auto-save" data-actor-id="{{data.actor.id}}">Auto Save (req. Effort/day)</span></div>
+            {{/if}}
+        </div>
+    </div>
+</section>

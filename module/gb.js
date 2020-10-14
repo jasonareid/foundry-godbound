@@ -112,4 +112,13 @@ Hooks.once("init", async function () {
             actor.rollDamage(damageSource, formula);
         }
     });
+
+    $(document).on('click', '.instant-auto-save', ev => {
+        let span = $(ev.currentTarget);
+        let actorId = span.data('actorId');
+        let actor = game.actors.get(actorId);
+        if (actor) {
+            actor.autoSave();
+        }
+    });
 });
