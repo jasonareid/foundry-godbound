@@ -135,7 +135,8 @@
       "range": "Melee / 30ft",
       "area": "Single Target",
       "damageRoll": "1d8",
-      "damageBonus": 0
+      "damageBonus": 0,
+      "magic": false
     },
     "project": {
       "description": "",

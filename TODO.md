@@ -1,4 +1,5 @@
 * Chat bubbles send item images
+* Show magic weapons in attacks
 * Make divine gift commitments look nicer
   * Don't forget to turn them into godbound-chat-blocks
   * Need to take advantage of the damage rolls

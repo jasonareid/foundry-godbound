@@ -328,11 +328,11 @@
             <div class="container col">
                 <div>
                     <h3>Facts:</h3>
-                    {{editor content=data.facts target="data.facts" button=true owner=owner editable=editable}}
+                    <textarea name="data.facts" style="height:128px;font-size:14px">{{data.facts}}</textarea>
                 </div>
                 <div>
                     <h3>Notes:</h3>
-                    {{editor content=data.notes target="data.notes" button=true owner=owner editable=editable}}
+                    <textarea name="data.notes" style="height:128px;font-size:14px">{{data.notes}}</textarea>
                 </div>
             </div>
         </div>
@@ -392,7 +392,12 @@
                             {{#ifeq item.type "attack"}}
                             <li class="item flexrow" data-item-id="{{item._id}}">
                                 <h4 class="item-name">
+                                    {{#if item.data.magic}}
+                                    {{item.name}}*
+                                    {{/if}}
+                                    {{#unless item.data.magic}}
                                     {{item.name}}
+                                    {{/unless}}
                                     {{#ifneq item.data.hitBonus 0}}
                                     +{{item.data.hitBonus}},
                                     {{/ifneq}}
@@ -400,10 +405,8 @@
                                     {{item.data.damageRoll}}+{{item.data.damageBonus}},
                                     {{/ifneq}}
                                     {{#ifeq item.data.damageBonus 0}}
-                                    {{item.data.damageRoll}},
+                                    {{item.data.damageRoll}}
                                     {{/ifeq}}
-                                    {{item.data.range}},
-                                    {{item.data.area}}
                                 </h4>
                                 <div class="item-controls">
                                     <a class="attack-roll" title="Roll"><i class="fas fa-dice-d20"></i></a>
@@ -451,7 +454,6 @@
                 <div class="container col" style="width:50%;">
                     <h2 style="display:flex;justify-content: space-between;">
                         <span>Combat Powers</span>
-                        <i class="fas fa-plus itemAdder" data-item-type="attack"></i>
                     </h2>
                     <ol class="item-list">
                         {{#each actor.items as |item id|}}

@@ -99,16 +99,19 @@
   flex: 1;
   height: 100px;
 }
-.godbound .sheet-header textarea {
+.godbound textarea {
   font-family: inherit;
   font-size: inherit;
   height: 50px;
 }
-.godbound .sheet-header textarea.med {
+.godbound textarea.med {
   height: 90px;
 }
-.godbound .sheet-header textarea.tall {
+.godbound textarea.tall {
   height: 128px;
+}
+.godbound textarea.xtall {
+  height: 340px;
 }
 .godbound .tabs {
   position: absolute;
