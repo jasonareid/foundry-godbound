@@ -642,6 +642,28 @@
                     {{/each}}
                 </ol>
             </div>
+            <div class="container col" style="margin-top:32px;">
+                <h2 style="display:flex;justify-content: space-between;">
+                    <span>Cult</span>
+                    <i class="fas fa-plus itemAdder" data-item-type="cult"></i>
+                </h2>
+                <ol class="item-list">
+                    {{#each actor.items as |item id|}}
+                    {{#ifeq item.type "cult"}}
+                    <li class="item flexrow" data-item-id="{{item._id}}">
+                        <h4 class="item-name">
+                            {{item.name}}
+                            <span class="item-tags">
+                            </span>
+                        </h4>
+                        <div class="item-controls">
+                            <a class="item-control item-chat" title="Chat Description"><i class="fas fa-comment"></i></a>
+                        </div>
+                    </li>
+                    {{/ifeq}}
+                    {{/each}}
+                </ol>
+            </div>
         </div>
     </section>
 </form>

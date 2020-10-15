@@ -1,6 +1,4 @@
-* Add Cult to tabs
-* Add Cult to template.json
-* Cults
+* Chat bubbles send item images
 * Make divine gift commitments look nicer
   * Don't forget to turn them into godbound-chat-blocks
   * Need to take advantage of the damage rolls

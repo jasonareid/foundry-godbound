@@ -1,0 +1,65 @@
+<form class="{{cssClass}}" autocomplete="off">
+    {{!-- Sheet Body --}}
+    <section class="sheet-body">
+        <div class="tab attrs active" data-group="primary" data-tab="attrs">
+            <div class="container col">
+                <h2>Cult</h2>
+                <div class="container row sheet-header">
+                    <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" height="100"
+                         width="100"/>
+                    <div class="header-fields tabular">
+                        <div>
+                            <label for="name">Name:</label>
+                            <input id="name" name="name" type="text" value="{{item.name}}"/>
+                        </div>
+                        <div>
+                            <label for="description">Description:</label>
+                            <textarea id="description" name="data.description">{{data.description}}</textarea>
+                        </div>
+                        <div>
+                            <label for="tenets">Tenets:</label>
+                            <textarea id="tenets" name="data.tenets" class="med">{{data.tenets}}</textarea>
+                        </div>
+                        <div>
+                            <label for="features">Features:</label>
+                            <textarea id="features" name="data.features" class="med">{{data.features}}</textarea>
+                        </div>
+                        <div>
+                            <label for="problems">Problems:</label>
+                            <textarea id="problems" name="data.problems" class="med">{{data.problems}}</textarea>
+                        </div>
+                        <div>
+                            <label for="power">Power:</label>
+                            <input id="power" name="data.power" type="text" value="{{data.power}}" data-dtype="Number"/>
+                        </div>
+                        <div>
+                            <label for="cohesion">Cohesion:</label>
+                            <input id="cohesion" name="data.cohesion" type="text" value="{{data.cohesion}}" data-dtype="Number"/>
+                        </div>
+                        <div>
+                            <label for="income">Income:</label>
+                            <input id="income" name="data.income" type="text" value="{{data.income}}" data-dtype="Number"/>
+                        </div>
+                        <div>
+                            <label for="trouble">Trouble:</label>
+                            <input id="trouble" name="data.trouble" type="text" value="{{data.trouble}}" data-dtype="Number"/>
+                        </div>
+                        <div>
+                            <label>Max Trbl:</label>
+                            <span style="padding:4px 0;">{{data.computed.maxTrouble}}</span>
+                        </div>
+                        <div>
+                            <label style="vertical-align: center">Actions:</label>
+                            <div class="item-controls" style="padding-top:4px;">
+                                <a class="item-control item-chat" title="Chat Effect"><i class="fas fa-comment"></i></a>
+                                <a class="item-control item-maybe-delete" title="Maybe Delete"><i class="fas fa-trash"></i></a>
+                                <a class="item-control item-delete" title="Delete" style="color:red;margin-left:16px;display:none;"><i class="fas fa-trash"></i></a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</form>

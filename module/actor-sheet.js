@@ -86,6 +86,7 @@ export class GodboundActorSheet extends ActorSheet {
         artifact: 'Artifact',
         treasure: 'Treasure',
         invocation: 'Invocation',
+        cult: 'Cult',
         tactic: 'Tactic,'
       }
       this.actor.createOwnedItem({name: names[$i.data('itemType')], type: $i.data('itemType')}, {renderSheet: true});

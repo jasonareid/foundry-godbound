@@ -118,7 +118,8 @@
       "artifactPower",
       "treasure",
       "invocation",
-      "tactic"
+      "tactic",
+      "cult"
     ],
     "autoHitAttack": {
       "damageRoll": "1d8",
@@ -208,6 +209,16 @@
     },
     "tactic": {
       "description": ""
+    },
+    "cult": {
+      "description": "",
+      "power": 1,
+      "cohesion": 1,
+      "income": 1,
+      "tenets": "",
+      "features": "",
+      "problems": "",
+      "trouble": 0
     }
   }
 }

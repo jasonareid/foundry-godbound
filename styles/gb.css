@@ -104,6 +104,9 @@
   font-size: inherit;
   height: 50px;
 }
+.godbound .sheet-header textarea.med {
+  height: 90px;
+}
 .godbound .sheet-header textarea.tall {
   height: 128px;
 }
