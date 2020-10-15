@@ -13,7 +13,7 @@ export class GodboundActorSheet extends ActorSheet {
 	  return mergeObject(super.defaultOptions, {
   	  classes: ["godbound", "sheet", "actor"],
       width: 600,
-      height: 600,
+      height: 700,
       tabs: [{navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "attrs"}],
       dragDrop: [{dragSelector: ".item-list .item", dropSelector: null}]
     });
