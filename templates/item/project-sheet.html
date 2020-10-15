@@ -1,30 +1,106 @@
 <form class="{{cssClass}}" autocomplete="off">
-    <header class="sheet-header">
-        <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
-        <div class="header-fields">
-            <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
-            <div class="resource">
-            	<label>Quantity</label>
-                <input type="text" name="data.quantity" value="{{data.quantity}}" data-dtype="Number"/>
-            </div>
-            <div class="resource">
-            	<label>Weight</label>
-                <input type="text" name="data.weight" value="{{data.weight}}" data-dtype="Number"/>
-            </div>
-        </div>
-    </header>
-
-    {{!-- Sheet Tab Navigation --}}
-    <nav class="sheet-tabs tabs" data-group="primary">
-        <a class="item" data-tab="description">Description</a>
-    </nav>
-
     {{!-- Sheet Body --}}
     <section class="sheet-body">
-
-        {{!-- Description Tab --}}
-        <div class="tab" data-group="primary" data-tab="description">
-            {{editor content=data.description target="data.description" button=true owner=owner editable=editable}}
+        <div class="tab attrs active" data-group="primary" data-tab="attrs">
+            <div class="container col">
+                <h2>Project</h2>
+                <div class="container row sheet-header">
+                    <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" height="100"
+                         width="100"/>
+                    <div class="header-fields tabular">
+                        <div>
+                            <label for="name">Name:</label>
+                            <input id="name" name="name" type="text" value="{{item.name}}"/>
+                        </div>
+                        <div>
+                            <label for="description">Description:</label>
+                            <textarea id="description" name="data.description">{{data.description}}</textarea>
+                        </div>
+                        <div>
+                            <label for="deeds">Req. Deeds:</label>
+                            <textarea id="deeds" name="data.deeds">{{data.deeds}}</textarea>
+                        </div>
+                        <div>
+                            <label for="scope">Scope:</label>
+                            <select id="scope" name="data.scope" data-dtype="Number">
+                                {{#select data.scope}}
+                                <option value="1">Village</option>
+                                <option value="2">City</option>
+                                <option value="4">Region</option>
+                                <option value="8">Nation</option>
+                                <option value="16">Realm</option>
+                                {{/select}}
+                            </select>
+                        </div>
+                        <div>
+                            <label for="difficulty">Difficulty:</label>
+                            <select id="difficulty" name="data.difficulty" data-dtype="Number">
+                                {{#select data.difficulty}}
+                                <option value="1">Plausible</option>
+                                <option value="2">Improbable</option>
+                                <option value="4">Impossible</option>
+                                {{/select}}
+                            </select>
+                        </div>
+                        <div>
+                            <label for="resistance">Resistance:</label>
+                            <select id="resistance" name="data.resistance" data-dtype="Number">
+                                {{#select data.resistance}}
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                {{/select}}
+                            </select>
+                        </div>
+                        <div>
+                            <label>Cost:</label>
+                            <span style="padding:4px 0;">{{data.computed.cost}}</span>
+                        </div>
+                        <div>
+                            <label for="committedDominion">Dominion:</label>
+                            <input id="committedDominion" name="data.committedDominion" type="text" value="{{data.committedDominion}}" data-dtype="Number"/>
+                        </div>
+                        <div>
+                            <label for="committedInfluence">Influence:</label>
+                            <input id="committedInfluence" name="data.committedInfluence" type="text" value="{{data.committedInfluence}}" data-dtype="Number"/>
+                        </div>
+                        <div>
+                            <label>Remaining:</label>
+                            <span style="padding:4px 0;">{{data.computed.remaining}}</span>
+                        </div>
+                        <div>
+                            <label></label>
+                            <div style="display: flex; align-items: center">
+                                <input type="checkbox" name="data.completed" {{checked data.completed}} style="margin-left:0" />Completed
+                            </div>
+                        </div>
+                        <div>
+                            <label style="vertical-align: center">Actions:</label>
+                            <div class="item-controls" style="padding-top:4px;">
+                                <a class="item-control item-chat" title="Chat Effect"><i class="fas fa-comment"></i></a>
+                                <a class="item-control item-maybe-delete" title="Maybe Delete"><i class="fas fa-trash"></i></a>
+                                <a class="item-control item-delete" title="Delete" style="color:red;margin-left:16px;display:none;"><i class="fas fa-trash"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 </form>

@@ -15,6 +15,7 @@ export class GodboundItem extends Item {
         const data = itemData.data;
 
         if (itemData.type === 'artifact') this._prepareArtifactData(itemData);
+        if (itemData.type === 'project') this._prepareProjectData(itemData);
     }
 
     _prepareArtifactData(itemData) {
@@ -29,6 +30,13 @@ export class GodboundItem extends Item {
             )
         ;
         data.computed.effort.spent = data.effort.total - data.computed.effort.available;
+    }
+
+    _prepareProjectData(itemData) {
+        const data = itemData.data;
+        data.computed = {};
+        data.computed.cost = (data.scope + data.resistance) * data.difficulty;
+        data.computed.remaining = data.computed.cost - (data.committedDominion + data.committedInfluence);
     }
 
     canSpendEffort(amount) {

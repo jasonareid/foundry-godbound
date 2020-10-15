@@ -1,4 +1,3 @@
-* Projects
 * Add Cult to tabs
 * Add Cult to template.json
 * Cults

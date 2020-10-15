@@ -137,8 +137,10 @@
       "damageBonus": 0
     },
     "project": {
-      "difficulty": "",
-      "scope": "",
+      "description": "",
+      "deeds": "",
+      "difficulty": 1,
+      "scope": 1,
       "resistance": 0,
       "completed": false,
       "committedDominion": 0,
