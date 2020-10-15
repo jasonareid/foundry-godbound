@@ -40,7 +40,6 @@ export class GodboundActorSheet extends ActorSheet {
     // Everything below here is only needed if the sheet is editable
     if (!this.options.editable) return;
 
-    // Update Inventory Item
     html.find('.item-name').click(ev => {
       const li = $(ev.currentTarget).parents('.item');
       const item = this.actor.getOwnedItem(li.data("itemId"));
@@ -58,25 +57,19 @@ export class GodboundActorSheet extends ActorSheet {
     html.find('.item-day-effort').click(ev => {
       const li = $(ev.currentTarget).parents('.item');
       const item = this.actor.getOwnedItem(li.data("itemId"));
-      let effortCost = 1;
-      if(item.type === 'divineMiracle') {
-        effortCost = item.data.data.effort;
-      }
-      this.actor.commitEffortForDay(effortCost, item);
+      this.actor.commitEffortForDay(item);
     });
 
     html.find('.item-scene-effort').click(ev => {
       const li = $(ev.currentTarget).parents('.item');
       const item = this.actor.getOwnedItem(li.data("itemId"));
-      let effortCost = 1;
-      this.actor.commitEffortForScene(effortCost, item);
+      this.actor.commitEffortForScene(item);
     });
 
     html.find('.item-atWill-effort').click(ev => {
       const li = $(ev.currentTarget).parents('.item');
       const item = this.actor.getOwnedItem(li.data("itemId"));
-      let effortCost = 1;
-      this.actor.commitEffortAtWill(effortCost, item);
+      this.actor.commitEffortAtWill(item);
     });
 
     html.find('.itemAdder').click(async ev => {
@@ -96,7 +89,8 @@ export class GodboundActorSheet extends ActorSheet {
         tactic: 'Tactic,'
       }
       this.actor.createOwnedItem({name: names[$i.data('itemType')], type: $i.data('itemType')}, {renderSheet: true});
-    })
+    });
+
     // Delete Inventory Item
     html.find('.item-delete').click(ev => {
       const li = $(ev.currentTarget).parents(".item");

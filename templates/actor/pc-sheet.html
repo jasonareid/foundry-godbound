@@ -541,6 +541,77 @@
                 </ol>
             </div>
         </div>
+
+        <div class="tab artifacts" data-group="primary" data-tab="artifacts">
+            <div class="container col">
+                <h2 style="display:flex;justify-content: space-between;">
+                    <span>Artifacts</span>
+                    <i class="fas fa-plus itemAdder" data-item-type="artifact"></i>
+                </h2>
+                <ol class="item-list">
+                    {{#each data.computed.artifacts as |artifact id|}}
+                    <li class="item flexrow" data-item-id="{{artifact.item._id}}">
+                        <h4 class="item-name">
+                            {{artifact.item.name}} (Effort {{artifact.item.data.computed.effort.available}})
+                            <span class="item-tags">
+                            {{#if artifact.item.data.bound}}
+                                Bound
+                            {{/if}}
+                            </span>
+                        </h4>
+                        <div class="item-controls">
+                            <a class="item-control item-day-effort" title="Commit Effort for Day"><i class="fas fa-sun"></i></a>
+                        </div>
+                    </li>
+                    {{#if artifact.item.data.bound}}
+                        {{#each artifact.artifactPowers as |power id|}}
+                        {{#ifeq power.type "artifactPower"}}
+                        <li class="item flexrow" data-item-id="{{power._id}}">
+                            <h4 class="item-name" style="padding-left:16px;">
+                                {{power.name}}
+                                <span class="item-tags">
+                                {{#if power.data.greater}}
+                                Gr
+                                {{/if}}
+                                {{#if power.data.constant}}
+                                C
+                                {{/if}}
+                                {{#if power.data.instant}}
+                                I
+                                {{/if}}
+                                {{#if power.data.onTurn}}
+                                T
+                                {{/if}}
+                                {{#if power.data.action}}
+                                A
+                                {{/if}}
+                                {{#if power.data.smite}}
+                                Sm
+                                {{/if}}
+                                </span>
+                            </h4>
+                            <div class="item-controls">
+                                {{#if power.data.atWill}}
+                                <a class="item-control item-atWill-effort" title="Commit Effort At Will"><i class="fas fa-stopwatch"></i></a>
+                                {{/if}}
+                                {{#if power.data.scene}}
+                                <a class="item-control item-scene-effort" title="Commit Effort for Scene"><i class="fas fa-clock"></i></a>
+                                {{/if}}
+                                {{#if power.data.day}}
+                                <a class="item-control item-day-effort" title="Commit Effort for Day"><i class="fas fa-sun"></i></a>
+                                {{/if}}
+                                <a class="item-control item-chat" title="Chat Effect"><i class="fas fa-comment"></i></a>
+                            </div>
+                        </li>
+                        {{/ifeq}}
+                        {{/each}}
+                    {{/if}}
+                    {{/each}}
+                </ol>
+                <h3>Free Effort: {{data.computed.effort.available}}</h3>
+            </div>
+        </div>
+
     </section>
 </form>
 

@@ -146,6 +146,37 @@ export class GodboundActor extends Actor {
         data.computed.hp.max = 8 + data.computed.attributes.con.mod + (
             (data.level - 1) * (4 + Math.ceil(data.computed.attributes.con.mod / 2))
         );
+
+        let artifactIdx = {};
+        data.computed.artifacts = [];
+        if(this.data.items && this.data.items.length > 0) {
+            this.data.items.forEach(i => {
+                let entry = null;
+                if(i.type === 'artifact') {
+                    entry = artifactIdx[i._id];
+                    if(!entry) {
+                        entry = {
+                            item: null,
+                            artifactPowers: []
+                        };
+                        artifactIdx[i._id] = entry;
+                    }
+                    entry.item = i;
+                    data.computed.artifacts.push(entry);
+                } else if(i.type === 'artifactPower') {
+                    entry = artifactIdx[i.data.artifactId];
+                    if(!entry) {
+                        entry = {
+                            item: null,
+                            artifactPowers: []
+                        };
+                        artifactIdx[i.data.artifactId] = entry;
+                    }
+                    entry.artifactPowers.push(i);
+                }
+            });
+        }
+        data.computed.artifactIdx = artifactIdx;
     }
 
     _prepareSave(src, dest, atts, name, att1, att2) {
@@ -274,28 +305,54 @@ export class GodboundActor extends Actor {
         }
     }
 
-    async commitEffortForDay(effortCost, item) {
-        if (this.canSpendEffort(effortCost)) {
-            await this.update({data: {effort: {day: this.data.data.effort.day + effortCost}}});
+    _calcActualEffortCost(item, effortCost) {
+        if(effortCost) return effortCost;
+        if(item.type === 'divineMiracle' || item.type === 'artifactPower') {
+            return Math.min(item.data.data.effortCost, 1);
+        }
+        return 1;
+    }
+
+    _determineEffortTarget(item) {
+        if(item.type !== 'artifactPower') return this;
+        return this.getOwnedItem(item.data.data.artifactId);
+    }
+
+    async commitEffortForDay(item, effortCost) {
+        effortCost = this._calcActualEffortCost(item, effortCost);
+        let target = this._determineEffortTarget(item);
+        if(item.type === 'artifact' && item.data.data.bound) {
+            ui.notifications.warn("Artifact already bound for the day");
+            return;
+        }
+        if (target.canSpendEffort(effortCost)) {
+            await target.update({data: {effort: {day: target.data.data.effort.day + effortCost}}});
             ChatMessage.create({
-                content: `<div><h3>${item.name}</h3><h4>${this.name}: ${effortCost} Effort for Day</h4><p>${this.replaceItemMacros(item.name, item.data.data.description)}</p></div>`,
+                content: `<div><h3>${item.name}</h3><h4>${target.name}: ${effortCost} Effort for Day</h4><p>${this.replaceItemMacros(item.name, item.data.data.description)}</p></div>`,
             });
+            if(item.type === 'artifact') {
+                item.update({data: {bound: true}});
+            }
         }
     }
-    async commitEffortForScene(effortCost, item) {
-        if (this.canSpendEffort(effortCost)) {
-            await this.update({data: {effort: {scene: this.data.data.effort.scene + 1}}});
+    async commitEffortForScene(item, effortCost) {
+        effortCost = this._calcActualEffortCost(item, effortCost);
+        let target = this._determineEffortTarget(item);
+        if (target.canSpendEffort(effortCost)) {
+            await target.update({data: {effort: {scene: target.data.data.effort.scene + 1}}});
             ChatMessage.create({
-                content: `<div><h3>${item.name}</h3><h4>${this.name}: Effort for Scene</h4><p>${this.replaceItemMacros(item.name, item.data.data.description)}</p></div>`,
+                content: `<div><h3>${item.name}</h3><h4>${target.name}: Effort for Scene</h4><p>${this.replaceItemMacros(item.name, item.data.data.description)}</p></div>`,
             });
         }
     }
 
-    async commitEffortAtWill(effortCost, item) {
-        if(this.canSpendEffort(effortCost)) {
-            await this.update({data: {effort: {atWill: this.data.data.effort.atWill + 1}}});
+    async commitEffortAtWill(item, effortCost) {
+        effortCost = this._calcActualEffortCost(item, effortCost);
+        let target = this._determineEffortTarget(item);
+        if(target.canSpendEffort(effortCost)) {
+            await target.update({data: {effort: {atWill: target.data.data.effort.atWill + 1}}});
             ChatMessage.create({
-                content: `<div><h3>${item.name}</h3><h4>${this.name}: At Will Effort</h4><p>${this.replaceItemMacros(item.name, item.data.data.description)}</p></div>`,
+                content: `<div><h3>${item.name}</h3><h4>${target.name}: At Will Effort</h4><p>${this.replaceItemMacros(item.name, item.data.data.description)}</p></div>`,
             });
         }
     }
@@ -329,5 +386,13 @@ export class GodboundActor extends Actor {
             }
         }
         return result.join('');
+    }
+
+    hasArtifactPowersUnder(id) {
+        console.log(id);
+        console.log(this.data.data.computed);
+        let lookup = this.data.data.computed.artifactIdx[id];
+        console.log(lookup);
+        return lookup && lookup.artifactPowers.length > 0;
     }
 }

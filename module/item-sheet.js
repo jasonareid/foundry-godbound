@@ -11,7 +11,8 @@ export class GodboundItemSheet extends ItemSheet {
         classes: ["godbound", "sheet", "item"],
         width: 520,
         height: 'auto',
-        resizable: true
+        resizable: true,
+        tabs: [{navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "attrs"}],
       }
     );
   }
@@ -26,6 +27,16 @@ export class GodboundItemSheet extends ItemSheet {
   getData() {
     const data = super.getData();
     data.dtypes = ["String", "Number", "Boolean"];
+    if(this.item.type === 'artifact' && this.item.actor) {
+      let lookup = this.item.actor.data.data.computed.artifactIdx[this.item._id];
+      if(lookup) {
+        data.artifactPowers = lookup.artifactPowers;
+      } else {
+        data.artifactPowers = [];
+      }
+      console.log("Artifact powers");
+      console.log(data.artifactPowers);
+    }
     return data;
   }
   /* -------------------------------------------- */
@@ -38,13 +49,25 @@ export class GodboundItemSheet extends ItemSheet {
   }
 
   /** @override */
-	activateListeners(html) {
+  activateListeners(html) {
     super.activateListeners(html);
 
+    html.find('.item-name').click(ev => {
+      const li = $(ev.currentTarget).parents('.item');
+      const item = this.actor.getOwnedItem(li.data("itemId"));
+      item.sheet.render(true);
+    });
+
     html.find('.item-chat').click(ev => {
-      const item = this.item;
+      const li = $(ev.currentTarget).parents('.item');
+      let item;
+      if(li && li.data("itemId")) {
+        item = this.actor.getOwnedItem(li.data("itemId"));
+      } else {
+        item = this.item;
+      }
       ChatMessage.create({
-        content: `<div><h3>${item.name}</h3><p>${this._replaceMacros(item.data.data.description)}</p></div>`,
+        content: `<div><h3>${item.name}</h3><p>${this.actor.replaceItemMacros(item.name, item.data.data.description)}</p></div>`,
       });
     });
 
@@ -60,9 +83,32 @@ export class GodboundItemSheet extends ItemSheet {
       }
     });
     html.find('.item-delete').click(ev => {
+      if(this.item.type === 'artifact') {
+        if(this.item.actor && this.item.actor.hasArtifactPowersUnder(this.item.id)) {
+          ui.notifications.warn("Please delete artifact powers individually before deleting artifact.");
+          return;
+        }
+      }
       if(this.item.actor) {
         this.item.actor.deleteOwnedItem(this.item.id);
       }
     });
+
+    html.find('.itemAdder').click(async ev => {
+      const $i = $(ev.currentTarget);
+      const names = {
+        artifactPower: 'Artifact Power',
+      }
+      if(!this.item.type === 'artifact') {
+        ui.notifications.error("Only artifacts should be creating sub-items");
+        return;
+      }
+      if(!this.item.actor) {
+        ui.notifications.error("Cannot add powers to an unowned artifact");
+        return;
+      }
+      this.actor.createOwnedItem({name: names[$i.data('itemType')], type: $i.data('itemType'), data: {artifactId: this.item._id}}, {renderSheet: true});
+    });
+
   }
 }

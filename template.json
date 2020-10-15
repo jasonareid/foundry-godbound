@@ -115,6 +115,7 @@
       "divineGift",
       "divineMiracle",
       "artifact",
+      "artifactPower",
       "treasure",
       "invocation",
       "tactic"
@@ -179,16 +180,21 @@
     },
     "divineMiracle": {
       "description": "",
-      "effort": 1,
+      "effortCost": 1,
       "smite": false,
       "combatPower": false
     },
     "artifact": {
       "description": "",
       "dominionCost": 0,
-      "effort": 0,
+      "effort": {
+        "total": 0,
+        "atWill": 0,
+        "scene": 0,
+        "day": 0
+      },
       "bound": false,
-      "effortSpent": 0
+      "mortalEffect": ""
     },
     "treasure": {
       "description": "",

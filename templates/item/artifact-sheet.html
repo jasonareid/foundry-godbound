@@ -1,30 +1,119 @@
-<form class="{{cssClass}}" autocomplete="off">
-    <header class="sheet-header">
-        <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
-        <div class="header-fields">
-            <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
-            <div class="resource">
-            	<label>Quantity</label>
-                <input type="text" name="data.quantity" value="{{data.quantity}}" data-dtype="Number"/>
-            </div>
-            <div class="resource">
-            	<label>Weight</label>
-                <input type="text" name="data.weight" value="{{data.weight}}" data-dtype="Number"/>
-            </div>
-        </div>
-    </header>
-
-    {{!-- Sheet Tab Navigation --}}
+<form class="{{cssClass}} artifact" autocomplete="off">
     <nav class="sheet-tabs tabs" data-group="primary">
-        <a class="item" data-tab="description">Description</a>
+        <a class="item" data-tab="attrs">Attrs</a>
+        <a class="item" data-tab="powers">Powers</a>
     </nav>
+
 
     {{!-- Sheet Body --}}
     <section class="sheet-body">
+        <div class="tab attrs" data-group="primary" data-tab="attrs">
+            <div class="container col">
+                <h2>Artifact</h2>
+                <div class="container row sheet-header">
+                    <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" height="100"
+                         width="100"/>
+                    <div class="header-fields tabular">
+                        <div>
+                            <label for="name">Name:</label>
+                            <input id="name" name="name" type="text" value="{{item.name}}"/>
+                        </div>
+                        <div>
+                            <label for="description">Description:</label>
+                            <textarea id="description" name="data.description" class="tall">{{data.description}}</textarea>
+                        </div>
+                        <div>
+                            <label for="effortTotal">Effort:</label>
+                            <input id="effortTotal" name="data.effort.total" type="text" value="{{data.effort.total}}" data-dtype="Number"/>
+                        </div>
+                        <div>
+                            <label for="effortAtWill">At Will:</label>
+                            <input id="effortAtWill" name="data.effort.atWill" type="text" value="{{data.effort.atWill}}" data-dtype="Number"/>
+                        </div>
+                        <div>
+                            <label for="effortScene">Scene:</label>
+                            <input id="effortScene" name="data.effort.scene" type="text" value="{{data.effort.scene}}" data-dtype="Number"/>
+                        </div>
+                        <div>
+                            <label for="effortDay">Day:</label>
+                            <input id="effortDay" name="data.effort.day" type="text" value="{{data.effort.day}}" data-dtype="Number"/>
+                        </div>
+                        <div>
+                            <label for="dominionCost">Cost:</label>
+                            <input id="dominionCost" name="data.dominionCost" type="text" value="{{data.dominionCost}}" data-dtype="Number"/>
+                        </div>
+                        <div>
+                            <label></label>
+                            <div style="display: flex; align-items: center">
+                                <input type="checkbox" name="data.bound" {{checked data.bound}} style="margin-left:0" />Bound for Day
+                            </div>
+                        </div>
+                        <div>
+                            <label for="mortalEffect">Mortal Effect:</label>
+                            <textarea id="mortalEffect" name="data.mortalEffect" class="tall">{{data.mortalEffect}}</textarea>
+                        </div>
+                        <div>
+                            <label style="vertical-align: center">Actions:</label>
+                            <div class="item-controls" style="padding-top:4px;">
+                                <a class="item-control item-chat" title="Chat Effect"><i class="fas fa-comment"></i></a>
+                                <a class="item-control item-maybe-delete" title="Maybe Delete"><i class="fas fa-trash"></i></a>
+                                <a class="item-control item-delete" title="Delete" style="color:red;margin-left:16px;display:none;"><i class="fas fa-trash"></i></a>
+                            </div>
 
-        {{!-- Description Tab --}}
-        <div class="tab" data-group="primary" data-tab="description">
-            {{editor content=data.description target="data.description" button=true owner=owner editable=editable}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab powers" data-group="primary" data-tab="powers">
+            <h2 style="display:flex;justify-content: space-between;">
+                <span>Powers</span>
+                <i class="fas fa-plus itemAdder" data-item-type="artifactPower"></i>
+            </h2>
+            <ol class="item-list">
+                    {{#each artifactPowers as |power id|}}
+                    {{#ifeq power.type "artifactPower"}}
+                    <li class="item flexrow" data-item-id="{{power._id}}">
+                        <h4 class="item-name">
+                            {{power.name}}
+                            <span class="item-tags">
+                                {{#if power.data.greater}}
+                                Gr
+                                {{/if}}
+                                {{#if power.data.constant}}
+                                C
+                                {{/if}}
+                                {{#if power.data.instant}}
+                                I
+                                {{/if}}
+                                {{#if power.data.onTurn}}
+                                T
+                                {{/if}}
+                                {{#if power.data.action}}
+                                A
+                                {{/if}}
+                                {{#if power.data.smite}}
+                                Sm
+                                {{/if}}
+                                </span>
+                        </h4>
+                        <div class="item-controls">
+                            {{#if power.data.atWill}}
+                            <a class="item-control item-atWill-effort" title="Commit Effort At Will"><i class="fas fa-stopwatch"></i></a>
+                            {{/if}}
+                            {{#if power.data.scene}}
+                            <a class="item-control item-scene-effort" title="Commit Effort for Scene"><i class="fas fa-clock"></i></a>
+                            {{/if}}
+                            {{#if power.data.day}}
+                            <a class="item-control item-day-effort" title="Commit Effort for Day"><i class="fas fa-sun"></i></a>
+                            {{/if}}
+                            <a class="item-control item-chat" title="Chat Effect"><i class="fas fa-comment"></i></a>
+                        </div>
+                    </li>
+                    {{/ifeq}}
+                    {{/each}}
+                </ol>
         </div>
     </section>
 </form>
