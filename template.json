@@ -155,12 +155,14 @@
       "description": ""
     },
     "divineGift": {
+      "word": "",
       "description": "",
       "constant": false,
       "instant": false,
       "onTurn": false,
       "action": false,
       "smite": false,
+      "noEffort": false,
       "atWill": false,
       "scene": false,
       "day": false,

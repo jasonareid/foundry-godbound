@@ -280,22 +280,24 @@
                         {{#ifeq item.type "divineGift"}}
                         <li class="item flexrow" data-item-id="{{item._id}}">
                             <h4 class="item-name">
-                                {{item.name}}
-                                <span class="item-tags">
                                 {{#if item.data.greater}}
-                                Gr
+                                    <span style="font-style: italic">{{item.name}}</span>
                                 {{/if}}
+                                {{#unless item.data.greater}}
+                                    {{item.name}}
+                                {{/unless}}
+                                <span class="item-tags">
                                 {{#if item.data.constant}}
-                                C
+                                Const
                                 {{/if}}
                                 {{#if item.data.instant}}
-                                I
+                                Inst
                                 {{/if}}
                                 {{#if item.data.onTurn}}
-                                T
+                                OnTurn
                                 {{/if}}
                                 {{#if item.data.action}}
-                                A
+                                Actn
                                 {{/if}}
                                 {{#if item.data.smite}}
                                 Sm
@@ -312,7 +314,7 @@
                                 {{#if item.data.day}}
                                 <a class="item-control item-day-effort" title="Commit Effort for Day"><i class="fas fa-sun"></i></a>
                                 {{/if}}
-                                {{#if item.data.constant}}
+                                {{#if (or item.data.constant item.data.noEffort)}}
                                 <a class="item-control item-chat" title="Chat Effect"><i class="fas fa-comment"></i></a>
                                 {{/if}}
                             </div>

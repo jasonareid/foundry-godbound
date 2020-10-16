@@ -37,6 +37,9 @@ export class GodboundItemSheet extends ItemSheet {
       console.log("Artifact powers");
       console.log(data.artifactPowers);
     }
+    if(this.item.type === 'divineGift' && this.item.actor) {
+      data.actorBoundWordNames = this.item.actor.items.filter(i => i.type === 'boundWord').map(i => i.name);
+    }
     return data;
   }
   /* -------------------------------------------- */

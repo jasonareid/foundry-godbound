@@ -13,6 +13,16 @@
                             <input id="name" name="name" type="text" value="{{item.name}}"/>
                         </div>
                         <div>
+                            <label for="word">Word:</label>
+                            <select id="word" name="data.word">
+                                {{#select data.word}}
+                                {{#each actorBoundWordNames as |wordName i|}}
+                                    <option value="{{wordName}}">{{wordName}}</option>
+                                {{/each}}
+                                {{/select}}
+                            </select>
+                        </div>
+                        <div>
                             <label for="description">Description:</label>
                             <textarea id="description" name="data.description" class="xtall">{{data.description}}</textarea>
                         </div>
@@ -34,7 +44,8 @@
                         <div>
                             <label>Effort:</label>
                             <div style="display: flex; align-items: center">
-                                <input type="checkbox" name="data.atWill" {{checked data.atWill}} style="margin-left:0" />At Will
+                                <input type="checkbox" name="data.noEffort" {{checked data.noEffort}} style="margin-left:0" />None
+                                <input type="checkbox" name="data.atWill" {{checked data.atWill}} />At Will
                                 <input type="checkbox" name="data.scene" {{checked data.scene}} />Scene
                                 <input type="checkbox" name="data.day" {{checked data.day}} />Day
                             </div>
