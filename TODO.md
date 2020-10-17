@@ -1,9 +1,6 @@
 * Tidy up combat powers
 * Space between item tags and name
 * Put effort icons into chat messages
-* Reset Day GM Macro (incl artifacts)
-* Reset Scene GM Macro
-* Calculate spent Influence / Dominion
 * Take Income button on Cult entry
 * Chat bubbles send item images
 * Show magic weapons in attacks

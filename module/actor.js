@@ -407,4 +407,28 @@ export class GodboundActor extends Actor {
         console.log(lookup);
         return lookup && lookup.artifactPowers.length > 0;
     }
+
+    async resetScene() {
+        await this.update({data: {effort: {scene: 0}}});
+        if(this.items) {
+            for(let i = 0; i < this.items.entries.length; i++) {
+                let item = this.items.entries[i];
+                if(item.type === 'artifact') {
+                    await item.update({data: {effort: {scene: 0}}});
+                }
+            }
+        }
+    }
+
+    async resetDay() {
+        await this.update({data: {effort: {day: 0, scene: 0}}});
+        if(this.items) {
+            for(let i = 0; i < this.items.entries.length; i++) {
+                let item = this.items.entries[i];
+                if(item.type === 'artifact') {
+                    await item.update({data: {bound: false, effort: {day: 0, scene: 0, atWill: 0}}});
+                }
+            }
+        }
+    }
 }
