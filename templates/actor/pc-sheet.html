@@ -197,16 +197,16 @@
                         <tr>
                             <td>Influence</td>
                             <td><input type="text" data-dtype="Number" name="data.influence.total" value="{{data.influence.total}}" /></td>
-                            <td><input type="text" data-dtype="Number" name="data.influence.spent" value="{{data.influence.spent}}" /></td>
+                            <td>{{data.computed.influence.spent}}</td>
                             <td>{{data.computed.influence.available}}</td>
                             <td></td>
                         </tr>
                         <tr>
                             <td>Dominion</td>
                             <td><input type="text" data-dtype="Number" name="data.dominion.total" value="{{data.dominion.total}}" /></td>
-                            <td><input type="text" data-dtype="Number" name="data.dominion.spent" value="{{data.dominion.spent}}" /></td>
+                            <td>{{data.computed.dominion.spent}}</td>
                             <td>{{data.computed.dominion.available}}</td>
-                            <td><input type="text" data-dtype="Number" name="data.dominion.income" value="{{data.dominion.income}}" /></td>
+                            <td>{{data.computed.dominion.income}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -645,6 +645,16 @@
                     {{/ifeq}}
                     {{/each}}
                 </ol>
+                <div style="display:flex;align-items:center;justify-content: space-around">
+                    <div>
+                        <label for="influenceContributed">Other Influence Spent:</label>
+                        <input id="influenceContributed" name="data.influence.contributed" value="{{data.influence.contributed}}" type="text" data-dtype="Number" class="compact" style="margin-left:8px" />
+                    </div>
+                    <div>
+                        <label for="dominionContributed">Other Dominion Spent:</label>
+                        <input id="dominionContributed" name="data.dominion.contributed" value="{{data.dominion.contributed}}" type="text" data-dtype="Number" class="compact" style="margin-left:8px" />
+                    </div>
+                </div>
             </div>
             <div class="container col" style="margin-top:32px;">
                 <h2 style="display:flex;justify-content: space-between;">

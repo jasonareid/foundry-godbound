@@ -31,13 +31,16 @@ export class GodboundItem extends Item {
             )
         ;
         data.computed.effort.spent = data.effort.total - data.computed.effort.available;
+        data.computed.remaining = data.dominionCost - (data.committedDominion + data.contributedDominion);
     }
 
     _prepareProjectData(itemData) {
         const data = itemData.data;
         data.computed = {};
         data.computed.cost = (data.scope + data.resistance) * data.difficulty;
-        data.computed.remaining = data.computed.cost - (data.committedDominion + data.committedInfluence);
+        data.computed.remaining = data.computed.cost - (
+            data.committedDominion + data.committedInfluence + data.contributedDominion + data.contributedInfluence
+        );
     }
 
     _prepareCultData(itemData) {

@@ -65,12 +65,11 @@
       },
       "influence": {
         "total": 0,
-        "spent": 0
+        "contributed": 0
       },
       "dominion": {
         "total": 0,
-        "spent": 0,
-        "income": 0
+        "contributed": 0
       },
       "wealth": {
         "total": 0,
@@ -138,16 +137,6 @@
       "damageBonus": 0,
       "magic": false
     },
-    "project": {
-      "description": "",
-      "deeds": "",
-      "difficulty": 1,
-      "scope": 1,
-      "resistance": 0,
-      "completed": false,
-      "committedDominion": 0,
-      "committedInfluence": 0
-    },
     "item": {
       "description": ""
     },
@@ -190,9 +179,25 @@
       "smite": false,
       "combatPower": false
     },
+    "project": {
+      "description": "",
+      "deeds": "",
+      "difficulty": 1,
+      "scope": 1,
+      "resistance": 0,
+      "completed": false,
+      "active": false,
+      "committedDominion": 0,
+      "committedInfluence": 0,
+      "contributedDominion": 0,
+      "contributedInfluence": 0
+    },
     "artifact": {
       "description": "",
       "dominionCost": 0,
+      "committedDominion": 0,
+      "contributedDominion": 0,
+      "completed": false,
       "effort": {
         "total": 0,
         "atWill": 0,

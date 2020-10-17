@@ -20,37 +20,59 @@
                         </div>
                         <div>
                             <label for="description">Description:</label>
-                            <textarea id="description" name="data.description" class="tall">{{data.description}}</textarea>
+                            <textarea id="description" name="data.description">{{data.description}}</textarea>
                         </div>
                         <div>
                             <label for="effortTotal">Effort:</label>
                             <input id="effortTotal" name="data.effort.total" type="text" value="{{data.effort.total}}" data-dtype="Number"/>
                         </div>
                         <div>
-                            <label for="effortAtWill">At Will:</label>
-                            <input id="effortAtWill" name="data.effort.atWill" type="text" value="{{data.effort.atWill}}" data-dtype="Number"/>
+                            <label>Committed:</label>
+                            <div style="display: flex; align-items: center;padding-bottom:16px;">
+                                <div style="width:22%;text-align: right;">
+                                    <i class="fas fa-stopwatch"></i>:
+                                    <input id="effortAtWill" name="data.effort.atWill" type="text" value="{{data.effort.atWill}}" data-dtype="Number" class="compact" />
+                                </div>
+                                <div style="width:25%;text-align: right;">
+                                    <i class="fas fa-clock"></i>:
+                                    <input id="effortScene" name="data.effort.scene" type="text" value="{{data.effort.scene}}" data-dtype="Number" class="compact"/>
+                                </div>
+                                <div style="width:28%;text-align: right;">
+                                    <i class="fas fa-sun"></i>:
+                                    <input id="effortDay" name="data.effort.day" type="text" value="{{data.effort.day}}" data-dtype="Number" class="compact"/>
+                                </div>
+                            </div>
                         </div>
                         <div>
-                            <label for="effortScene">Scene:</label>
-                            <input id="effortScene" name="data.effort.scene" type="text" value="{{data.effort.scene}}" data-dtype="Number"/>
-                        </div>
-                        <div>
-                            <label for="effortDay">Day:</label>
-                            <input id="effortDay" name="data.effort.day" type="text" value="{{data.effort.day}}" data-dtype="Number"/>
-                        </div>
-                        <div>
-                            <label for="dominionCost">Cost:</label>
-                            <input id="dominionCost" name="data.dominionCost" type="text" value="{{data.dominionCost}}" data-dtype="Number"/>
+                            <label>Dominion:</label>
+                            <div style="display: flex; align-items: center;justify-content: space-around">
+                                <div style="width:22%;text-align: right;">
+                                    Cost:
+                                    <input id="dominionCost" name="data.dominionCost" type="text" value="{{data.dominionCost}}" data-dtype="Number" class="compact"/>
+                                </div>
+                                <div style="width:25%;text-align: right;">
+                                    Paid:
+                                    <input id="committedDominion" name="data.committedDominion" type="text" value="{{data.committedDominion}}" data-dtype="Number" class="compact"/>
+                                </div>
+                                <div style="width:28%;text-align: right;">
+                                    Ctrb:
+                                    <input id="contributedDominion" name="data.contributedDominion" type="text" value="{{data.contributedDominion}}" data-dtype="Number" class="compact"/>
+                                </div>
+                                <div style="width:22%;text-align: right;padding-right:8px;">
+                                    <label>Rem: {{data.computed.remaining}}</label>
+                                </div>
+                            </div>
                         </div>
                         <div>
                             <label></label>
-                            <div style="display: flex; align-items: center">
-                                <input type="checkbox" name="data.bound" {{checked data.bound}} style="margin-left:0" />Bound for Day
+                            <div style="display: flex; align-items: center;padding-top:16px;">
+                                <input type="checkbox" name="data.completed" {{checked data.completed}} style="margin-left:0" />Completed
+                                <input type="checkbox" name="data.bound" {{checked data.bound}} style="margin-left:16px" />Bound for Day
                             </div>
                         </div>
                         <div>
                             <label for="mortalEffect">Mortal Effect:</label>
-                            <textarea id="mortalEffect" name="data.mortalEffect" class="tall">{{data.mortalEffect}}</textarea>
+                            <textarea id="mortalEffect" name="data.mortalEffect">{{data.mortalEffect}}</textarea>
                         </div>
                         <div>
                             <label style="vertical-align: center">Actions:</label>

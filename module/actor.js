@@ -137,10 +137,22 @@ export class GodboundActor extends Actor {
         data.computed.effort.spent = data.effort.total - data.computed.effort.available;
 
         data.computed.influence = {};
-        data.computed.influence.available = data.influence.total - data.influence.spent;
-
+        data.computed.influence.spent = data.influence.contributed;
         data.computed.dominion = {};
-        data.computed.dominion.available = data.dominion.total - data.dominion.spent;
+        data.computed.dominion.spent = data.dominion.contributed;
+        data.computed.dominion.income = 0;
+        if(actorData.items) {
+            actorData.items.forEach(i => {
+                if(i.type === 'project') {
+                    data.computed.dominion.spent += i.data.committedDominion;
+                    data.computed.influence.spent += i.data.committedInfluence;
+                } else if(i.type === 'artifact') {
+                    data.computed.dominion.spent += i.data.committedDominion;
+                }
+            });
+        }
+        data.computed.influence.available = data.influence.total - data.computed.influence.spent;
+        data.computed.dominion.available = data.dominion.total - data.computed.dominion.spent;
 
         data.computed.hp = {};
         data.computed.hp.max = 8 + data.computed.attributes.con.mod + (

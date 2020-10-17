@@ -69,16 +69,29 @@
                             </select>
                         </div>
                         <div>
-                            <label>Cost:</label>
+                            <label>Dom Cost:</label>
                             <span style="padding:4px 0;">{{data.computed.cost}}</span>
                         </div>
                         <div>
-                            <label for="committedDominion">Dominion:</label>
-                            <input id="committedDominion" name="data.committedDominion" type="text" value="{{data.committedDominion}}" data-dtype="Number"/>
-                        </div>
-                        <div>
-                            <label for="committedInfluence">Influence:</label>
-                            <input id="committedInfluence" name="data.committedInfluence" type="text" value="{{data.committedInfluence}}" data-dtype="Number"/>
+                            <label>Paid:</label>
+                            <div style="display: flex; align-items: center;justify-content: space-around">
+                                <div style="width:25%;text-align:center">
+                                    Dom:
+                                    <input id="committedDominion" name="data.committedDominion" type="text" value="{{data.committedDominion}}" data-dtype="Number" class="compact"/>
+                                </div>
+                                <div style="width:25%;text-align:center">
+                                    DCtrb:
+                                    <input id="contributedDominion" name="data.contributedDominion" type="text" value="{{data.contributedDominion}}" data-dtype="Number" class="compact"/>
+                                </div>
+                                <div style="width:25%;text-align:center">
+                                    Inf:
+                                    <input id="committedInfluence" name="data.committedInfluence" type="text" value="{{data.committedInfluence}}" data-dtype="Number" class="compact"/>
+                                </div>
+                                <div style="width:25%;text-align:center">
+                                    ICtrb:
+                                    <input id="contributedInfluence" name="data.contributedInfluence" type="text" value="{{data.contributedInfluence}}" data-dtype="Number" class="compact"/>
+                                </div>
+                            </div>
                         </div>
                         <div>
                             <label>Remaining:</label>
@@ -87,7 +100,8 @@
                         <div>
                             <label></label>
                             <div style="display: flex; align-items: center">
-                                <input type="checkbox" name="data.completed" {{checked data.completed}} style="margin-left:0" />Completed
+                                <input type="checkbox" name="data.active" {{checked data.active}} style="margin-left:0" />Active
+                                <input type="checkbox" name="data.completed" {{checked data.completed}} style="margin-left:16px" />Completed
                             </div>
                         </div>
                         <div>
