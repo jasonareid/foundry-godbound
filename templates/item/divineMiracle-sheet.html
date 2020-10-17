@@ -17,6 +17,14 @@
                             <textarea id="description" name="data.description" class="tall">{{data.description}}</textarea>
                         </div>
                         <div>
+                            <label>Activation:</label>
+                            <div style="display: flex; align-items: center">
+                                <input type="checkbox" name="data.instant" {{checked data.instant}} />Instant
+                                <input type="checkbox" name="data.onTurn" {{checked data.onTurn}} />On Turn
+                                <input type="checkbox" name="data.action" {{checked data.action}} />Action
+                            </div>
+                        </div>
+                        <div>
                             <label for="effort">Effort:</label>
                             <input id="effort" name="data.effort" type="text" value="{{data.effort}}" data-dtype="Number"/>
                         </div>

@@ -14,9 +14,20 @@ export class GodboundItem extends Item {
         const actorData = this.actor ? this.actor.data : {};
         const data = itemData.data;
 
+        this.data.data.computed = {};
         if (itemData.type === 'artifact') this._prepareArtifactData(itemData);
         if (itemData.type === 'project') this._prepareProjectData(itemData);
         if (itemData.type === 'cult') this._prepareCultData(itemData);
+
+        if (this.data.data.damageRoll) {
+            if (!this.data.data.damageBonus) {
+                this.data.data.computed.damageFormula =`${this.data.data.damageRoll}`;
+            } else if (this.data.data.damageBonus < 0) {
+                this.data.data.computed.damageFormula = `${this.data.data.damageRoll}${this.data.data.damageBonus}`;
+            } else {
+                this.data.computed.damageFormula = `${this.data.data.damageRoll}+${this.data.data.damageBonus}`;
+            }
+        }
     }
 
     _prepareArtifactData(itemData) {
@@ -51,11 +62,11 @@ export class GodboundItem extends Item {
     }
 
     canSpendEffort(amount) {
-        if(!this.type === 'artifact') {
+        if (!this.type === 'artifact') {
             ui.notifications.warn("Item is not powered by effort");
             return false;
         }
-        if(this.data.data.computed.effort.available >= amount) {
+        if (this.data.data.computed.effort.available >= amount) {
             return true;
         } else {
             ui.notifications.warn("Not enough effort in item");

@@ -1,24 +1,28 @@
-<section class="godbound chat-message">
+<section class="godbound chat-message saving-throw">
     <div class="godbound chat-block">
-        <div class="flexrow chat-header">
-            <div class="chat-title"><h3>{{title}}</h3></div>
-            {{#if data.item}}
-            <div class="chat-img" style="background-image:url('{{data.item.img}}')"></div>
-            {{else}}
+        {{#if data.actor}}
+        <div class="flexrow chat-actor">
             <div class="chat-img" style="background-image:url('{{data.actor.img}}')"></div>
-            {{/if}}
+            <div class="chat-title"><h3>{{title}}</h3></div>
         </div>
+        {{/if}}
+        {{#if data.item}}
+        <div class="flexrow chat-header">
+            <div class="chat-img" style="background-image:url('{{data.item.img}}')"></div>
+            <div class="chat-title"><h3>{{data.item.name}}</h3></div>
+        </div>
+        {{/if}}
         <div class="blindable" data-blind="{{data.roll.blindroll}}">
             <div class="chat-details">{{{flavor}}}</div>
+            {{#if roll}}<div>{{{roll}}}</div>{{/if}}
             {{#if result.isFailure}}
                 <div class='roll-result roll-fail'><b>Failure</b> ({{result.target}})</div>
             {{/if}}
             {{#if result.isSuccess}}
                 <div class='roll-result roll-success'><b>Success</b>({{result.target}})</div>
             {{/if}}
-            {{#if roll}}<div>{{{roll}}}</div>{{/if}}
             {{#if result.isFailure}}
-                <div><span class="instant-auto-save" data-actor-id="{{data.actor.id}}">Auto Save (req. Effort/day)</span></div>
+                <div><span class="instant-auto-save" data-actor-id="{{data.actor.id}}">Auto Save <i class="fas fa-sun"></i></span></div>
             {{/if}}
         </div>
     </div>

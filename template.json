@@ -123,7 +123,8 @@
     ],
     "autoHitAttack": {
       "damageRoll": "1d8",
-      "damageBonus": 0
+      "damageBonus": 0,
+      "magic": false
     },
     "multiDieDamageRoll": {
       "damageRoll": "1d8",
@@ -178,6 +179,9 @@
       "description": "",
       "effortCost": 1,
       "smite": false,
+      "instant": false,
+      "onTurn": false,
+      "action": false,
       "combatPower": false
     },
     "project": {

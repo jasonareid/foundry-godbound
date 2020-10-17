@@ -261,8 +261,7 @@
   .chat-header {
     height: 46px;
     margin: 4px 0;
-    border: 1px solid black;
-    border-radius: 3px;
+    border-bottom: 1px solid #aaa;
     color: black;
     padding: 2px;
     box-shadow: 0 0 2px #fff inset;
@@ -281,11 +280,33 @@
         word-break: break-all;
       }
     }
+  }
+  .chat-actor {
+    height: 46px;
+    margin: 4px 0;
+    border-bottom: 1px solid #aaa;
+    color: black;
+    padding: 2px;
+    box-shadow: 0 0 2px #fff inset;
 
-    .chat-img {
-      flex: 0 0 42px;
-      background-size: cover;
+    .chat-title {
+      margin: 4px 0;
+      height: 30px;
+      overflow: hidden;
+
+      h3 {
+        border: none;
+        line-height: 34px;
+        margin: 0;
+        text-indent: 10px;
+        font-size: 16px;
+        word-break: break-all;
+      }
     }
+  }
+  .chat-img {
+    flex: 0 0 42px;
+    background-size: cover;
   }
 
   .chat-target {
@@ -300,8 +321,9 @@
   }
 
   .roll-result {
-    font-size: 13px;
+    font-size: 16px;
     text-align: center;
+    margin-top:4px;
   }
 
   .roll-result.roll-success {

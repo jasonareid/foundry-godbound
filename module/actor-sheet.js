@@ -50,7 +50,7 @@ export class GodboundActorSheet extends ActorSheet {
       const li = $(ev.currentTarget).parents('.item');
       const item = this.actor.getOwnedItem(li.data("itemId"));
       ChatMessage.create({
-        content: `<div><h3>${item.name}</h3><p>${this.actor.replaceItemMacros(item.name, item.data.data.description)}</p></div>`,
+        content: `<div><h3>${item.name}</h3><p>${this.actor.replaceItemMacros(item, item.data.data.description)}</p></div>`,
       });
     });
 
@@ -119,7 +119,7 @@ export class GodboundActorSheet extends ActorSheet {
           speaker: this.actor,
         };
         let templateData = {
-          title: `${Capitalize(attr)} Check (${data.modifier < 1 ? 'Hard' : data.modifier > 1 ? 'Easy' : 'Normal'})`,
+          title: `${Capitalize(attr)} Check (${data.modifier < 0 ? 'Hard' : data.modifier > 0 ? 'Easy' : 'Normal'})`,
           data: data,
         }
         let roll = new Roll('1d20 + @attr + @difficulty', {
@@ -169,7 +169,7 @@ export class GodboundActorSheet extends ActorSheet {
         title: `Attack with ${item.name}`,
         flavor: `By ${this.actor.name}`,
         damage: `${item.data.data.damageRoll}+${attrBonus+item.data.data.damageBonus}`,
-        damageSource: item.name,
+        damageSource: item.id,
         data: {},
       };
       let roll = new Roll('1d20 + @attrBonus + @toHitBonus + @itemBonus', {
@@ -205,9 +205,9 @@ export class GodboundActorSheet extends ActorSheet {
       const li = $(ev.currentTarget).parents('.item');
       const item = this.actor.getOwnedItem(li.data("itemId"));
       if(item.data.data.damageBonus < 0) {
-        this.actor.rollDamage(item.name, `${item.data.data.damageRoll}${item.data.data.damageBonus}`)
+        this.actor.rollDamage(item)
       } else {
-        this.actor.rollDamage(item.name, `${item.data.data.damageRoll}+${item.data.data.damageBonus}`);
+        this.actor.rollDamage(item);
       }
     });
 

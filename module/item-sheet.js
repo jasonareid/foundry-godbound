@@ -48,7 +48,7 @@ export class GodboundItemSheet extends ItemSheet {
     if(!this.item.actor) {
       return description;
     }
-    return this.item.actor.replaceItemMacros(this.item.name, description);
+    return this.item.actor.replaceItemMacros(this.item, description);
   }
 
   /** @override */
@@ -70,7 +70,7 @@ export class GodboundItemSheet extends ItemSheet {
         item = this.item;
       }
       ChatMessage.create({
-        content: `<div><h3>${item.name}</h3><p>${this.actor.replaceItemMacros(item.name, item.data.data.description)}</p></div>`,
+        content: `<div><h3>${item.name}</h3><p>${this.actor.replaceItemMacros(item, item.data.data.description)}</p></div>`,
       });
     });
 

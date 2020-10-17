@@ -211,8 +211,7 @@
 .godbound.chat-block .chat-header {
   height: 46px;
   margin: 4px 0;
-  border: 1px solid black;
-  border-radius: 3px;
+  border-bottom: 1px solid #aaa;
   color: black;
   padding: 2px;
   box-shadow: 0 0 2px #fff inset;
@@ -230,7 +229,28 @@
   font-size: 16px;
   word-break: break-all;
 }
-.godbound.chat-block .chat-header .chat-img {
+.godbound.chat-block .chat-actor {
+  height: 46px;
+  margin: 4px 0;
+  border-bottom: 1px solid #aaa;
+  color: black;
+  padding: 2px;
+  box-shadow: 0 0 2px #fff inset;
+}
+.godbound.chat-block .chat-actor .chat-title {
+  margin: 4px 0;
+  height: 30px;
+  overflow: hidden;
+}
+.godbound.chat-block .chat-actor .chat-title h3 {
+  border: none;
+  line-height: 34px;
+  margin: 0;
+  text-indent: 10px;
+  font-size: 16px;
+  word-break: break-all;
+}
+.godbound.chat-block .chat-img {
   flex: 0 0 42px;
   background-size: cover;
 }
@@ -244,8 +264,9 @@
   font-size: 13px;
 }
 .godbound.chat-block .roll-result {
-  font-size: 13px;
+  font-size: 16px;
   text-align: center;
+  margin-top: 4px;
 }
 .godbound.chat-block .roll-result.roll-success {
   color: #18520b;

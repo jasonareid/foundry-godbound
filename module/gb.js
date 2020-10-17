@@ -105,9 +105,8 @@ Hooks.once("init", async function () {
     $(document).on('click', '.damage-formula-roll', ev => {
         let span = $(ev.currentTarget);
         let formula = span.data('formula');
-        let actorId = span.data('actorId');
-        let damageSource = span.data('damageSource');
-        let actor = game.actors.get(actorId);
+        let actor = game.actors.get(span.data('actorId'));
+        let damageSource = actor.getOwnedItem(span.data('damageSource'));
         if (actor) {
             actor.rollDamage(damageSource, formula);
         }

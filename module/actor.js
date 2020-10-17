@@ -5,36 +5,51 @@ export class GodboundActor extends Actor {
 
         if (gbActor.data.type === 'pc') {
             await gbActor.createOwnedItem({
-                name: 'Fray Die', type: 'autoHitAttack', data: {
+                name: 'Fray Die', type: 'autoHitAttack',
+                img: 'modules/game-icons-net/blackbackground/sword-spin.svg',
+                data: {
                     numDice: 1,
                     diceType: 8
                 }
             });
             await gbActor.createOwnedItem({
-                name: 'Succeed on Save', type: 'divineMiracle', data: {
+                name: 'Succeed on Save', type: 'divineMiracle',
+                img: 'modules/game-icons-net/blackbackground/shield-reflect.svg',
+                data: {
                     description: "Succeed on a Failed Save",
-                    effortCost: 1
+                    effortCost: 1,
+                    instant: true,
                 }
             });
             await gbActor.createOwnedItem({
-                name: 'Suppress Effect', type: 'divineMiracle', data: {
-                    description: "Suppress an Appropriate Effect",
-                    effortCost: 1
+                name: 'Dispel Effect', type: 'divineMiracle',
+                img: 'modules/game-icons-net/blackbackground/halt.svg',
+                data: {
+                    description: "Dispel an appropriate effect, instantly if targeted directly at you.",
+                    effortCost: 1,
+                    action: true,
+                    instant: true,
                 }
             });
             await gbActor.createOwnedItem({
-                name: 'Divine Wrath', type: 'divineMiracle', data: {
+                name: 'Divine Wrath', type: 'divineMiracle',
+                img: 'modules/game-icons-net/blackbackground/hypersonic-bolt.svg',
+                data: {
                     description: "You smite a chosen foe within sight with the energies of the Word, inflicting @RollDmg[leveld8] damage. You are always immune to the wrath of your own bound Words, as are other entities that wield similar powers. As a Smite power, Divine Wrath cannot be used two rounds in a row.",
                     effortCost: 1,
                     smite: true,
+                    action: true,
                     combatPower: true,
                 }
             });
             await gbActor.createOwnedItem({
-                name: 'Corona of Fury', type: 'divineMiracle', data: {
+                name: 'Corona of Fury', type: 'divineMiracle',
+                img: 'modules/game-icons-net/blackbackground/explosion-rays.svg',
+                data: {
                     description: "Commit Effort to the end of the scene. You hurl a torrent of your Word’s energy at a group of foes, affecting all within a 30-foot radius of a target point within sight of you. Each victim takes @RollDmg[halfLeveld8] damage. The fury can selectively spare allies within the area, but the victims then get an appropriate saving throw to resist the effect. You are always immune to the furies of your own bound Words, as are other entities that wield similar powers. Corona of Fury cannot be used two rounds in a row.",
                     effortCost: 1,
                     smite: true,
+                    action: true,
                     combatPower: true,
                 }
             });
@@ -260,13 +275,16 @@ export class GodboundActor extends Actor {
     }
 
     async rollDamage(source, formula) {
+        if(!formula) {
+            formula = source.data.data.computed.damageFormula;
+        }
         let template = 'systems/godbound/templates/chat/damage-roll-result.html';
         let chatData = {
             user: game.user._id,
             speaker: this,
         };
         let templateData = {
-            title: `${source}`,
+            title: `Damage Roll`,
             data: {},
         };
         let roll = new Roll(formula);
@@ -277,6 +295,7 @@ export class GodboundActor extends Actor {
             normalDamage: this._toNormalDamage(roll),
         };
         templateData.data.actor = this;
+        templateData.data.item = source;
         chatData.content = await renderTemplate(template, templateData);
         chatData.roll = roll;
         chatData.isRoll = true;
@@ -295,10 +314,10 @@ export class GodboundActor extends Actor {
         }
     }
 
-    _replaceRollDmgMacro(itemName, formula) {
+    _replaceRollDmgMacro(item, formula) {
         let replacement = formula.replace('halfLevel', Math.ceil(this.data.data.level / 2));
         replacement = replacement.replace('level', this.data.data.level);
-        return `<span class="damage-formula-roll" data-formula="${replacement}" data-actor-id="${this.id}" data-damage-source="${itemName}">${replacement}</span>`;
+        return `<span class="damage-formula-roll" data-formula="${replacement}" data-actor-id="${this.id}" data-damage-source="${item.id}">${replacement}</span>`;
     }
 
     canSpendEffort(amount) {
@@ -342,7 +361,7 @@ export class GodboundActor extends Actor {
         if (target.canSpendEffort(effortCost)) {
             await target.update({data: {effort: {day: target.data.data.effort.day + effortCost}}});
             ChatMessage.create({
-                content: `<div><h3>${item.name}</h3><h4>${target.name}: ${effortCost} Effort for Day</h4><p>${this.replaceItemMacros(item.name, item.data.data.description)}</p></div>`,
+                content: `<div><h3>${item.name}</h3><h4>${target.name}: ${effortCost} Effort for Day</h4><p>${this.replaceItemMacros(item, item.data.data.description)}</p></div>`,
             });
             if(item.type === 'artifact') {
                 item.update({data: {bound: true}});
@@ -355,7 +374,7 @@ export class GodboundActor extends Actor {
         if (target.canSpendEffort(effortCost)) {
             await target.update({data: {effort: {scene: target.data.data.effort.scene + 1}}});
             ChatMessage.create({
-                content: `<div><h3>${item.name}</h3><h4>${target.name}: Effort for Scene</h4><p>${this.replaceItemMacros(item.name, item.data.data.description)}</p></div>`,
+                content: `<div><h3>${item.name}</h3><h4>${target.name}: Effort for Scene</h4><p>${this.replaceItemMacros(item, item.data.data.description)}</p></div>`,
             });
         }
     }
@@ -366,7 +385,7 @@ export class GodboundActor extends Actor {
         if(target.canSpendEffort(effortCost)) {
             await target.update({data: {effort: {atWill: target.data.data.effort.atWill + 1}}});
             ChatMessage.create({
-                content: `<div><h3>${item.name}</h3><h4>${target.name}: At Will Effort</h4><p>${this.replaceItemMacros(item.name, item.data.data.description)}</p></div>`,
+                content: `<div><h3>${item.name}</h3><h4>${target.name}: At Will Effort</h4><p>${this.replaceItemMacros(item, item.data.data.description)}</p></div>`,
             });
         }
     }
@@ -377,11 +396,11 @@ export class GodboundActor extends Actor {
             ui.notifications.error("Cannot find Succeed on Save Miracle");
         } else {
             let ownedItem = this.getOwnedItem(items[0].id);
-            await this.commitEffortForDay(1, ownedItem);
+            await this.commitEffortForDay(ownedItem, ownedItem.data.data.effortCost);
         }
     }
 
-    replaceItemMacros(itemName, description) {
+    replaceItemMacros(item, description) {
         if(!description) return description;
 
         let segments = description.split(/(@.*?\[.*?])/g);
@@ -393,7 +412,7 @@ export class GodboundActor extends Actor {
             } else {
                 let macro = segments[i];
                 if(parsed[1] === 'RollDmg') {
-                    result.push(this._replaceRollDmgMacro(itemName, parsed[2]));
+                    result.push(this._replaceRollDmgMacro(item, parsed[2]));
                 } else {
                     result.push(macro);
                 }

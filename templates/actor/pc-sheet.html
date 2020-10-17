@@ -260,7 +260,23 @@
                             {{#each actor.items as |item id|}}
                             {{#ifeq item.type "divineMiracle"}}
                             <li class="item flexrow" data-item-id="{{item._id}}">
-                                <h4 class="item-name">{{item.name}}</h4>
+                                <h4 class="item-name">
+                                    {{item.name}}
+                                    <span class="item-tags">
+                                    {{#if item.data.instant}}
+                                        <a title="Instant"><i class="fas fa-bolt"></i></a>
+                                    {{/if}}
+                                    {{#if item.data.onTurn}}
+                                        <a title="On Turn"><i class="fas fa-redo-alt"></i></a>
+                                    {{/if}}
+                                    {{#if item.data.action}}
+                                        <a title="Action"><i class="fas fa-hourglass-end"></i></a>
+                                    {{/if}}
+                                    {{#if item.data.smite}}
+                                        <a title="Smite"><i class="fas fa-meteor"></i></a>
+                                    {{/if}}
+                                    </span>
+                                </h4>
                                 <div class="item-controls">
                                     <a class="item-control item-day-effort" title="Commit Effort for Day"><i class="fas fa-sun"></i></a>
                                 </div>
