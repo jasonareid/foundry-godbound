@@ -13,19 +13,19 @@ export class GodboundActor extends Actor {
             await gbActor.createOwnedItem({
                 name: 'Succeed on Save', type: 'divineMiracle', data: {
                     description: "Succeed on a Failed Save",
-                    effort: 1
+                    effortCost: 1
                 }
             });
             await gbActor.createOwnedItem({
                 name: 'Suppress Effect', type: 'divineMiracle', data: {
                     description: "Suppress an Appropriate Effect",
-                    effort: 1
+                    effortCost: 1
                 }
             });
             await gbActor.createOwnedItem({
                 name: 'Divine Wrath', type: 'divineMiracle', data: {
                     description: "You smite a chosen foe within sight with the energies of the Word, inflicting @RollDmg[leveld8] damage. You are always immune to the wrath of your own bound Words, as are other entities that wield similar powers. As a Smite power, Divine Wrath cannot be used two rounds in a row.",
-                    effort: 1,
+                    effortCost: 1,
                     smite: true,
                     combatPower: true,
                 }
@@ -33,7 +33,7 @@ export class GodboundActor extends Actor {
             await gbActor.createOwnedItem({
                 name: 'Corona of Fury', type: 'divineMiracle', data: {
                     description: "Commit Effort to the end of the scene. You hurl a torrent of your Word’s energy at a group of foes, affecting all within a 30-foot radius of a target point within sight of you. Each victim takes @RollDmg[halfLeveld8] damage. The fury can selectively spare allies within the area, but the victims then get an appropriate saving throw to resist the effect. You are always immune to the furies of your own bound Words, as are other entities that wield similar powers. Corona of Fury cannot be used two rounds in a row.",
-                    effort: 1,
+                    effortCost: 1,
                     smite: true,
                     combatPower: true,
                 }
@@ -140,7 +140,7 @@ export class GodboundActor extends Actor {
         data.computed.influence.spent = data.influence.contributed;
         data.computed.dominion = {};
         data.computed.dominion.spent = data.dominion.contributed;
-        data.computed.dominion.income = 0;
+        data.computed.dominion.income = data.dominion.otherIncome;
         if(actorData.items) {
             actorData.items.forEach(i => {
                 if(i.type === 'project') {
@@ -148,6 +148,8 @@ export class GodboundActor extends Actor {
                     data.computed.influence.spent += i.data.committedInfluence;
                 } else if(i.type === 'artifact') {
                     data.computed.dominion.spent += i.data.committedDominion;
+                } else if(i.type === 'cult') {
+                    data.computed.dominion.income += i.data.income;
                 }
             });
         }

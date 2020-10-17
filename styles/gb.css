@@ -197,6 +197,7 @@
 }
 .godbound .item-list .item-tags {
   color: darkred;
+  margin-left: 8px;
 }
 .godbound .item-list .item-controls {
   flex: 0 0 auto;

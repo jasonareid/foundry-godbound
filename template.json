@@ -69,7 +69,8 @@
       },
       "dominion": {
         "total": 0,
-        "contributed": 0
+        "contributed": 0,
+        "otherIncome": 0
       },
       "wealth": {
         "total": 0,

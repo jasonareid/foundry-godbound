@@ -1,13 +1,9 @@
-* Tidy up combat powers
-* Space between item tags and name
 * Put effort icons into chat messages
-* Take Income button on Cult entry
 * Chat bubbles send item images
-* Show magic weapons in attacks
+* Show magic weapons in attack chats
 * Make divine gift commitments look nicer
   * Don't forget to turn them into godbound-chat-blocks
   * Need to take advantage of the damage rolls
-* Turn At Wills into Toggles
 * Post Chat message Prompt for Saving Throw
 * Color successful & failed checks & saves
 * Put some blood on the damage roll message
@@ -15,3 +11,4 @@
 * NPC Sheets
 * Tactics
 * SSL server
+* Add Deselection module, DragUpload module, Escape Window, Everybody Look
