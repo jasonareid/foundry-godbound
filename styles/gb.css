@@ -208,6 +208,12 @@
 .godbound.chat-block {
   margin: 0;
 }
+.godbound.chat-block.result-msg-success {
+  background-color: rgba(30, 255, 30, 0.1);
+}
+.godbound.chat-block.result-msg-failure {
+  background-color: rgba(255, 30, 30, 0.1);
+}
 .godbound.chat-block .chat-actor {
   height: 46px;
   margin: 4px 0;

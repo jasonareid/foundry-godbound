@@ -117,6 +117,7 @@ export class GodboundActorSheet extends ActorSheet {
           isFailure: roll.total < target,
           target: target,
         }
+        result.className = result.isSuccess ? 'result-msg-success' : 'result-msg-failure';
         templateData.roll = await roll.render();
         templateData.result = result;
         templateData.data.actor = this.actor;
@@ -218,6 +219,7 @@ export class GodboundActorSheet extends ActorSheet {
           isFailure: roll.total < target,
           target: target,
         }
+        result.className = result.isSuccess ? 'result-msg-success' : 'result-msg-failure';
         templateData.roll = await roll.render();
         templateData.result = result;
         templateData.data.actor = this.actor;

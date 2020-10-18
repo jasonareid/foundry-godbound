@@ -1,6 +1,3 @@
-* Show magic weapons in attack chats
-* Color successful & failed checks & saves
-* Put some blood on the damage roll message
 * Move or copy HP to combat
 * NPC Sheets
 * Tactics

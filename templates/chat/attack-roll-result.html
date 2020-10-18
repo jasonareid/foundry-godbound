@@ -1,5 +1,5 @@
-<section class="godbound chat-message attack-roll">
-    <div class="godbound chat-block">
+<section class="godbound chat-message">
+    <div class="godbound chat-block attack-roll">
         <h2>
             {{title}}
         </h2>
@@ -7,7 +7,14 @@
             <div class="chat-img" style="background-image:url('{{data.actor.img}}')"></div>
             <div class="chat-img" style="background-image:url('{{data.item.img}}')"></div>
             <div class="chat-title">
-                <h3>{{data.item.name}}</h3>
+                <h3 style="margin-top:8px;">
+                    {{#if data.item.data.data.magic}}
+                        {{data.item.name}}*
+                    {{/if}}
+                    {{#unless data.item.data.data.magic}}
+                        {{data.item.name}}
+                    {{/unless}}
+                </h3>
             </div>
         </div>
         <div class="blindable" data-blind="{{data.roll.blindroll}}">
