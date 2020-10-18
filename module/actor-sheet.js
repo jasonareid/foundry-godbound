@@ -264,5 +264,19 @@ export class GodboundActorSheet extends ActorSheet {
       html.find('#hdadjust').val('0');
       await this.actor.applyHDDamage(adj);
     });
+
+    html.find('#chooseTactic').click(ev => {
+      console.log(this.actor.data.items);
+      let tactics = this.actor.data.items.filter(i =>
+        i.type === 'tactic'
+      );
+      console.log(tactics);
+      if(tactics.length > 0) {
+        var chosen = tactics[Math.floor(Math.random() * tactics.length)];
+        console.log(chosen);
+        html.find('#chosenTactic #chosenTactic-name').text(`${chosen.name} -`);
+        html.find('#chosenTactic #chosenTactic-desc').text(chosen.data.description);
+      }
+    });
   }
 }

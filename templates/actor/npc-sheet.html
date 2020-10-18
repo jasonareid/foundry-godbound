@@ -324,21 +324,22 @@
                 </div>
 
                 <div class="container col" style="width:50%;">
-                    <h2 style="display:flex;justify-content: space-between;">
-                        <span>Combat Powers</span>
-                    </h2>
-                    <ol class="item-list">
-                        {{#each actor.items as |item id|}}
-                        {{#ifcombatpower ../actor._id item._id}}
-                        <li class="item flexrow" data-item-id="{{item._id}}">
-                            <h4 class="item-name">
-                                {{#if item.data.greater}}
-                                <span style="font-style: italic">{{item.name}}</span>
-                                {{/if}}
-                                {{#unless item.data.greater}}
-                                {{item.name}}
-                                {{/unless}}
-                                <span class="item-tags">
+                    <div class="container col">
+                        <h2 style="display:flex;justify-content: space-between;">
+                            <span>Combat Powers</span>
+                        </h2>
+                        <ol class="item-list">
+                            {{#each actor.items as |item id|}}
+                            {{#ifcombatpower ../actor._id item._id}}
+                            <li class="item flexrow" data-item-id="{{item._id}}">
+                                <h4 class="item-name">
+                                    {{#if item.data.greater}}
+                                    <span style="font-style: italic">{{item.name}}</span>
+                                    {{/if}}
+                                    {{#unless item.data.greater}}
+                                    {{item.name}}
+                                    {{/unless}}
+                                    <span class="item-tags">
                                 {{#if item.data.instant}}
                                     <a title="Instant"><i class="fas fa-bolt"></i></a>
                                 {{/if}}
@@ -352,36 +353,59 @@
                                     <a title="Smite"><i class="fas fa-meteor"></i></a>
                                 {{/if}}
                                 </span>
-                            </h4>
-                            <div class="item-controls">
-                                {{#ifeq item.type "divineMiracle"}}
-                                <a class="item-control item-day-effort" title="Commit Effort for Day"><i class="fas fa-sun"></i></a>
-                                {{/ifeq}}
-                                {{#if (or (eq item.type "divineGift") (eq item.type "artifactPower"))}}
-                                {{#if item.data.constant}}
-                                <a class="item-control item-chat" title="Constant Effect"><i class="fas fa-infinity"></i></a>
-                                {{/if}}
-                                {{#if item.data.noEffort}}
-                                <a class="item-control item-chat" title="Effortless Effect"><i class="far fa-play-circle"></i></a>
-                                {{/if}}
-                                {{#if item.data.atWill}}
-                                <a class="item-control item-atWill-effort" title="Commit Effort At Will"><i class="fas fa-power-off"></i></a>
-                                {{/if}}
-                                {{#if item.data.scene}}
-                                <a class="item-control item-scene-effort" title="Commit Effort for Scene"><i class="fas fa-clock"></i></a>
-                                {{/if}}
-                                {{#if item.data.day}}
-                                <a class="item-control item-day-effort" title="Commit Effort for Day"><i class="fas fa-sun"></i></a>
-                                {{/if}}
-                                {{/if}}
-                            </div>
-                        </li>
-                        {{/ifcombatpower}}
-                        {{/each}}
-                    </ol>
-                    <h3>Free Effort: {{data.computed.effort.available}}</h3>
-                </div>
+                                </h4>
+                                <div class="item-controls">
+                                    {{#ifeq item.type "divineMiracle"}}
+                                    <a class="item-control item-day-effort" title="Commit Effort for Day"><i class="fas fa-sun"></i></a>
+                                    {{/ifeq}}
+                                    {{#if (or (eq item.type "divineGift") (eq item.type "artifactPower"))}}
+                                    {{#if item.data.constant}}
+                                    <a class="item-control item-chat" title="Constant Effect"><i class="fas fa-infinity"></i></a>
+                                    {{/if}}
+                                    {{#if item.data.noEffort}}
+                                    <a class="item-control item-chat" title="Effortless Effect"><i class="far fa-play-circle"></i></a>
+                                    {{/if}}
+                                    {{#if item.data.atWill}}
+                                    <a class="item-control item-atWill-effort" title="Commit Effort At Will"><i class="fas fa-power-off"></i></a>
+                                    {{/if}}
+                                    {{#if item.data.scene}}
+                                    <a class="item-control item-scene-effort" title="Commit Effort for Scene"><i class="fas fa-clock"></i></a>
+                                    {{/if}}
+                                    {{#if item.data.day}}
+                                    <a class="item-control item-day-effort" title="Commit Effort for Day"><i class="fas fa-sun"></i></a>
+                                    {{/if}}
+                                    {{/if}}
+                                </div>
+                            </li>
+                            {{/ifcombatpower}}
+                            {{/each}}
+                        </ol>
+                        <h3>Free Effort: {{data.computed.effort.available}}</h3>
+                    </div>
 
+                    <div class="container col" style="margin-top: 32px;">
+                        <h2 style="display:flex;justify-content: space-between;">
+                            <span>Tactics</span>
+                            <i class="fas fa-plus itemAdder" data-item-type="tactic"></i>
+                        </h2>
+                        <ol class="item-list">
+                            {{#each actor.items as |item id|}}
+                            {{#ifeq item.type "tactic"}}
+                            <li class="item flexrow" data-item-id="{{item._id}}">
+                                <h4 class="item-name">
+                                    {{item.name}}
+                                </h4>
+                            </li>
+                            {{/ifeq}}
+                            {{/each}}
+                        </ol>
+                        <input type="button" id="chooseTactic" value="Choose Tactic" />
+                        <h4 id="chosenTactic">
+                            <span id="chosenTactic-name"></span>
+                            <span id="chosenTactic-desc"></span>
+                        </h4>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
