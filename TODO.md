@@ -1,8 +1,8 @@
 * Show smite in power chat
-* Move or copy HP to combat
 * Show magic weapons in attack chats
 * Color successful & failed checks & saves
 * Put some blood on the damage roll message
+* Move or copy HP to combat
 * NPC Sheets
 * Tactics
 * SSL server
