@@ -208,27 +208,6 @@
 .godbound.chat-block {
   margin: 0;
 }
-.godbound.chat-block .chat-header {
-  height: 46px;
-  margin: 4px 0;
-  border-bottom: 1px solid #aaa;
-  color: black;
-  padding: 2px;
-  box-shadow: 0 0 2px #fff inset;
-}
-.godbound.chat-block .chat-header .chat-title {
-  margin: 4px 0;
-  height: 30px;
-  overflow: hidden;
-}
-.godbound.chat-block .chat-header .chat-title h3 {
-  border: none;
-  line-height: 34px;
-  margin: 0;
-  text-indent: 10px;
-  font-size: 16px;
-  word-break: break-all;
-}
 .godbound.chat-block .chat-actor {
   height: 46px;
   margin: 4px 0;
@@ -238,17 +217,13 @@
   box-shadow: 0 0 2px #fff inset;
 }
 .godbound.chat-block .chat-actor .chat-title {
-  margin: 4px 0;
+  margin: 0;
   height: 30px;
-  overflow: hidden;
 }
 .godbound.chat-block .chat-actor .chat-title h3 {
   border: none;
-  line-height: 34px;
-  margin: 0;
-  text-indent: 10px;
+  margin-left: 4px;
   font-size: 16px;
-  word-break: break-all;
 }
 .godbound.chat-block .chat-img {
   flex: 0 0 42px;

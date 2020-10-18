@@ -96,13 +96,14 @@ export class GodboundActorSheet extends ActorSheet {
     html.find('.attr-roll').click(ev => {
       let attr = $(ev.currentTarget).data('attr');
       PlayerRollDialog.create(this.actor, {rollType: `${Capitalize(attr)} check`}, async (data) => {
-        let template = 'systems/godbound/templates/chat/roll-result.html';
+        let template = 'systems/godbound/templates/chat/attr-roll-result.html';
         let chatData = {
           user: game.user._id,
           speaker: this.actor,
         };
         let templateData = {
-          title: `${Capitalize(attr)} Check (${data.modifier < 0 ? 'Hard' : data.modifier > 0 ? 'Easy' : 'Normal'})`,
+          title: 'Attribute Check',
+          details: `${Capitalize(attr)} - ${data.modifier < 0 ? 'Hard' : data.modifier > 0 ? 'Easy' : 'Normal'}`,
           data: data,
         }
         let roll = new Roll('1d20 + @attr + @difficulty', {
@@ -203,7 +204,8 @@ export class GodboundActorSheet extends ActorSheet {
           speaker: this.actor,
         };
         let templateData = {
-          title: `${Capitalize(save)} Save (${data.modifier < 1 ? 'Hard' : data.modifier > 1 ? 'Easy' : 'Normal'})`,
+          title: 'Saving Throw',
+          details: `${Capitalize(save)} - ${data.modifier < 1 ? 'Hard' : data.modifier > 1 ? 'Easy' : 'Normal'}`,
           data: data,
         }
         let roll = new Roll('1d20 + @difficulty', {
