@@ -1,3 +1,5 @@
+import {TypeNames} from "./misc.js";
+
 export class GodboundActor extends Actor {
 
     static async create(data, options) {
@@ -314,6 +316,26 @@ export class GodboundActor extends Actor {
         }
     }
 
+    async demonstratePower(item, effortCommitment) {
+        let template = 'systems/godbound/templates/chat/power-result.html';
+        let chatData = {
+            user: game.user._id,
+            speaker: this,
+        };
+        let templateData = {
+            title: TypeNames(item.type),
+            data: {},
+        };
+        templateData.data.actor = this;
+        templateData.data.item = item;
+        if(effortCommitment) {
+            templateData.data.effort = {[effortCommitment]: true};
+        }
+        templateData.data.description = this.replaceItemDescriptionMacros(item);
+        chatData.content = await renderTemplate(template, templateData);
+        ChatMessage.create(chatData);
+    }
+
     _replaceRollDmgMacro(item, formula) {
         let replacement = formula.replace('halfLevel', Math.ceil(this.data.data.level / 2));
         replacement = replacement.replace('level', this.data.data.level);
@@ -360,9 +382,7 @@ export class GodboundActor extends Actor {
         }
         if (target.canSpendEffort(effortCost)) {
             await target.update({data: {effort: {day: target.data.data.effort.day + effortCost}}});
-            ChatMessage.create({
-                content: `<div><h3>${item.name}</h3><h4>${target.name}: ${effortCost} Effort for Day</h4><p>${this.replaceItemMacros(item, item.data.data.description)}</p></div>`,
-            });
+            await this.demonstratePower(item, 'day');
             if(item.type === 'artifact') {
                 item.update({data: {bound: true}});
             }
@@ -373,9 +393,7 @@ export class GodboundActor extends Actor {
         let target = this._determineEffortTarget(item);
         if (target.canSpendEffort(effortCost)) {
             await target.update({data: {effort: {scene: target.data.data.effort.scene + 1}}});
-            ChatMessage.create({
-                content: `<div><h3>${item.name}</h3><h4>${target.name}: Effort for Scene</h4><p>${this.replaceItemMacros(item, item.data.data.description)}</p></div>`,
-            });
+            await this.demonstratePower(item, 'scene');
         }
     }
 
@@ -384,9 +402,7 @@ export class GodboundActor extends Actor {
         let target = this._determineEffortTarget(item);
         if(target.canSpendEffort(effortCost)) {
             await target.update({data: {effort: {atWill: target.data.data.effort.atWill + 1}}});
-            ChatMessage.create({
-                content: `<div><h3>${item.name}</h3><h4>${target.name}: At Will Effort</h4><p>${this.replaceItemMacros(item, item.data.data.description)}</p></div>`,
-            });
+            await this.demonstratePower(item, 'atWill');
         }
     }
 
@@ -400,8 +416,8 @@ export class GodboundActor extends Actor {
         }
     }
 
-    replaceItemMacros(item, description) {
-        if(!description) return description;
+    replaceItemDescriptionMacros(item) {
+        let description = item.data.data.description || '';
 
         let segments = description.split(/(@.*?\[.*?])/g);
         let result = [];

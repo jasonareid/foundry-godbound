@@ -3,7 +3,7 @@
  * @extends {ActorSheet}
  */
 import {PlayerRollDialog} from "./playerRollDialog.js";
-import {Capitalize} from "./misc.js";
+import {Capitalize, TypeNames} from "./misc.js";
 
 
 export class GodboundActorSheet extends ActorSheet {
@@ -49,9 +49,7 @@ export class GodboundActorSheet extends ActorSheet {
     html.find('.item-chat').click(ev => {
       const li = $(ev.currentTarget).parents('.item');
       const item = this.actor.getOwnedItem(li.data("itemId"));
-      ChatMessage.create({
-        content: `<div><h3>${item.name}</h3><p>${this.actor.replaceItemMacros(item, item.data.data.description)}</p></div>`,
-      });
+      this.actor.demonstratePower(item);
     });
 
     html.find('.item-day-effort').click(ev => {
@@ -74,22 +72,7 @@ export class GodboundActorSheet extends ActorSheet {
 
     html.find('.itemAdder').click(async ev => {
       const $i = $(ev.currentTarget);
-      const names = {
-        boundWord: 'Word',
-        divineGift: 'Gift',
-        divineMiracle: 'Miracle',
-        attack: 'Attack',
-        autoHitAttack: 'Attack',
-        multiDieDamageRoll: 'Attack',
-        project: 'Project',
-        item: 'Item',
-        artifact: 'Artifact',
-        treasure: 'Treasure',
-        invocation: 'Invocation',
-        cult: 'Cult',
-        tactic: 'Tactic,'
-      }
-      this.actor.createOwnedItem({name: names[$i.data('itemType')], type: $i.data('itemType')}, {renderSheet: true});
+      this.actor.createOwnedItem({name: TypeNames($i.data('itemType')), type: $i.data('itemType')}, {renderSheet: true});
     });
 
     // Delete Inventory Item

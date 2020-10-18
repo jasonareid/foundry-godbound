@@ -1,3 +1,5 @@
+import {TypeNames} from "./misc.js";
+
 /**
  * Extend the basic ItemSheet with some very simple modifications
  * @extends {ItemSheet}
@@ -44,13 +46,6 @@ export class GodboundItemSheet extends ItemSheet {
   }
   /* -------------------------------------------- */
 
-  _replaceMacros(description) {
-    if(!this.item.actor) {
-      return description;
-    }
-    return this.item.actor.replaceItemMacros(this.item, description);
-  }
-
   /** @override */
   activateListeners(html) {
     super.activateListeners(html);
@@ -64,14 +59,18 @@ export class GodboundItemSheet extends ItemSheet {
     html.find('.item-chat').click(ev => {
       const li = $(ev.currentTarget).parents('.item');
       let item;
-      if(li && li.data("itemId")) {
+      if(li && li.data("itemId") && this.actor) {
         item = this.actor.getOwnedItem(li.data("itemId"));
       } else {
         item = this.item;
       }
-      ChatMessage.create({
-        content: `<div><h3>${item.name}</h3><p>${this.actor.replaceItemMacros(item, item.data.data.description)}</p></div>`,
-      });
+      if(this.actor) {
+        this.actor.demonstratePower(item);
+      } else {
+        ChatMessage.create({
+          content: `<div><h3>${item.name}</h3><p>${item.data.data.description}</p></div>`,
+        });
+      }
     });
 
     // Everything below here is only needed if the sheet is editable
@@ -99,9 +98,6 @@ export class GodboundItemSheet extends ItemSheet {
 
     html.find('.itemAdder').click(async ev => {
       const $i = $(ev.currentTarget);
-      const names = {
-        artifactPower: 'Artifact Power',
-      }
       if(!this.item.type === 'artifact') {
         ui.notifications.error("Only artifacts should be creating sub-items");
         return;
@@ -110,7 +106,7 @@ export class GodboundItemSheet extends ItemSheet {
         ui.notifications.error("Cannot add powers to an unowned artifact");
         return;
       }
-      this.actor.createOwnedItem({name: names[$i.data('itemType')], type: $i.data('itemType'), data: {artifactId: this.item._id}}, {renderSheet: true});
+      this.actor.createOwnedItem({name: TypeNames($i.data('itemType')), type: $i.data('itemType'), data: {artifactId: this.item._id}}, {renderSheet: true});
     });
 
   }
