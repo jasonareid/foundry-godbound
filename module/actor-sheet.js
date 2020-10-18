@@ -183,6 +183,7 @@ export class GodboundActorSheet extends ActorSheet {
         total: roll.total,
       };
       templateData.data.actor = this.actor;
+      templateData.data.item = item;
       chatData.content = await renderTemplate(template, templateData);
       chatData.roll = roll;
       chatData.isRoll = true;

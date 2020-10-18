@@ -81,6 +81,26 @@ Hooks.once("init", async function () {
         }
     });
 
+    Handlebars.registerHelper("ifcombatpower", function(actorId, itemId, options) {
+        console.log("ifcombatpower", actorId, itemId);
+        let actor = game.actors.get(actorId);
+        if(actor) {
+            let item = actor.getOwnedItem(itemId);
+            if(item) {
+                if(item.data.data.combatPower) {
+                    if(item.type === 'artifactPower') {
+                        let artifactId = item.data.data.artifactId;
+                        let artifact = actor.getOwnedItem(artifactId);
+                        if(!artifact.data.data.completed || !artifact.data.data.bound) {
+                            return;
+                        }
+                    }
+                    return options.fn(this);
+                }
+            }
+        }
+    });
+
     Handlebars.registerHelper("ifneq", function(arg1, arg2, options) {
         if (arg1 !== arg2) {
             return options.fn(this);
