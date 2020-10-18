@@ -286,7 +286,7 @@ export class GodboundActor extends Actor {
             speaker: this,
         };
         let templateData = {
-            title: `Damage Roll`,
+            title: `Damage`,
             data: {},
         };
         let roll = new Roll(formula);

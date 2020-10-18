@@ -149,8 +149,7 @@ export class GodboundActorSheet extends ActorSheet {
       };
       let attrBonus = this.actor.data.data.computed.attributes[item.data.data.attr].mod;
       let templateData = {
-        title: `Attack with ${item.name}`,
-        flavor: `By ${this.actor.name}`,
+        title: `Attack`,
         damage: `${item.data.data.damageRoll}+${attrBonus+item.data.data.damageBonus}`,
         damageSource: item.id,
         data: {},
@@ -205,7 +204,6 @@ export class GodboundActorSheet extends ActorSheet {
         };
         let templateData = {
           title: `${Capitalize(save)} Save (${data.modifier < 1 ? 'Hard' : data.modifier > 1 ? 'Easy' : 'Normal'})`,
-          flavor: `By ${this.actor.name}`,
           data: data,
         }
         let roll = new Roll('1d20 + @difficulty', {
