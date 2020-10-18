@@ -468,4 +468,19 @@ export class GodboundActor extends Actor {
             }
         }
     }
+
+    async applyDamage(amount) {
+        let hpUpdate = {};
+        let bonus = this.data.data.hp.bonus;
+        let current = this.data.data.hp.current;
+        if(bonus > 0) {
+            let damageToBonus = Math.min(amount, bonus);
+            hpUpdate.bonus = bonus - damageToBonus;
+            amount -= damageToBonus;
+        }
+        if(amount > 0) {
+            hpUpdate.current = current - amount;
+        }
+        await this.update({data: {hp: hpUpdate}});
+    }
 }

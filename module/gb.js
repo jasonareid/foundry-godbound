@@ -81,8 +81,13 @@ Hooks.once("init", async function () {
         }
     });
 
+    Handlebars.registerHelper("unlesseq", function(arg1, arg2, options) {
+        if (arg1 !== arg2) {
+            return options.fn(this);
+        }
+    });
+
     Handlebars.registerHelper("ifcombatpower", function(actorId, itemId, options) {
-        console.log("ifcombatpower", actorId, itemId);
         let actor = game.actors.get(actorId);
         if(actor) {
             let item = actor.getOwnedItem(itemId);

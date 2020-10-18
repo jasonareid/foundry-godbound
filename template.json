@@ -89,12 +89,9 @@
         "current": 0,
         "max": 0
       },
-      "actions": 1,
-      "attacks": 1,
-      "range": "",
-      "area": "",
+      "numActions": 1,
+      "numAttacks": 1,
       "toHitBonus": 0,
-      "damage": "",
       "effort": {
         "total": 0,
         "atWill": 0,

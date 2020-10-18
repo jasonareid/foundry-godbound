@@ -242,5 +242,16 @@ export class GodboundActorSheet extends ActorSheet {
         }
       });
     })
+
+    html.find('#hpdmg').click(async ev => {
+      let adjStr = html.find('#hpadjust').val();
+      let adj = parseInt(adjStr);
+      if(String(adj) !== adjStr || adj < -1) {
+        ui.notifications.error("HP Adjustment Value must be a positive number");
+        return;
+      }
+      html.find('#hpadjust').val('0');
+      await this.actor.applyDamage(adj);
+    });
   }
 }

@@ -441,7 +441,7 @@
                         </div>
                     </div>
 
-                    <div class="container col">
+                    <div class="container col" style="margin-top:32px;">
                         <h2 style="display:flex;justify-content: space-between;">
                             <span>Auto Attacks</span>
                             <i class="fas fa-plus itemAdder" data-item-type="autoHitAttack"></i>
@@ -469,6 +469,24 @@
                             {{/ifeq}}
                             {{/each}}
                         </ol>
+                    </div>
+
+                    <div class="container col" style="margin-top:32px;">
+                        <h2 style="display:flex;justify-content: space-between;">
+                            <span>HP</span>
+                        </h2>
+                        <div style="display:flex;justify-content: space-between">
+                            <h3>
+                                HP: {{actor.data.hp.current}}
+                                {{#unlesseq actor.data.hp.bonus 0}}
+                                ({{actor.data.hp.bonus}})
+                                {{/unlesseq}}
+                            </h3>
+                            <div>
+                                <input class="compact" id="hpadjust" />
+                                <input type="button" class="compact" id="hpdmg" value="Damage" />
+                            </div>
+                        </div>
                     </div>
                 </div>
 
