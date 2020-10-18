@@ -1,3 +1,4 @@
+* Show smite in power chat
 * Move or copy HP to combat
 * Show magic weapons in attack chats
 * Color successful & failed checks & saves
