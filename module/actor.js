@@ -55,8 +55,6 @@ export class GodboundActor extends Actor {
                     combatPower: true,
                 }
             });
-        } else if (gbActor.data.type === 'npc') {
-
         }
     }
 
@@ -234,6 +232,7 @@ export class GodboundActor extends Actor {
                 data.effort.day
             )
         ;
+        data.computed.effort.spent = data.effort.total - data.computed.effort.available;
     }
 
     _extractBonus(roll) {
@@ -482,5 +481,14 @@ export class GodboundActor extends Actor {
             hpUpdate.current = current - amount;
         }
         await this.update({data: {hp: hpUpdate}});
+    }
+
+    async applyHDDamage(amount) {
+        let hdUpdate = {};
+        let current = this.data.data.hd.current;
+        if(amount > 0) {
+            hdUpdate.current = current - amount;
+        }
+        await this.update({data: {hd: hdUpdate}});
     }
 }

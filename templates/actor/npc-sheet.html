@@ -1,14 +1,11 @@
-<form class="{{cssClass}}" autocomplete="off">
+<form class="{{cssClass}}" autocomplete="off" style="overflow-y:scroll;">
 
     {{!-- Sheet Tab Navigation --}}
     <nav class="sheet-tabs tabs" data-group="primary">
         <a class="item" data-tab="attrs">Attrs</a>
         <a class="item" data-tab="divine">Divine</a>
         <a class="item" data-tab="combat">Combat</a>
-        <a class="item" data-tab="wealth">Wealth</a>
-        <a class="item" data-tab="artifacts">Artifacts</a>
-        <a class="item" data-tab="projects">Projects</a>
-        <a class="item" data-tab="notes" style="flex-grow:2">Facts & Notes</a>
+        <a class="item" data-tab="notes">Notes</a>
     </nav>
 
     {{!-- Sheet Body --}}
@@ -26,148 +23,39 @@
                             <label for="description">Description:</label> <textarea id="description" name="data.description">{{data.description}}</textarea>
                         </div>
                         <div>
-                            <label for="languages">Languages:</label> <input id="languages" name="data.languages" type="text" value="{{data.languages}}"/>
-                        </div>
-                        <div>
                             <label for="goal">Goals:</label> <textarea id="goal" name="data.goal">{{data.goal}}</textarea>
                         </div>
                         <div>
-                            <label for="level">Level:</label>
-                            <div>
-                                <input id="level" name="data.level" type="text" value="{{data.level}}" class="shares"/>
-                                <label for="xp" style="padding-left:16px">XP:</label>
-                                <input id="xp" name="data.xp" type="text" value="{{data.xp}}" class="shares"/>
-                            </div>
+                            <label for="hdCurrent">HD:</label>
+                            <input id="hdCurrent" type="text" name="data.hd.current" value="{{data.hd.current}}" data-dtype="Number" />
                         </div>
                         <div>
-
+                            <label for="hdMax">Max:</label>
+                            <input id="hdMax" type="text" name="data.hd.max" value="{{data.hd.max}}" data-dtype="Number" />
+                        </div>
+                        <div>
+                            <label for="save">Save:</label>
+                            <input id="save" type="text" name="data.save" value="{{data.save}}" data-dtype="Number" />
+                        </div>
+                        <div>
+                            <label for="morale">Morale:</label>
+                            <input id="morale" type="text" name="data.morale" value="{{data.morale}}" data-dtype="Number" />
+                        </div>
+                        <div>
+                            <label for="ac">AC:</label>
+                            <input id="ac" type="text" name="data.ac" value="{{data.ac}}" data-dtype="Number" />
+                        </div>
+                        <div>
+                            <label for="numActions">Actns:</label>
+                            <input id="numActions" type="text" name="data.numActions" value="{{data.numActions}}" data-dtype="Number" />
+                        </div>
+                        <div>
+                            <label for="numAttacks">Attks:</label>
+                            <input id="numAttacks" type="text" name="data.numAttacks" value="{{data.numAttacks}}" data-dtype="Number" />
                         </div>
                     </div>
                     <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100"
                          width="100"/>
-                </div>
-
-                <div class="container row">
-                    <div class="container col">
-                        <div>
-                            <h3>Attributes</h3>
-                            <table class="headered">
-                                <thead>
-                                <tr>
-                                    <td></td>
-                                    <td>Score</td>
-                                    <td>Mod</td>
-                                    <td>Check</td>
-                                    <td>Roll</td>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>Str</td>
-                                    <td><input type="text" name="data.attributes.str.score" value="{{data.attributes.str.score}}" data-dtype="Number" /></td>
-                                    <td>{{data.computed.attributes.str.mod}}</td>
-                                    <td>{{data.computed.attributes.str.check}}</td>
-                                    <td><i class="fas fa-dice-d20"></i></td>
-                                </tr>
-                                <tr>
-                                    <td>Dex</td>
-                                    <td><input type="text" name="data.attributes.dex.score" value="{{data.attributes.dex.score}}" data-dtype="Number" /></td>
-                                    <td>{{data.computed.attributes.dex.mod}}</td>
-                                    <td>{{data.computed.attributes.dex.check}}</td>
-                                    <td><i class="fas fa-dice-d20"></i></td>
-                                </tr>
-                                <tr>
-                                    <td>Con</td>
-                                    <td><input type="text" name="data.attributes.con.score" value="{{data.attributes.con.score}}" data-dtype="Number" /></td>
-                                    <td>{{data.computed.attributes.con.mod}}</td>
-                                    <td>{{data.computed.attributes.con.check}}</td>
-                                    <td><i class="fas fa-dice-d20"></i></td>
-                                </tr>
-                                <tr>
-                                    <td>Int</td>
-                                    <td><input type="text" name="data.attributes.int.score" value="{{data.attributes.int.score}}" data-dtype="Number" /></td>
-                                    <td>{{data.computed.attributes.int.mod}}</td>
-                                    <td>{{data.computed.attributes.int.check}}</td>
-                                    <td><i class="fas fa-dice-d20"></i></td>
-                                </tr>
-                                <tr>
-                                    <td>Wis</td>
-                                    <td><input type="text" name="data.attributes.wis.score" value="{{data.attributes.wis.score}}" data-dtype="Number" /></td>
-                                    <td>{{data.computed.attributes.wis.mod}}</td>
-                                    <td>{{data.computed.attributes.wis.check}}</td>
-                                    <td><i class="fas fa-dice-d20"></i></td>
-                                </tr>
-                                <tr>
-                                    <td>Cha</td>
-                                    <td><input type="text" name="data.attributes.cha.score" value="{{data.attributes.cha.score}}" data-dtype="Number" /></td>
-                                    <td>{{data.computed.attributes.cha.mod}}</td>
-                                    <td>{{data.computed.attributes.cha.check}}</td>
-                                    <td><i class="fas fa-dice-d20"></i></td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="container col">
-                        <div>
-                            <h3>Saving Throws</h3>
-                            <table class="headered">
-                                <thead>
-                                <tr>
-                                    <td></td>
-                                    <td>Base</td>
-                                    <td>Bonus</td>
-                                    <td>Penalty</td>
-                                    <td>Roll</td>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>Hardiness</td>
-                                    <td>{{data.computed.saves.hardiness.base}}</td>
-                                    <td><input type="text" name="data.saves.hardiness.bonus" value="{{data.saves.hardiness.bonus}}" data-dtype="Number" /></td>
-                                    <td>{{data.computed.saves.hardiness.penalty}}</td>
-                                    <td><i class="fas fa-dice-d20"></i></td>
-                                </tr>
-                                <tr>
-                                    <td>Evasion</td>
-                                    <td>{{data.computed.saves.evasion.base}}</td>
-                                    <td><input type="text" name="data.saves.evasion.bonus" value="{{data.saves.evasion.bonus}}" data-dtype="Number" /></td>
-                                    <td>{{data.computed.saves.evasion.penalty}}</td>
-                                    <td><i class="fas fa-dice-d20"></i></td>
-                                </tr>
-                                <tr>
-                                    <td>Spirit</td>
-                                    <td>{{data.computed.saves.spirit.base}}</td>
-                                    <td><input type="text" name="data.saves.spirit.bonus" value="{{data.saves.spirit.bonus}}" data-dtype="Number" /></td>
-                                    <td>{{data.computed.saves.spirit.penalty}}</td>
-                                    <td><i class="fas fa-dice-d20"></i></td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div>
-                            <h3>Defense</h3>
-                            <table>
-                                <tbody>
-                                <tr>
-                                    <td style="width:30%">Current HP</td>
-                                    <td style="width:20%"><input type="text" name="data.hp.current" value="{{data.hp.current}}" data-dtype="Number" /></td>
-                                    <td style="width:10%">AC</td>
-                                    <td>{{data.computed.armor.ac}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Bonus HP</td>
-                                    <td colspan="3"><input type="text" name="data.hp.bonus" value="{{data.hp.bonus}}" data-dtype="Number" /></td>
-                                </tr>
-                                <tr>
-                                    <td>Max HP</td>
-                                    <td colspan="3" style="padding-left: 4px;">{{data.computed.hp.max}}</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
                 </div>
             </div>
 
@@ -178,36 +66,21 @@
                 <h2>Resources</h2>
                 <table class="headered">
                     <thead>
-                        <tr>
-                            <td></td>
-                            <td>Total</td>
-                            <td>Committed</td>
-                            <td>Free</td>
-                            <td>Income</td>
-                        </tr>
+                    <tr>
+                        <td></td>
+                        <td>Total</td>
+                        <td>Committed</td>
+                        <td>Free</td>
+                    </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Effort</td>
-                            <td><input type="text" data-dtype="Number" name="data.effort.total" value="{{data.effort.total}}" /></td>
-                            <td>{{data.computed.effort.spent}}</td>
-                            <td>{{data.computed.effort.available}}</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>Influence</td>
-                            <td><input type="text" data-dtype="Number" name="data.influence.total" value="{{data.influence.total}}" /></td>
-                            <td><input type="text" data-dtype="Number" name="data.influence.spent" value="{{data.influence.spent}}" /></td>
-                            <td>{{data.computed.influence.available}}</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>Dominion</td>
-                            <td><input type="text" data-dtype="Number" name="data.dominion.total" value="{{data.dominion.total}}" /></td>
-                            <td><input type="text" data-dtype="Number" name="data.dominion.spent" value="{{data.dominion.spent}}" /></td>
-                            <td>{{data.computed.dominion.available}}</td>
-                            <td><input type="text" data-dtype="Number" name="data.dominion.income" value="{{data.dominion.income}}" /></td>
-                        </tr>
+                    <tr>
+                        <td>Effort</td>
+                        <td><input type="text" data-dtype="Number" name="data.effort.total" value="{{data.effort.total}}" /></td>
+                        <td>{{data.computed.effort.spent}}</td>
+                        <td>{{data.computed.effort.available}}</td>
+                        <td></td>
+                    </tr>
                     </tbody>
                 </table>
                 <div class="container row" style="margin-left: auto; margin-right: auto;font-size: 16px;">
@@ -260,9 +133,25 @@
                             {{#each actor.items as |item id|}}
                             {{#ifeq item.type "divineMiracle"}}
                             <li class="item flexrow" data-item-id="{{item._id}}">
-                                <h4 class="item-name">{{item.name}}</h4>
+                                <h4 class="item-name">
+                                    {{item.name}}
+                                    <span class="item-tags">
+                                    {{#if item.data.instant}}
+                                        <a title="Instant"><i class="fas fa-bolt"></i></a>
+                                    {{/if}}
+                                    {{#if item.data.onTurn}}
+                                        <a title="On Turn"><i class="fas fa-redo-alt"></i></a>
+                                    {{/if}}
+                                    {{#if item.data.action}}
+                                        <a title="Action"><i class="fas fa-hourglass-end"></i></a>
+                                    {{/if}}
+                                    {{#if item.data.smite}}
+                                        <a title="Smite"><i class="fas fa-meteor"></i></a>
+                                    {{/if}}
+                                    </span>
+                                </h4>
                                 <div class="item-controls">
-                                    <a class="item-control item-chat" title="Chat Effect"><i class="fas fa-comment"></i></a>
+                                    <a class="item-control item-day-effort" title="Commit Effort for Day"><i class="fas fa-sun"></i></a>
                                 </div>
                             </li>
                             {{/ifeq}}
@@ -279,9 +168,44 @@
                         {{#each actor.items as |item id|}}
                         {{#ifeq item.type "divineGift"}}
                         <li class="item flexrow" data-item-id="{{item._id}}">
-                            <h4 class="item-name">{{item.name}}</h4>
+                            <h4 class="item-name">
+                                {{#if item.data.greater}}
+                                <span style="font-style: italic">{{item.name}}</span>
+                                {{/if}}
+                                {{#unless item.data.greater}}
+                                {{item.name}}
+                                {{/unless}}
+                                <span class="item-tags">
+                                {{#if item.data.instant}}
+                                    <a title="Instant"><i class="fas fa-bolt"></i></a>
+                                {{/if}}
+                                {{#if item.data.onTurn}}
+                                    <a title="On Turn"><i class="fas fa-redo-alt"></i></a>
+                                {{/if}}
+                                {{#if item.data.action}}
+                                    <a title="Action"><i class="fas fa-hourglass-end"></i></a>
+                                {{/if}}
+                                {{#if item.data.smite}}
+                                    <a title="Smite"><i class="fas fa-meteor"></i></a>
+                                {{/if}}
+                                </span>
+                            </h4>
                             <div class="item-controls">
-                                <a class="item-control item-chat" title="Chat Effect"><i class="fas fa-comment"></i></a>
+                                {{#if item.data.constant}}
+                                <a class="item-control item-chat" title="Constant Effect"><i class="fas fa-infinity"></i></a>
+                                {{/if}}
+                                {{#if item.data.noEffort}}
+                                <a class="item-control item-chat" title="Effortless Effect"><i class="far fa-play-circle"></i></a>
+                                {{/if}}
+                                {{#if item.data.atWill}}
+                                <a class="item-control item-atWill-effort" title="Commit Effort At Will"><i class="fas fa-power-off"></i></a>
+                                {{/if}}
+                                {{#if item.data.scene}}
+                                <a class="item-control item-scene-effort" title="Commit Effort for Scene"><i class="fas fa-clock"></i></a>
+                                {{/if}}
+                                {{#if item.data.day}}
+                                <a class="item-control item-day-effort" title="Commit Effort for Day"><i class="fas fa-sun"></i></a>
+                                {{/if}}
                             </div>
                         </li>
                         {{/ifeq}}
@@ -295,29 +219,170 @@
             <div class="container col">
                 <div>
                     <h3>Facts:</h3>
-                    {{editor content=data.facts target="data.facts" button=true owner=owner editable=editable}}
+                    <textarea name="data.facts" style="height:128px;font-size:14px">{{data.facts}}</textarea>
                 </div>
                 <div>
                     <h3>Notes:</h3>
-                    {{editor content=data.notes target="data.notes" button=true owner=owner editable=editable}}
+                    <textarea name="data.notes" style="height:128px;font-size:14px">{{data.notes}}</textarea>
                 </div>
             </div>
         </div>
 
-        {{!-- Owned Items Tab --}}
-        <div class="tab items" data-group="primary" data-tab="items">
-            <ol class="item-list">
-                {{#each actor.items as |item id|}}
-                <li class="item flexrow" data-item-id="{{item._id}}">
-                    <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
-                    <h4 class="item-name">{{item.name}}</h4>
-                    <div class="item-controls">
-                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+        <div class="tab combat" data-group="primary" data-tab="combat">
+            <div class="container col">
+                <h2>
+                    Armor AC {{data.ac}}
+                </h2>
+            </div>
+            <div class="container row" style="margin-top:32px;">
+                <div class="container col" style="width:50%;">
+                    <div class="container col">
+                        <h2 style="display:flex;justify-content: space-between;">
+                            <span>Attacks</span>
+                            <i class="fas fa-plus itemAdder" data-item-type="attack"></i>
+                        </h2>
+                        <ol class="item-list">
+                            {{#each actor.items as |item id|}}
+                            {{#ifeq item.type "attack"}}
+                            <li class="item flexrow" data-item-id="{{item._id}}">
+                                <h4 class="item-name">
+                                    {{#if item.data.magic}}
+                                    {{item.name}}*
+                                    {{/if}}
+                                    {{#unless item.data.magic}}
+                                    {{item.name}}
+                                    {{/unless}}
+                                    <span class="item-tags">
+                                    {{#ifneq item.data.hitBonus 0}}
+                                        +{{item.data.hitBonus}}
+                                    {{/ifneq}}
+                                    {{#ifneq item.data.damageBonus 0}}
+                                        {{item.data.damageRoll}}+{{item.data.damageBonus}}
+                                    {{/ifneq}}
+                                    {{#ifeq item.data.damageBonus 0}}
+                                        {{item.data.damageRoll}}
+                                    {{/ifeq}}
+                                    </span>
+                                </h4>
+                                <div class="item-controls">
+                                    <a class="attack-roll" title="Roll"><i class="fas fa-dice-d20"></i></a>
+                                </div>
+                            </li>
+                            {{/ifeq}}
+                            {{/each}}
+                        </ol>
+                        <div>
+                            <label for="toHitBonus">To Hit Bonus:</label>
+                            <input id="toHitBonus" name="data.toHitBonus" value="{{data.toHitBonus}}" type="text" data-dtype="Number" class="compact" style="margin-left:8px;" />
+                        </div>
                     </div>
-                </li>
-                {{/each}}
-            </ol>
+
+                    <div class="container col" style="margin-top:32px;">
+                        <h2 style="display:flex;justify-content: space-between;">
+                            <span>Auto Attacks</span>
+                            <i class="fas fa-plus itemAdder" data-item-type="autoHitAttack"></i>
+                        </h2>
+                        <ol class="item-list">
+                            {{#each actor.items as |item id|}}
+                            {{#ifeq item.type "autoHitAttack"}}
+                            <li class="item flexrow" data-item-id="{{item._id}}">
+                                <h4 class="item-name">
+                                    {{item.name}}
+                                    <span class="item-tags">
+                                    {{#ifneq item.data.damageBonus 0}}
+                                        {{item.data.damageRoll}}+{{item.data.damageBonus}}
+                                    {{/ifneq}}
+
+                                    {{#ifeq item.data.damageBonus 0}}
+                                        {{item.data.damageRoll}}
+                                    {{/ifeq}}
+                                    </span>
+                                </h4>
+                                <div class="item-controls">
+                                    <a class="autoattack-roll" title="Roll"><i class="fas fa-dice-d20"></i></a>
+                                </div>
+                            </li>
+                            {{/ifeq}}
+                            {{/each}}
+                        </ol>
+                    </div>
+
+                    <div class="container col" style="margin-top:32px;">
+                        <h2 style="display:flex;justify-content: space-between;">
+                            <span>HD</span>
+                        </h2>
+                        <div style="display:flex;justify-content: space-between">
+                            <h3>
+                                HD: {{actor.data.hd.current}}
+                            </h3>
+                            <div>
+                                <input class="compact" id="hdadjust" />
+                                <input type="button" class="compact" id="hddmg" value="Damage" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container col" style="width:50%;">
+                    <h2 style="display:flex;justify-content: space-between;">
+                        <span>Combat Powers</span>
+                    </h2>
+                    <ol class="item-list">
+                        {{#each actor.items as |item id|}}
+                        {{#ifcombatpower ../actor._id item._id}}
+                        <li class="item flexrow" data-item-id="{{item._id}}">
+                            <h4 class="item-name">
+                                {{#if item.data.greater}}
+                                <span style="font-style: italic">{{item.name}}</span>
+                                {{/if}}
+                                {{#unless item.data.greater}}
+                                {{item.name}}
+                                {{/unless}}
+                                <span class="item-tags">
+                                {{#if item.data.instant}}
+                                    <a title="Instant"><i class="fas fa-bolt"></i></a>
+                                {{/if}}
+                                {{#if item.data.onTurn}}
+                                    <a title="On Turn"><i class="fas fa-redo-alt"></i></a>
+                                {{/if}}
+                                {{#if item.data.action}}
+                                    <a title="Action"><i class="fas fa-hourglass-end"></i></a>
+                                {{/if}}
+                                {{#if item.data.smite}}
+                                    <a title="Smite"><i class="fas fa-meteor"></i></a>
+                                {{/if}}
+                                </span>
+                            </h4>
+                            <div class="item-controls">
+                                {{#ifeq item.type "divineMiracle"}}
+                                <a class="item-control item-day-effort" title="Commit Effort for Day"><i class="fas fa-sun"></i></a>
+                                {{/ifeq}}
+                                {{#if (or (eq item.type "divineGift") (eq item.type "artifactPower"))}}
+                                {{#if item.data.constant}}
+                                <a class="item-control item-chat" title="Constant Effect"><i class="fas fa-infinity"></i></a>
+                                {{/if}}
+                                {{#if item.data.noEffort}}
+                                <a class="item-control item-chat" title="Effortless Effect"><i class="far fa-play-circle"></i></a>
+                                {{/if}}
+                                {{#if item.data.atWill}}
+                                <a class="item-control item-atWill-effort" title="Commit Effort At Will"><i class="fas fa-power-off"></i></a>
+                                {{/if}}
+                                {{#if item.data.scene}}
+                                <a class="item-control item-scene-effort" title="Commit Effort for Scene"><i class="fas fa-clock"></i></a>
+                                {{/if}}
+                                {{#if item.data.day}}
+                                <a class="item-control item-day-effort" title="Commit Effort for Day"><i class="fas fa-sun"></i></a>
+                                {{/if}}
+                                {{/if}}
+                            </div>
+                        </li>
+                        {{/ifcombatpower}}
+                        {{/each}}
+                    </ol>
+                    <h3>Free Effort: {{data.computed.effort.available}}</h3>
+                </div>
+
+            </div>
         </div>
     </section>
 </form>

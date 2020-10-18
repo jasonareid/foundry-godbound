@@ -253,5 +253,16 @@ export class GodboundActorSheet extends ActorSheet {
       html.find('#hpadjust').val('0');
       await this.actor.applyDamage(adj);
     });
+
+    html.find('#hddmg').click(async ev => {
+      let adjStr = html.find('#hdadjust').val();
+      let adj = parseInt(adjStr);
+      if(String(adj) !== adjStr || adj < -1) {
+        ui.notifications.error("HD Adjustment Value must be a positive number");
+        return;
+      }
+      html.find('#hdadjust').val('0');
+      await this.actor.applyHDDamage(adj);
+    });
   }
 }
