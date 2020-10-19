@@ -164,6 +164,7 @@
       "onTurn": false,
       "action": false,
       "smite": false,
+      "noEffort": false,
       "atWill": false,
       "scene": false,
       "day": false,
@@ -179,6 +180,7 @@
       "instant": false,
       "onTurn": false,
       "action": false,
+      "day": true,
       "combatPower": false
     },
     "project": {

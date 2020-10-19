@@ -275,6 +275,56 @@ export class GodboundActor extends Actor {
         return runningTotal;
     }
 
+    async rollAttack(item) {
+        let template = 'systems/godbound/templates/chat/attack-roll-result.html';
+        let chatData = {
+            user: game.user._id,
+            speaker: this,
+        };
+        let attrBonus = this.data.data.computed.attributes[item.data.data.attr].mod;
+        let totalBonus = attrBonus+item.data.data.damageBonus;
+        let totalBonusStr = '';
+        if(totalBonus > 0) {
+            totalBonusStr = `+${totalBonus}`;
+        } else if(totalBonus < 0) {
+            totalBonusStr = `${totalBonus};`
+        }
+        let templateData = {
+            title: `Attack`,
+            damage: `${item.data.data.damageRoll}${totalBonusStr}`,
+            damageSource: item.id,
+            data: {},
+        };
+        let roll = new Roll('1d20 + @attrBonus + @toHitBonus + @itemBonus', {
+            attrBonus: attrBonus,
+            toHitBonus: this.data.data.toHitBonus,
+            itemBonus: item.data.data.hitBonus
+        });
+        roll.roll();
+        templateData.roll = await roll.render();
+        templateData.result = {
+            total: roll.total,
+        };
+        templateData.data.actor = this;
+        templateData.data.item = item;
+        chatData.content = await renderTemplate(template, templateData);
+        chatData.roll = roll;
+        chatData.isRoll = true;
+        if (game.dice3d) {
+            await game.dice3d.showForRoll(
+                roll,
+                game.user,
+                true,
+                chatData.whisper,
+                chatData.blind
+            );
+            ChatMessage.create(chatData);
+        } else {
+            chatData.sound = CONFIG.sounds.dice;
+            ChatMessage.create(chatData);
+        }
+    }
+
     async rollDamage(source, formula) {
         if(!formula) {
             formula = source.data.data.computed.damageFormula;
@@ -329,6 +379,13 @@ export class GodboundActor extends Actor {
         templateData.data.item = item;
         if(effortCommitment) {
             templateData.data.effort = {[effortCommitment]: true};
+        }
+        if(!effortCommitment) {
+            templateData.data.actions = {};
+            if(item.data.data.day) templateData.data.actions.day = true;
+            if(item.data.data.scene) templateData.data.actions.scene = true;
+            if(item.data.data.atWill) templateData.data.actions.atWill = true;
+            if(item.data.data.day) templateData.data.actions.day = true;
         }
         templateData.data.description = this.replaceItemDescriptionMacros(item);
         chatData.content = await renderTemplate(template, templateData);

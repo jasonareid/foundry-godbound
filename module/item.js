@@ -73,4 +73,21 @@ export class GodboundItem extends Item {
             return false;
         }
     }
+
+    getCommitmentOptions() {
+        let options = [];
+        if(this.data.data.noEffort) {
+            options.push({id: 'noEffort', name: 'No Effort', actorFnRef: 'demonstratePower', iClass: 'far fa-play-circle'});
+        }
+        if(this.data.data.atWill) {
+            options.push({id: 'atWill', name: 'At Will', actorFnRef: 'commitEffortAtWill', iClass: 'fas fa-power-off'});
+        }
+        if(this.data.data.scene) {
+            options.push({id: 'scene', name: 'Scene', actorFnRef: 'commitEffortForScene', iClass: 'fas fa-clock'});
+        }
+        if(this.data.data.day) {
+            options.push({id: 'day', name: 'Day', actorFnRef: 'commitEffortForDay', iClass: 'fas fa-sun'});
+        }
+        return options;
+    }
 }

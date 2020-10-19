@@ -144,56 +144,13 @@ export class GodboundActorSheet extends ActorSheet {
     html.find('.attack-roll').click(async ev => {
       const li = $(ev.currentTarget).parents('.item');
       const item = this.actor.getOwnedItem(li.data("itemId"));
-      let template = 'systems/godbound/templates/chat/attack-roll-result.html';
-      let chatData = {
-        user: game.user._id,
-        speaker: this.actor,
-      };
-      let attrBonus = this.actor.data.data.computed.attributes[item.data.data.attr].mod;
-      let templateData = {
-        title: `Attack`,
-        damage: `${item.data.data.damageRoll}+${attrBonus+item.data.data.damageBonus}`,
-        damageSource: item.id,
-        data: {},
-      };
-      let roll = new Roll('1d20 + @attrBonus + @toHitBonus + @itemBonus', {
-        attrBonus: attrBonus,
-        toHitBonus: this.actor.data.data.toHitBonus,
-        itemBonus: item.data.data.hitBonus
-      });
-      roll.roll();
-      templateData.roll = await roll.render();
-      templateData.result = {
-        total: roll.total,
-      };
-      templateData.data.actor = this.actor;
-      templateData.data.item = item;
-      chatData.content = await renderTemplate(template, templateData);
-      chatData.roll = roll;
-      chatData.isRoll = true;
-      if (game.dice3d) {
-        await game.dice3d.showForRoll(
-            roll,
-            game.user,
-            true,
-            chatData.whisper,
-            chatData.blind
-        );
-        ChatMessage.create(chatData);
-      } else {
-        chatData.sound = CONFIG.sounds.dice;
-        ChatMessage.create(chatData);
-      }
+      this.actor.rollAttack(item);
     });
 
     html.find('.autoattack-roll').click(ev => {
       const li = $(ev.currentTarget).parents('.item');
       const item = this.actor.getOwnedItem(li.data("itemId"));
-      if(item.data.data.damageBonus < 0) {
-        this.actor.rollDamage(item)
-      } else {
-        this.actor.rollDamage(item);
-      }
+      this.actor.rollDamage(item)
     });
 
     html.find('.save-roll').click(ev => {

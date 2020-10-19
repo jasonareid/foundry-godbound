@@ -2,7 +2,7 @@ import {SafeNum} from "./misc.js";
 
 export class PlayerRollDialog extends Dialog {
     static async create(actor, opts, onComplete) {
-        let dialogContent = 'systems/godbound/templates/rolls/player-roll-dialog-content.html';
+        let dialogContent = 'systems/godbound/templates/dialogues/player-roll-dialog-content.html';
 
         let template = await renderTemplate(dialogContent,
             Object.assign({}, opts)
