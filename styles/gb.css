@@ -264,6 +264,9 @@
   cursor: pointer;
   color: darkred;
 }
+.godbound.chat-block .power-description {
+  font-family: serif;
+}
 .godbound.sheet.actor {
   min-width: 560px;
   min-height: 420px;
