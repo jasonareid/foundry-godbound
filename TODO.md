@@ -2,6 +2,9 @@
 * NPC Saves
 * Clean up NPC interface
 * Add undo link to power usages
+* Other Miracle Button
+  * Compendium Powers linked to above
+* Open Word documents from character sheet
 * SSL server
 * Add Search Anywhere
 * Look at RunAsGM in Furnace for macros
