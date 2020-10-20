@@ -81,7 +81,7 @@
     "npc": {
       "description": "",
       "goal": "",
-      "move": 30,
+      "move": "30' run",
       "save": 15,
       "morale": 9,
       "ac": 10,
