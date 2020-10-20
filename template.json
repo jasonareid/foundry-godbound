@@ -98,7 +98,8 @@
         "scene": 0,
         "day": 0
       },
-      "notes": ""
+      "notes": "",
+      "cardinality": "Individual"
     }
   },
   "Item": {

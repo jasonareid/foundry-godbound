@@ -53,6 +53,17 @@
                             <label for="numAttacks">Attks:</label>
                             <input id="numAttacks" type="text" name="data.numAttacks" value="{{data.numAttacks}}" data-dtype="Number" />
                         </div>
+                        <div>
+                            <label for="cardinality">Cardinality:</label>
+                            <select id="cardinality" name="data.cardinality">
+                                {{#select data.cardinality}}
+                                    <option value="Individual">Individual</option>
+                                    <option value="SmallMob">Small Mob</option>
+                                    <option value="LargeMob">Large Mob</option>
+                                    <option value="VastMob">Vast Mob</option>
+                                {{/select}}
+                            </select>
+                        </div>
                     </div>
                     <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100"
                          width="100"/>
