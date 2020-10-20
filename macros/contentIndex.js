@@ -570,6 +570,7 @@ const pdfDirectory = [
 const toolsDirectory = [
     {name: "Online Tools", directory: [
             ["Fantasy Name Generator", "https://www.fantasynamegenerators.com/"],
+            ["Game Icons", "https://www.game-icons.net/"],
             ["Kassoon Town Generator+", "https://www.kassoon.com/dnd/town-generator/"],
             ["Chaotic Shiny", "http://chaoticshiny.com/index.php"],
         ]},
