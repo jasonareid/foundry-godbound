@@ -1,4 +1,3 @@
-* NPC Attacks (attributes)
 * NPC Saves
 * Clean up NPC interface
 * Add undo link to power usages

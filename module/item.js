@@ -25,7 +25,7 @@ export class GodboundItem extends Item {
             } else if (this.data.data.damageBonus < 0) {
                 this.data.data.computed.damageFormula = `${this.data.data.damageRoll}${this.data.data.damageBonus}`;
             } else {
-                this.data.computed.damageFormula = `${this.data.data.damageRoll}+${this.data.data.damageBonus}`;
+                this.data.data.computed.damageFormula = `${this.data.data.damageRoll}+${this.data.data.damageBonus}`;
             }
         }
     }

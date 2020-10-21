@@ -238,8 +238,8 @@ export class GodboundActor extends Actor {
     _extractBonus(roll) {
         let runningTotal = 0;
         for(let i = 0; i < roll.dice.length; i++) {
-            for(let j = 0; j < roll.dice[i].rolls.length; j++) {
-                runningTotal += roll.dice[i].rolls[j].roll;
+            for(let j = 0; j < roll.dice[i].results.length; j++) {
+                runningTotal += roll.dice[i].results[j].result;
             }
         }
         return roll.total - runningTotal;
@@ -248,8 +248,8 @@ export class GodboundActor extends Actor {
     _sortedDiceResults(roll) {
         let results = [];
         for(let i = 0; i < roll.dice.length; i++) {
-            for(let j = 0; j < roll.dice[i].rolls.length; j++) {
-                results.push(roll.dice[i].rolls[j].roll);
+            for(let j = 0; j < roll.dice[i].results.length; j++) {
+                results.push(roll.dice[i].results[j].result);
             }
         }
         results.sort().reverse();
@@ -257,8 +257,11 @@ export class GodboundActor extends Actor {
     }
 
     _toNormalDamage(roll) {
+        console.log(roll);
         let bonus = this._extractBonus(roll);
+        console.log("bonus", bonus);
         let results = this._sortedDiceResults(roll);
+        console.log("results", results);
         results[0] = results[0] + bonus;
         let runningTotal = 0;
         for(let i = 0; i < results.length; i++) {
