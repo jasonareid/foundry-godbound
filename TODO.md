@@ -1,7 +1,6 @@
-* Remove deselection module
-* Add undo link to power usages
+* Open Word documents from character sheet
 * Other Miracle Button
   * Compendium Powers linked to above
-* Open Word documents from character sheet
+* Add undo link to power usages
 * SSL server
 * Look at RunAsGM in Furnace for macros
