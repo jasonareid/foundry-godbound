@@ -233,6 +233,15 @@ export class GodboundActor extends Actor {
             )
         ;
         data.computed.effort.spent = data.effort.total - data.computed.effort.available;
+
+        if(data.numActions > data.numAttacks) {
+            data.computed.extraActions = data.numActions - data.numAttacks;
+        }
+
+        data.computed.saves = {};
+        data.computed.saves.npc = {
+            save: data.save
+        };
     }
 
     _extractBonus(roll) {
@@ -353,6 +362,48 @@ export class GodboundActor extends Actor {
         };
         templateData.data.actor = this;
         templateData.data.item = source;
+        chatData.content = await renderTemplate(template, templateData);
+        chatData.roll = roll;
+        chatData.isRoll = true;
+        if (game.dice3d) {
+            await game.dice3d.showForRoll(
+                roll,
+                game.user,
+                true,
+                chatData.whisper,
+                chatData.blind
+            );
+            ChatMessage.create(chatData);
+        } else {
+            chatData.sound = CONFIG.sounds.dice;
+            ChatMessage.create(chatData);
+        }
+    }
+
+    async rollMorale() {
+        let template = 'systems/godbound/templates/chat/morale-roll-result.html';
+        let chatData = {
+            user: game.user._id,
+            speaker: this,
+        };
+        let templateData = {
+            title: `Morale`,
+            data: {},
+        };
+        let formula = '2d6';
+        let roll = new Roll(formula);
+        roll.roll();
+        let target = this.data.data.morale;
+        let result = {
+            isSuccess: roll.total <= target,
+            isFailure: roll.total > target,
+            target: target,
+        }
+        result.className = result.isSuccess ? 'result-msg-success' : 'result-msg-failure';
+        templateData.roll = await roll.render();
+        templateData.result = result;
+        templateData.data.actor = this;
+
         chatData.content = await renderTemplate(template, templateData);
         chatData.roll = roll;
         chatData.isRoll = true;

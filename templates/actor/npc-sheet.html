@@ -253,7 +253,14 @@
                 <div class="container col" style="width:50%;">
                     <div class="container col">
                         <h2 style="display:flex;justify-content: space-between;">
-                            <span>Attacks</span>
+                            <span>Attacks
+                                {{#if (gt data.computed.extraActions 0)}}
+                                    ({{data.numAttacks}} + {{data.computed.extraActions}} actn)
+                                {{/if}}
+                                {{#unless (gt data.computed.extraActions 0)}}
+                                    ({{data.numAttacks}})
+                                {{/unless}}
+                            </span>
                             <i class="fas fa-plus itemAdder" data-item-type="attack"></i>
                         </h2>
                         <ol class="item-list">
@@ -324,7 +331,7 @@
 
                     <div class="container col" style="margin-top:32px;">
                         <h2 style="display:flex;justify-content: space-between;">
-                            <span>HD</span>
+                            <span>Stats</span>
                         </h2>
                         <div style="display:flex;justify-content: space-between">
                             <h3>
@@ -333,6 +340,22 @@
                             <div>
                                 <input class="compact" id="hdadjust" />
                                 <input type="button" class="compact" id="hddmg" value="Damage" />
+                            </div>
+                        </div>
+                        <div style="display:flex;justify-content: space-between;align-items:top">
+                            <h3>
+                                Save: {{actor.data.save}}
+                            </h3>
+                            <div>
+                                <a class="save-roll" title="Roll" data-save="npc"><i class="fas fa-dice-d20"></i></a>
+                            </div>
+                        </div>
+                        <div style="display:flex;justify-content: space-between;align-items:top">
+                            <h3>
+                                Morale: {{actor.data.morale}}
+                            </h3>
+                            <div>
+                                <a class="morale-roll" title="Roll"><i class="fas fa-dice-d20"></i></a>
                             </div>
                         </div>
                     </div>

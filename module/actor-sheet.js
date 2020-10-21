@@ -147,6 +147,10 @@ export class GodboundActorSheet extends ActorSheet {
       this.actor.rollAttack(item);
     });
 
+    html.find('.morale-roll').click(async ev => {
+      this.actor.rollMorale();
+    });
+
     html.find('.autoattack-roll').click(ev => {
       const li = $(ev.currentTarget).parents('.item');
       const item = this.actor.getOwnedItem(li.data("itemId"));
@@ -163,7 +167,7 @@ export class GodboundActorSheet extends ActorSheet {
         };
         let templateData = {
           title: 'Saving Throw',
-          details: `${Capitalize(save)} - ${data.modifier < 1 ? 'Hard' : data.modifier > 1 ? 'Easy' : 'Normal'}`,
+          details: `${Capitalize(save)} - ${data.modifier < 0 ? 'Hard' : data.modifier > 0 ? 'Easy' : 'Normal'}`,
           data: data,
         }
         let roll = new Roll('1d20 + @difficulty', {
