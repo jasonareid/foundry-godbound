@@ -1,5 +1,4 @@
-* NPC Saves
-* Clean up NPC interface
+* Remove deselection module
 * Add undo link to power usages
 * Other Miracle Button
   * Compendium Powers linked to above

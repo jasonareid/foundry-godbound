@@ -99,7 +99,11 @@ export class GodboundActorSheet extends ActorSheet {
         let template = 'systems/godbound/templates/chat/attr-roll-result.html';
         let chatData = {
           user: game.user._id,
-          speaker: this.actor,
+          speaker: this.actor.token ? {
+            token: this.actor
+          } : {
+            actor: this.actor
+          },
         };
         let templateData = {
           title: 'Attribute Check',
@@ -163,7 +167,11 @@ export class GodboundActorSheet extends ActorSheet {
         let template = 'systems/godbound/templates/chat/saving-throw-result.html';
         let chatData = {
           user: game.user._id,
-          speaker: this.actor,
+          speaker: this.actor.token ? {
+            token: this.actor
+          } : {
+            actor: this.actor
+          },
         };
         let templateData = {
           title: 'Saving Throw',

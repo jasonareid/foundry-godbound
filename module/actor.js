@@ -288,15 +288,23 @@ export class GodboundActor extends Actor {
     }
 
     async rollAttack(item) {
+        let tracker = 0;
+        console.log("tracker", tracker, "this.isToken", this.isToken); tracker++;
         let template = 'systems/godbound/templates/chat/attack-roll-result.html';
+        // console.log(this);
         let chatData = {
             user: game.user._id,
-            speaker: this,
+            speaker: this.token ? {
+                token: this
+            } : {
+                actor: this
+            },
         };
         let attrBonus = 0;
         if(this.data.data.computed.attributes) {
             attrBonus = this.data.data.computed.attributes[item.data.data.attr].mod;
         }
+        console.log("tracker", tracker, "this.isToken", this.isToken); tracker++;
         let totalBonus = attrBonus+item.data.data.damageBonus;
         let totalBonusStr = '';
         if(totalBonus > 0) {
@@ -310,6 +318,7 @@ export class GodboundActor extends Actor {
             damageSource: item.id,
             data: {},
         };
+        console.log("tracker", tracker, "this.isToken", this.isToken); tracker++;
         let roll = new Roll('1d20 + @attrBonus + @toHitBonus + @itemBonus', {
             attrBonus: attrBonus,
             toHitBonus: this.data.data.toHitBonus,
@@ -320,12 +329,15 @@ export class GodboundActor extends Actor {
         templateData.result = {
             total: roll.total,
         };
+        console.log("tracker", tracker, "this.isToken", this.isToken); tracker++;
         templateData.data.actor = this;
         templateData.data.item = item;
         chatData.content = await renderTemplate(template, templateData);
         chatData.roll = roll;
         chatData.isRoll = true;
+        console.log("tracker", tracker, "this.isToken", this.isToken); tracker++;
         if (game.dice3d) {
+            console.log("tracker", tracker, "this.isToken", this.isToken); tracker++;
             await game.dice3d.showForRoll(
                 roll,
                 game.user,
@@ -333,10 +345,14 @@ export class GodboundActor extends Actor {
                 chatData.whisper,
                 chatData.blind
             );
-            ChatMessage.create(chatData);
+            console.log("tracker", tracker, "this.isToken", this.isToken); tracker++;
+            await ChatMessage.create(chatData);
+            console.log("tracker", tracker, "this.isToken", this.isToken); tracker++;
         } else {
+            console.log("tracker", tracker, "this.isToken", this.isToken); tracker++;
             chatData.sound = CONFIG.sounds.dice;
-            ChatMessage.create(chatData);
+            await ChatMessage.create(chatData);
+            console.log("tracker", tracker, "this.isToken", this.isToken); tracker++;
         }
     }
 
@@ -347,7 +363,11 @@ export class GodboundActor extends Actor {
         let template = 'systems/godbound/templates/chat/damage-roll-result.html';
         let chatData = {
             user: game.user._id,
-            speaker: this,
+            speaker: this.token ? {
+                token: this
+            } : {
+                actor: this
+            },
         };
         let templateData = {
             title: `Damage`,
@@ -384,7 +404,11 @@ export class GodboundActor extends Actor {
         let template = 'systems/godbound/templates/chat/morale-roll-result.html';
         let chatData = {
             user: game.user._id,
-            speaker: this,
+            speaker: this.token ? {
+                token: this
+            } : {
+                actor: this
+            },
         };
         let templateData = {
             title: `Morale`,
@@ -426,7 +450,11 @@ export class GodboundActor extends Actor {
         let template = 'systems/godbound/templates/chat/power-result.html';
         let chatData = {
             user: game.user._id,
-            speaker: this,
+            speaker: this.token ? {
+                token: this
+            } : {
+                actor: this
+            },
         };
         let templateData = {
             title: TypeNames(item.type),
