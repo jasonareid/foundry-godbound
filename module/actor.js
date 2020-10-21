@@ -281,7 +281,10 @@ export class GodboundActor extends Actor {
             user: game.user._id,
             speaker: this,
         };
-        let attrBonus = this.data.data.computed.attributes[item.data.data.attr].mod;
+        let attrBonus = 0;
+        if(this.data.data.computed.attributes) {
+            attrBonus = this.data.data.computed.attributes[item.data.data.attr].mod;
+        }
         let totalBonus = attrBonus+item.data.data.damageBonus;
         let totalBonusStr = '';
         if(totalBonus > 0) {

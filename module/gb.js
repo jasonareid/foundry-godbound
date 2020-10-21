@@ -161,7 +161,7 @@ async function createGodboundMacro(data, slot) {
     const item = data.data;
 
     //Create the macro command
-    const command = `game.Godbound.executeGodboundItemMacro("${item._id}", "${item.name}");`;
+    const command = `game.Godbound.executeGodboundItemMacro("${item._id}", "${item.name}", "${data.actorId}");`;
     let macro = game.macros.entities.find(m => (m.name === item.name) && (m.command === command));
     if (!macro) {
         macro = await Macro.create({
@@ -175,13 +175,16 @@ async function createGodboundMacro(data, slot) {
     game.user.assignHotbarMacro(macro, slot);
     return false;
 }
-async function executeGodboundItemMacro(itemId, itemName, commitment) {
+async function executeGodboundItemMacro(itemId, itemName, actorId) {
     const speaker = ChatMessage.getSpeaker();
     let actor;
     if (speaker.token) actor = game.actors.tokens[speaker.token];
+    if (!actor) actor = game.actors.get(actorId);
     if (!actor) actor = game.actors.get(speaker.actor);
-    const item = actor ? actor.items.find(i => i._id === itemId) : null;
-    if (!item) return ui.notifications.warn(`Your controlled Actor does not have an item named ${itemName} with id ${itemId}`);
+    let item = actor ? actor.items.find(i => i._id === itemId) : null;
+    if(!item) {
+        return ui.notifications.warn(`Your controlled Actor does not have an item named ${itemName} with id ${itemId}`);
+    }
 
     if(item.type === 'autoHitAttack') {
         actor.rollDamage(item);
@@ -191,9 +194,6 @@ async function executeGodboundItemMacro(itemId, itemName, commitment) {
         actor.commitEffortForDay(item);
     } else if(item.type === 'divineGift' || item.type === 'artifactPower') {
         let options = item.getCommitmentOptions();
-        if(commitment) {
-            options = options.filter(opt => opt.id === commitment);
-        }
         if(options.length === 1) {
             await actor[options[0].actorFnRef](item);
         } else {

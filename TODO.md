@@ -6,5 +6,4 @@
   * Compendium Powers linked to above
 * Open Word documents from character sheet
 * SSL server
-* Add Search Anywhere
 * Look at RunAsGM in Furnace for macros
