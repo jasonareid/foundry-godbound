@@ -17,14 +17,6 @@
                             <textarea id="description" name="data.description" class="xtall">{{data.description}}</textarea>
                         </div>
                         <div>
-                            <label style="vertical-align: center">Actions:</label>
-                            <div class="item-controls" style="padding-top:4px;">
-                                <a class="item-control item-chat" title="Chat Effect"><i class="fas fa-comment"></i></a>
-                                <a class="item-control item-maybe-delete" title="Maybe Delete"><i class="fas fa-trash"></i></a>
-                                <a class="item-control item-delete" title="Delete" style="color:red;margin-left:16px;display:none;"><i class="fas fa-trash"></i></a>
-                            </div>
-                        </div>
-                        <div>
                             <label for="pdfCode">PDF:</label>
                             <select id="pdfCode" name="data.pdfCode">
                                 {{#select data.pdfCode}}
@@ -38,6 +30,14 @@
                             <label for="pdfPage">Page:</label>
                             <input id="pdfPage" name="data.pdfPage" type="text" value="{{data.pdfPage}}"
                                    data-dtype="Number"/>
+                        </div>
+                        <div>
+                            <label style="vertical-align: center">Actions:</label>
+                            <div class="item-controls" style="padding-top:4px;">
+                                <a class="item-control item-chat" title="Chat Effect"><i class="fas fa-comment"></i></a>
+                                <a class="item-control item-maybe-delete" title="Maybe Delete"><i class="fas fa-trash"></i></a>
+                                <a class="item-control item-delete" title="Delete" style="color:red;margin-left:16px;display:none;"><i class="fas fa-trash"></i></a>
+                            </div>
                         </div>
                     </div>
                 </div>
