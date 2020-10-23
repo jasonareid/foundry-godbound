@@ -141,7 +141,9 @@
       "description": ""
     },
     "boundWord": {
-      "description": ""
+      "description": "",
+      "pdfCode": "",
+      "pdfPage": 1
     },
     "divineGift": {
       "word": "",

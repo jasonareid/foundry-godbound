@@ -46,6 +46,12 @@ export class GodboundActorSheet extends ActorSheet {
       item.sheet.render(true);
     });
 
+    html.find('.item-pdf').click(ev => {
+      const li = $(ev.currentTarget).parents('.item');
+      const item = this.actor.getOwnedItem(li.data("itemId"));
+      this.actor.demonstrateDoc(item);
+    });
+
     html.find('.item-chat').click(ev => {
       const li = $(ev.currentTarget).parents('.item');
       const item = this.actor.getOwnedItem(li.data("itemId"));

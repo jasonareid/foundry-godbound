@@ -23,7 +23,21 @@
                                 <a class="item-control item-maybe-delete" title="Maybe Delete"><i class="fas fa-trash"></i></a>
                                 <a class="item-control item-delete" title="Delete" style="color:red;margin-left:16px;display:none;"><i class="fas fa-trash"></i></a>
                             </div>
-
+                        </div>
+                        <div>
+                            <label for="pdfCode">PDF:</label>
+                            <select id="pdfCode" name="data.pdfCode">
+                                {{#select data.pdfCode}}
+                                <option value="CORE">Core Rulebook</option>
+                                <option value="LEXICON">Lexicon of the Throne</option>
+                                <option value="FEMPIRES">Fallen Empires</option>
+                                {{/select}}
+                            </select>
+                        </div>
+                        <div>
+                            <label for="pdfPage">Page:</label>
+                            <input id="pdfPage" name="data.pdfPage" type="text" value="{{data.pdfPage}}"
+                                   data-dtype="Number"/>
                         </div>
                     </div>
                 </div>

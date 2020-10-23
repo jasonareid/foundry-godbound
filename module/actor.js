@@ -446,6 +446,14 @@ export class GodboundActor extends Actor {
         }
     }
 
+    async demonstrateDoc(item) {
+        let pdfCode = item.data.data.pdfCode;
+        let pdfPage = item.data.data.pdfPage;
+        if(ui && ui.PDFoundry && pdfCode && pdfPage) {
+            ui.PDFoundry.openPDFByCode(pdfCode, {page: pdfPage});
+        }
+    }
+
     async demonstratePower(item, effortCommitment) {
         let template = 'systems/godbound/templates/chat/power-result.html';
         let chatData = {
