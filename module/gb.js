@@ -133,8 +133,14 @@ Hooks.once("init", async function () {
         let formula = span.data('formula');
         let actor = game.actors.get(span.data('actorId'));
         let damageSource = actor.getOwnedItem(span.data('damageSource'));
+
+        let damageTarget = null;
+        let damageTargetId = span.data('targetTokenId');
+        if(damageTargetId) {
+            damageTarget = canvas.tokens.get(damageTargetId);
+        }
         if (actor) {
-            actor.rollDamage(damageSource, formula);
+            actor.rollDamage(damageSource, formula, damageTarget);
         }
     });
 

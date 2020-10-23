@@ -365,7 +365,7 @@ export class GodboundActor extends Actor {
         }
     }
 
-    async rollDamage(source, formula) {
+    async rollDamage(source, formula, targetToken) {
         if(!formula) {
             formula = source.data.data.computed.damageFormula;
         }
