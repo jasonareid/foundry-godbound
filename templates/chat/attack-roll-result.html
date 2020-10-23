@@ -1,5 +1,5 @@
 <section class="godbound chat-message">
-    <div class="godbound chat-block attack-roll">
+    <div class="godbound chat-block attack-roll {{result.className}}">
         <h2>
             {{title}}
         </h2>
@@ -17,8 +17,24 @@
                 </h3>
             </div>
         </div>
+        {{#if data.targetToken}}
+        <div class="flexrow chat-actor">
+            <div class="chat-img" style="background-image:url('{{data.targetToken.data.img}}')" title="{{data.targetToken.data.name}}" ></div>
+            <div class="chat-title">
+                <h3 style="margin-top:8px;">{{data.targetToken.data.name}}</h3>
+            </div>
+        </div>
+        {{/if}}
         <div class="blindable" data-blind="{{data.roll.blindroll}}">
             <div>{{{roll}}}</div>
+            {{#if result.isCheckedForSuccess}}
+                {{#if result.isFailure}}
+                <div class='roll-result roll-fail'><b>Miss</b></div>
+                {{/if}}
+                {{#if result.isSuccess}}
+                <div class='roll-result roll-success'><b>Hit</b></div>
+                {{/if}}
+            {{/if}}
             <div>Damage: <span class="damage-formula-roll" data-formula="{{damage}}" data-actor-id="{{data.actor.id}}" data-damage-source="{{damageSource}}">{{damage}}</span></div>
         </div>
     </div>

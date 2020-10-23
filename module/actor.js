@@ -288,8 +288,6 @@ export class GodboundActor extends Actor {
     }
 
     async rollAttack(item) {
-        let tracker = 0;
-        console.log("tracker", tracker, "this.isToken", this.isToken); tracker++;
         let template = 'systems/godbound/templates/chat/attack-roll-result.html';
         // console.log(this);
         let chatData = {
@@ -304,7 +302,6 @@ export class GodboundActor extends Actor {
         if(this.data.data.computed.attributes) {
             attrBonus = this.data.data.computed.attributes[item.data.data.attr].mod;
         }
-        console.log("tracker", tracker, "this.isToken", this.isToken); tracker++;
         let totalBonus = attrBonus+item.data.data.damageBonus;
         let totalBonusStr = '';
         if(totalBonus > 0) {
@@ -318,7 +315,6 @@ export class GodboundActor extends Actor {
             damageSource: item.id,
             data: {},
         };
-        console.log("tracker", tracker, "this.isToken", this.isToken); tracker++;
         let roll = new Roll('1d20 + @attrBonus + @toHitBonus + @itemBonus', {
             attrBonus: attrBonus,
             toHitBonus: this.data.data.toHitBonus,
@@ -326,18 +322,35 @@ export class GodboundActor extends Actor {
         });
         roll.roll();
         templateData.roll = await roll.render();
+        let target = null;
+        if(game.user.targets.size > 0) {
+            let token = game.user.targets.values().next().value;
+            if(token.actor) {
+                if(token.actor.data.type === 'pc') {
+                    target = 20 - token.actor.data.data.computed.armor.ac;
+                } else {
+                    target = 20 - token.actor.data.data.ac;
+                }
+            }
+            templateData.data.targetToken = token;
+        }
+        let isCheckedForSuccess = target !== null;
         templateData.result = {
             total: roll.total,
+            isSuccess: isCheckedForSuccess && roll.total >= target,
+            isFailure: isCheckedForSuccess && roll.total < target,
+            isCheckedForSuccess,
+            target,
         };
-        console.log("tracker", tracker, "this.isToken", this.isToken); tracker++;
+        if(isCheckedForSuccess) {
+            templateData.result.className = templateData.result.isSuccess ? 'result-msg-success' : 'result-msg-failure';
+        }
         templateData.data.actor = this;
         templateData.data.item = item;
         chatData.content = await renderTemplate(template, templateData);
         chatData.roll = roll;
         chatData.isRoll = true;
-        console.log("tracker", tracker, "this.isToken", this.isToken); tracker++;
         if (game.dice3d) {
-            console.log("tracker", tracker, "this.isToken", this.isToken); tracker++;
             await game.dice3d.showForRoll(
                 roll,
                 game.user,
@@ -345,14 +358,10 @@ export class GodboundActor extends Actor {
                 chatData.whisper,
                 chatData.blind
             );
-            console.log("tracker", tracker, "this.isToken", this.isToken); tracker++;
             await ChatMessage.create(chatData);
-            console.log("tracker", tracker, "this.isToken", this.isToken); tracker++;
         } else {
-            console.log("tracker", tracker, "this.isToken", this.isToken); tracker++;
             chatData.sound = CONFIG.sounds.dice;
             await ChatMessage.create(chatData);
-            console.log("tracker", tracker, "this.isToken", this.isToken); tracker++;
         }
     }
 
