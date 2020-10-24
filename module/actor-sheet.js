@@ -253,5 +253,9 @@ export class GodboundActorSheet extends ActorSheet {
         html.find('#chosenTactic #chosenTactic-desc').text(chosen.data.description);
       }
     });
+    html.find('#chosenTactic').click(ev => {
+      html.find('#chosenTactic #chosenTactic-name').text('');
+      html.find('#chosenTactic #chosenTactic-desc').text('');
+    });
   }
 }
