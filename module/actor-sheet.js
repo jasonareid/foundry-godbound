@@ -34,7 +34,32 @@ export class GodboundActorSheet extends ActorSheet {
 
   /* -------------------------------------------- */
   /** @override */
-	activateListeners(html) {
+  _onEditImage(event) {
+    const attr = event.currentTarget.dataset.edit;
+    let original = getProperty(this.actor.data, attr);
+    let current = original;
+    let activeSource = null;
+    if(!game.user.isGM) {
+      current = `player-home/${game.user.name}`;
+      activeSource = 'data';
+    }
+    let options = {
+      type: "image",
+      current: original,
+      callback: path => {
+        event.currentTarget.src = path;
+        this._onSubmit(event);
+      },
+      top: this.position.top + 40,
+      left: this.position.left + 10
+    };
+    if(activeSource) {
+      options.activeSource = activeSource;
+    }
+    new FilePicker(options).browse(current);
+  }
+
+  activateListeners(html) {
     super.activateListeners(html);
 
     // Everything below here is only needed if the sheet is editable

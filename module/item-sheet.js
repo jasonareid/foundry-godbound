@@ -45,8 +45,35 @@ export class GodboundItemSheet extends ItemSheet {
     return data;
   }
   /* -------------------------------------------- */
-
   /** @override */
+  _onEditImage(event) {
+    const attr = event.currentTarget.dataset.edit;
+    const original = getProperty(this.item.data, attr);
+    let current = original;
+    let activeSource = null;
+    if(!game.user.isGM) {
+      current = `player-home/${game.user.name}`;
+      activeSource = 'data';
+    }
+    let options = {
+      type: "image",
+      current: original,
+      callback: path => {
+        event.currentTarget.src = path;
+        if ( this.options.submitOnChange ) {
+          this._onSubmit(event);
+        }
+      },
+      top: this.position.top + 40,
+      left: this.position.left + 10
+    };
+    if(activeSource) {
+      options.activeSource = activeSource;
+    }
+    const fp = new FilePicker(options);
+    fp.browse(current);
+  }
+
   activateListeners(html) {
     super.activateListeners(html);
 
