@@ -445,11 +445,15 @@
                     </div>
                 </div>
             </div>
-            <div class="container col" style="margin-top: 32px;">
-                <div>
-                    <h3>Combat Notes:</h3>
-                    <textarea name="data.combatNotes" style="height:128px;font-size:14px">{{data.combatNotes}}</textarea>
+            <div class="container row" style="margin-top: 32px;">
+                <div class="container col">
+                    <div>
+                        <h3>Combat Notes:</h3>
+                        <textarea name="data.combatNotes" style="height:128px;font-size:14px">{{data.combatNotes}}</textarea>
+                    </div>
                 </div>
+                <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100"
+                     width="100" style="border:0;"/>
             </div>
         </div>
     </section>
