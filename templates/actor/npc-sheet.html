@@ -132,7 +132,7 @@
                             <li class="item flexrow" data-item-id="{{item._id}}">
                                 <h4 class="item-name">{{item.name}}</h4>
                                 <div class="item-controls">
-                                    <a class="item-control item-chat" title="Chat Effect"><i class="fas fa-comment"></i></a>
+                                    <a class="item-control item-pdf" title="Show Documentation"><i class="fas fa-file-pdf"></i></a>
                                 </div>
                             </li>
                             {{/ifeq}}
@@ -333,7 +333,7 @@
                         <h2 style="display:flex;justify-content: space-between;">
                             <span>Stats</span>
                         </h2>
-                        <div style="display:flex;justify-content: space-between">
+                        <div style="display:flex;justify-content: space-between;margin:0;">
                             <h3>
                                 HD: {{actor.data.hd.current}}
                             </h3>
@@ -342,7 +342,7 @@
                                 <input type="button" class="compact" id="hddmg" value="Damage" />
                             </div>
                         </div>
-                        <div style="display:flex;justify-content: space-between;align-items:top">
+                        <div style="display:flex;justify-content: space-between;align-items:flex-start;margin:0;">
                             <h3>
                                 Save: {{actor.data.save}}
                             </h3>
@@ -350,7 +350,7 @@
                                 <a class="save-roll" title="Roll" data-save="npc"><i class="fas fa-dice-d20"></i></a>
                             </div>
                         </div>
-                        <div style="display:flex;justify-content: space-between;align-items:top">
+                        <div style="display:flex;justify-content: space-between;align-items:flex-start;margin:0;">
                             <h3>
                                 Morale: {{actor.data.morale}}
                             </h3>
@@ -443,6 +443,12 @@
                             <span id="chosenTactic-desc"></span>
                         </h4>
                     </div>
+                </div>
+            </div>
+            <div class="container col" style="margin-top: 32px;">
+                <div>
+                    <h3>Combat Notes:</h3>
+                    <textarea name="data.combatNotes" style="height:128px;font-size:14px">{{data.combatNotes}}</textarea>
                 </div>
             </div>
         </div>

@@ -99,7 +99,8 @@
         "day": 0
       },
       "notes": "",
-      "cardinality": "Individual"
+      "cardinality": "Individual",
+      "combatNotes": ""
     }
   },
   "Item": {
