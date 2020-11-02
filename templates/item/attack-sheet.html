@@ -40,16 +40,7 @@
                         <div>
                             <label for="damageRoll">Damage:</label>
                             <div style="display: flex; align-items: center">
-                                <select name="data.damageRoll" id="damageRoll" >
-                                    {{#select item.data.damageRoll}}
-                                    <option value="1d4">1d4</option>
-                                    <option value="1d6">1d6</option>
-                                    <option value="1d8">1d8</option>
-                                    <option value="1d10">1d10</option>
-                                    <option value="1d12">1d12</option>
-                                    <option value="1d20">1d20</option>
-                                    {{/select}}
-                                </select>
+                                <input id="damageRoll" name="data.damageRoll" type="text" value="{{item.data.damageRoll}}" class="compact"/>
                                 +
                                 <input id="damageBonus" name="data.damageBonus" type="text" value="{{item.data.damageBonus}}" data-dtype="Number" class="compact"/>
                             </div>
