@@ -205,6 +205,9 @@
 .godbound input.compact {
   width: 24px;
 }
+.godbound input.compactplus {
+  width: 48px;
+}
 .godbound input.compact[type='button'] {
   width: 80px;
 }
