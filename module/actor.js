@@ -213,7 +213,7 @@ export class GodboundActor extends Actor {
         dest[name].base = 15 - Math.max(
             atts[att1].mod,
             atts[att2].mod
-        ) - level;
+        ) - Math.max(level - 1, 0);
         dest[name].penalty = 0;
         dest[name].save = dest[name].base - src[name].bonus;
     }
