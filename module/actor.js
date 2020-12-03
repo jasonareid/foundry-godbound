@@ -102,9 +102,9 @@ export class GodboundActor extends Actor {
         }
 
         data.computed.saves = {};
-        this._prepareSave(data.saves, data.computed.saves, data.computed.attributes, 'hardiness', 'str', 'con');
-        this._prepareSave(data.saves, data.computed.saves, data.computed.attributes, 'evasion', 'dex', 'int');
-        this._prepareSave(data.saves, data.computed.saves, data.computed.attributes, 'spirit', 'wis', 'cha');
+        this._prepareSave(data.level, data.saves, data.computed.saves, data.computed.attributes, 'hardiness', 'str', 'con');
+        this._prepareSave(data.level, data.saves, data.computed.saves, data.computed.attributes, 'evasion', 'dex', 'int');
+        this._prepareSave(data.level, data.saves, data.computed.saves, data.computed.attributes, 'spirit', 'wis', 'cha');
 
         data.computed.armor = {};
         switch (data.armor.type) {
@@ -208,12 +208,12 @@ export class GodboundActor extends Actor {
         data.computed.artifactIdx = artifactIdx;
     }
 
-    _prepareSave(src, dest, atts, name, att1, att2) {
+    _prepareSave(level, src, dest, atts, name, att1, att2) {
         dest[name] = {};
         dest[name].base = 15 - Math.max(
             atts[att1].mod,
             atts[att2].mod
-        );
+        ) - level;
         dest[name].penalty = 0;
         dest[name].save = dest[name].base - src[name].bonus;
     }

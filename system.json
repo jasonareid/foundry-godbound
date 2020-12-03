@@ -4,7 +4,7 @@
   "description": "Godbound",
   "version": 0.1,
   "minimumCoreVersion": "0.5.6",
-  "compatibleCoreVersion": "0.6.6",
+  "compatibleCoreVersion": "0.7.7",
   "templateVersion": 2,
   "author": "jasonwocky",
   "esmodules": ["module/gb.js"],
