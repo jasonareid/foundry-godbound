@@ -680,6 +680,9 @@
                                 {{/if}}
                                 {{#unless item.data.completed}}
                                     In Progress
+                                    {{#if item.data.active}}
+                                        / In Effect
+                                    {{/if}}
                                 {{/unless}}
                             </span>
                         </h4>
