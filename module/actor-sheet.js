@@ -282,5 +282,73 @@ export class GodboundActorSheet extends ActorSheet {
       html.find('#chosenTactic #chosenTactic-name').text('');
       html.find('#chosenTactic #chosenTactic-desc').text('');
     });
+
+
+    /* Best Left Buried */
+    html.find('.blb_attr-roll').click(async ev => {
+      let attr = $(ev.currentTarget).data('attr');
+        let template = 'systems/godbound/templates/chat/attr-roll-result.html';
+        let chatData = {
+          user: game.user._id,
+          speaker: this.actor.token ? {
+            token: this.actor
+          } : {
+            actor: this.actor
+          },
+        };
+        let odds = blbOdds(html);
+        let templateData = {
+          title: 'Attribute Roll',
+          details: `${Capitalize(attr)} - ${odds}`,
+          data: {},
+        }
+        let roll;
+        if(!odds || odds === 'normal') {
+          roll = new Roll('2d6 + @attr', {
+            attr: this.actor.data.data[attr],
+          });
+        } else if(odds === 'upperHand') {
+          roll = new Roll('3d6d + @attr', {
+            attr: this.actor.data.data[attr],
+          });
+        } else if(odds === 'againstTheOdds') {
+          roll = new Roll('3d6dh + @attr', {
+            attr: this.actor.data.data[attr],
+          });
+        }
+        roll.roll();
+
+        let target = 9;
+        let result = {
+          isSuccess: roll.total >= target,
+          isFailure: roll.total < target,
+          target: target,
+        }
+        result.className = result.isSuccess ? 'result-msg-success' : 'result-msg-failure';
+        templateData.roll = await roll.render();
+        templateData.result = result;
+        templateData.data.actor = this.actor;
+        chatData.content = await renderTemplate(template, templateData);
+        chatData.roll = roll;
+        chatData.isRoll = true;
+        // Dice So Nice
+        if (game.dice3d) {
+          await game.dice3d.showForRoll(
+              roll,
+              game.user,
+              true,
+              chatData.whisper,
+              chatData.blind
+          );
+          ChatMessage.create(chatData);
+        } else {
+          chatData.sound = CONFIG.sounds.dice;
+          ChatMessage.create(chatData);
+        }
+      });
   }
+}
+
+function blbOdds(html) {
+  return html.find("input[name='blb_odds']:checked").val();
 }

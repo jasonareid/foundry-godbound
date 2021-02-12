@@ -2,8 +2,34 @@
   "Actor": {
     "types": [
       "pc",
-      "npc"
+      "npc",
+      "blb_pc",
+      "blb_npc"
     ],
+    "blb_pc": {
+      "archetype": "",
+      "brawn": 0,
+      "wit": 0,
+      "will": 0,
+      "xp": 0,
+      "vigor": 0,
+      "grip": 0,
+      "affluence": 0,
+      "armour": 7,
+      "initiativeMod": 0,
+      "advancementsTxt": "",
+      "equipmentTxt": "",
+      "consqeuencesTxt": ""
+    },
+    "blb_npc": {
+      "brawn": 0,
+      "wit": 0,
+      "will": 0,
+      "vigor": 0,
+      "grip": 0,
+      "armour": 8,
+      "notes": ""
+    },
     "pc": {
       "description": "",
       "languages": "",
@@ -118,8 +144,30 @@
       "treasure",
       "invocation",
       "tactic",
-      "cult"
+      "cult",
+      "blb_advancement",
+      "blb_consequence",
+      "blb_weapon",
+      "blb_equipment"
     ],
+    "blb_advancement": {
+      "description": ""
+    },
+    "blb_consequence": {
+      "description": ""
+    },
+    "blb_equipment": {
+      "slots": 1,
+      "description": ""
+    },
+    "blb_weapon": {
+      "type": "hand",
+      "range": "melee",
+      "stat": "brawn",
+      "dmgMod": 0,
+      "initiativeMod": 0,
+      "slots": 1
+    },
     "autoHitAttack": {
       "damageRoll": "1d8",
       "damageBonus": 0,

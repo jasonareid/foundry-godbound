@@ -1,0 +1,172 @@
+<form class="{{cssClass}}" autocomplete="off" style="overflow-y:scroll;">
+
+    {{!-- Sheet Tab Navigation --}}
+    <nav class="sheet-tabs tabs" data-group="primary">
+        <a class="item" data-tab="blb_char">Character</a>
+    </nav>
+
+    {{!-- Sheet Body --}}
+    <section class="sheet-body">
+
+        <div class="tab blb_char" data-group="primary" data-tab="blb_char">
+            <div class="container col">
+                <div class="container row sheet-header">
+                    <div class="header-fields tabular">
+                        <div>
+                            <label for="name">Name:</label> <input id="name" name="name" type="text" value="{{actor.name}}"/>
+                        </div>
+                        <div>
+                            <label for="archetype">Archetype:</label> <input id="archetype" name="data.archetype" type="text">{{data.archetype}}</input>
+                        </div>
+                        <div>
+                            <label for="xp">XP:</label>
+                            <input id="xp" name="data.xp" value="{{data.xp}}" type="text" data-dtype="Number" class="compact" />
+                        </div>
+                    </div>
+                    <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100"
+                         width="100"/>
+                </div>
+
+                <div class="container row" style="margin-top:-16px">
+                    <div class="container row">
+                        <div>
+                            <h3>Attributes</h3>
+                            <table class="headered">
+                                <thead>
+                                <tr>
+                                    <td></td>
+                                    <td>Score</td>
+                                    <td>Roll</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>Brawn</td>
+                                    <td><input type="text" name="data.brawn" value="{{data.brawn}}" data-dtype="Number" /></td>
+                                    <td><a class="blb_attr-roll" title="Roll" data-attr="brawn"><i class="fas fa-dice-d20"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>Wit</td>
+                                    <td><input type="text" name="data.wit" value="{{data.wit}}" data-dtype="Number" /></td>
+                                    <td><a class="blb_attr-roll" title="Roll" data-attr="wit"><i class="fas fa-dice-d20"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>Will</td>
+                                    <td><input type="text" name="data.will" value="{{data.will}}" data-dtype="Number" /></td>
+                                    <td><a class="blb_attr-roll" title="Roll" data-attr="will"><i class="fas fa-dice-d20"></i></a></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="container row">
+                        <div>
+                            <h3>Utility Rolls</h3>
+                            <table class="headered">
+                                <thead>
+                                <tr>
+                                    <td></td>
+                                    <td>Roll</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>Initiative</td>
+                                    <td><a class="blb_attr-roll" title="Roll" data-attr="initiative"><i class="fas fa-dice-d20"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>Observation</td>
+                                    <td><a class="blb_attr-roll" title="Roll" data-attr="observation"><i class="fas fa-dice-d20"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>Grip</td>
+                                    <td><a class="blb_attr-roll" title="Roll" data-attr="grip"><i class="fas fa-dice-d20"></i></a></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="container col">
+                        <div>
+                            <h3>Odds</h3>
+                        </div>
+                        <div>
+                            <input type="radio" id="blb_odds_normal" name="blb_odds" value="normal" checked />
+                            <label for="blb_odds_normal">Normal</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="blb_odds_upper_hand" name="blb_odds" value="upperHand" />
+                            <label for="blb_odds_upper_hand">Upper Hand</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="blb_odds_against" name="blb_odds" value="againstTheOdds" />
+                            <label for="blb_odds_against">Against the Odds</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="container row" style="margin-bottom: 24px;">
+                    <span>
+                        Vigor <input type="text" name="data.vigor" value="{{data.vigor}}" data-dtype="Number" style="margin-left:16px;width:24px;"/>
+                    </span>
+                    <span>
+                        Grip <input type="text" name="data.grip" value="{{data.grip}}" data-dtype="Number"  style="margin-left:16px;width:24px;"/>
+                    </span>
+                    <span>
+                        Armour <input type="text" name="data.armour" value="{{data.armour}}" data-dtype="Number" style="margin-left:16px;width:24px;" />
+                    </span>
+                </div>
+                <div class="container col">
+                    <h2 style="display:flex;justify-content: space-between;">
+                        <span>Weapons</span>
+                        <i class="fas fa-plus itemAdder" data-item-type="blb_weapon"></i>
+                    </h2>
+                    <ol class="item-list">
+                        {{#each actor.items as |item id|}}
+                        {{#ifeq item.type "blb_weapon"}}
+                        <li class="item flexrow" data-item-id="{{item._id}}">
+                            <h4 class="item-name">
+                                {{item.name}}
+                                <span class="item-tags">
+                                {{item.data.type}} /
+                                {{item.data.range}} /
+                                {{item.data.stat}}
+                                {{#ifneq item.data.dmgMod 0}}
+                                    / Dmg {{item.data.dmgMod}}
+                                {{/ifneq}}
+                                {{#ifneq item.data.initiativeMod 0}}
+                                    / Init {{item.data.initiativeMod}}
+                                {{/ifneq}}
+                                {{#ifneq item.data.slots 1}}
+                                    / Enc{{item.data.slots}}
+                                {{/ifneq}}
+                            </span>
+                            </h4>
+                            <div class="item-controls">
+                                <a class="blb_attack-roll" title="Roll"><i class="fas fa-dice-d20"></i></a>
+                            </div>
+                        </li>
+                        {{/ifeq}}
+                        {{/each}}
+                    </ol>
+                </div>
+                <div class="container row">
+                    <div class="container col">
+                        Advancements
+                        <textarea style="height: auto" rows="8" id="advancementsTxt" name="data.advancementsTxt">{{data.advancementsTxt}}</textarea>
+                    </div>
+                    <div class="container col">
+                        Consequences
+                        <textarea style="height: auto"  rows="8" id="consequencesTxt" name="data.consequencesTxt">{{data.consequencesTxt}}</textarea>
+                    </div>
+                    <div class="container col">
+                        Equipment
+                        <textarea style="height: auto"  rows="8" id="equipmentTxt" name="data.equipmentTxt">{{data.equipmentTxt}}</textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</form>
+

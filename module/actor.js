@@ -67,6 +67,18 @@ export class GodboundActor extends Actor {
         if (actorData.type === 'pc') this._preparePcData(actorData);
 
         if (actorData.type === 'npc') this._prepareNpcData(actorData);
+
+        if (actorData.type === 'blb_pc') this._prepareBlbPcData(actorData);
+    }
+
+    _prepareBlbPcData(actorData) {
+        const data = actorData.data;
+
+        // Make a new Object that holds computed data and keeps it separate from anything else
+        data.computed = {};
+
+        data.computed.maxSlots = 12 + (2* data.brawn) + Math.max(data.wit, data.will);
+        data.computed.maxVigor = data.brawn + 6;
     }
 
     _preparePcData(actorData) {

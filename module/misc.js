@@ -24,6 +24,7 @@ const names = {
     cult: 'Cult',
     tactic: 'Tactic',
     artifactPower: 'Artifact Power',
+    blb_weapon: 'Weapon',
 }
 
 export const TypeNames = (type) => {
