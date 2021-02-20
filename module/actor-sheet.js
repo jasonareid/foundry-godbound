@@ -285,6 +285,10 @@ export class GodboundActorSheet extends ActorSheet {
 
 
     /* Best Left Buried */
+    html.find('.blb_init-roll').click(async ev => {
+      this.actor.rollInitiative({createCombatants: true});
+    });
+
     html.find('.blb_attr-roll').click(async ev => {
       let attr = $(ev.currentTarget).data('attr');
         let template = 'systems/godbound/templates/chat/attr-roll-result.html';
@@ -303,17 +307,25 @@ export class GodboundActorSheet extends ActorSheet {
           data: {},
         }
         let roll;
+        let attrValue;
+        if(attr === 'observation') {
+          attrValue = 0;
+        } else if(attr === 'grip') {
+          attrValue = this.actor.data.data['will'];
+        } else {
+          attrValue = this.actor.data.data[attr];
+        }
         if(!odds || odds === 'normal') {
           roll = new Roll('2d6 + @attr', {
-            attr: this.actor.data.data[attr],
+            attr: attrValue,
           });
         } else if(odds === 'upperHand') {
           roll = new Roll('3d6d + @attr', {
-            attr: this.actor.data.data[attr],
+            attr: attrValue,
           });
         } else if(odds === 'againstTheOdds') {
           roll = new Roll('3d6dh + @attr', {
-            attr: this.actor.data.data[attr],
+            attr: attrValue,
           });
         }
         roll.roll();
