@@ -132,6 +132,9 @@
                                 {{item.data.type}} /
                                 {{item.data.range}} /
                                 {{item.data.stat}}
+                                {{#ifeq item.data.gun true}}
+                                    / Gun
+                                {{/ifeq}}
                                 {{#ifneq item.data.dmgMod 0}}
                                     / Dmg {{item.data.dmgMod}}
                                 {{/ifneq}}

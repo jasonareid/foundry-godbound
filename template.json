@@ -164,6 +164,7 @@
       "type": "hand",
       "range": "melee",
       "stat": "brawn",
+      "gun": false,
       "dmgMod": 0,
       "initiativeMod": 0,
       "slots": 1
