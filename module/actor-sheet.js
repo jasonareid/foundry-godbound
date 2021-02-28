@@ -358,6 +358,70 @@ export class GodboundActorSheet extends ActorSheet {
           ChatMessage.create(chatData);
         }
       });
+
+    html.find('.blb_attack-roll').click(async ev => {
+      let itemElement = $(ev.currentTarget).parents('.item');
+      let itemId = itemElement.data('itemId')
+      let attr = $(itemElement).data('itemAttr');
+      let dmgMod = $(itemElement).data('itemDmgMod');
+      let itemName = $(itemElement).data('itemName');
+      let template = 'systems/godbound/templates/chat/blb-attack-roll-result.html';
+      let chatData = {
+        user: game.user._id,
+        speaker: this.actor.token ? {
+          token: this.actor
+        } : {
+          actor: this.actor
+        },
+      };
+      let odds = blbOdds(html);
+      let templateData = {
+        title: 'Attack Roll',
+        details: `${Capitalize(itemName)} - ${odds}`,
+        data: {},
+      }
+      let roll;
+      let attrValue = this.actor.data.data[attr];
+
+      if(!odds || odds === 'normal') {
+        roll = new Roll('3d6 + @attr', {
+          attr: attrValue,
+        });
+      } else if(odds === 'upperHand') {
+        roll = new Roll('4d6d + @attr', {
+          attr: attrValue,
+        });
+      } else if(odds === 'againstTheOdds') {
+        roll = new Roll('4d6dh + @attr', {
+          attr: attrValue,
+        });
+      }
+      roll.roll();
+
+      let result = {
+      }
+      result.className = 'result-msg-success';
+      templateData.roll = await roll.render();
+      templateData.result = result;
+      templateData.data.actor = this.actor;
+      chatData.content = await renderTemplate(template, templateData);
+      chatData.roll = roll;
+      chatData.isRoll = true;
+      // Dice So Nice
+      if (game.dice3d) {
+        await game.dice3d.showForRoll(
+            roll,
+            game.user,
+            true,
+            chatData.whisper,
+            chatData.blind
+        );
+        ChatMessage.create(chatData);
+      } else {
+        chatData.sound = CONFIG.sounds.dice;
+        ChatMessage.create(chatData);
+      }
+    });
   }
 }
 

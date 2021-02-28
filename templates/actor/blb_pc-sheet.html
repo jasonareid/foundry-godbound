@@ -16,7 +16,7 @@
                             <label for="name">Name:</label> <input id="name" name="name" type="text" value="{{actor.name}}"/>
                         </div>
                         <div>
-                            <label for="archetype">Archetype:</label> <input id="archetype" name="data.archetype" type="text">{{data.archetype}}</input>
+                            <label for="archetype">Archetype:</label> <input id="archetype" name="data.archetype" type="text" value="{{data.archetype}}" />
                         </div>
                         <div>
                             <label for="xp">XP:</label>
@@ -125,7 +125,7 @@
                     <ol class="item-list">
                         {{#each actor.items as |item id|}}
                         {{#ifeq item.type "blb_weapon"}}
-                        <li class="item flexrow" data-item-id="{{item._id}}">
+                        <li class="item flexrow" data-item-name="{{item.name}}" data-item-id="{{item._id}}" data-item-attr="{{item.stat}}" data-item-dmgMod="{{item.data.dmgMod}}">
                             <h4 class="item-name">
                                 {{item.name}}
                                 <span class="item-tags">
