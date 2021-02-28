@@ -413,10 +413,12 @@ export class GodboundActorSheet extends ActorSheet {
             chatData.whisper,
             chatData.blind
         );
-        ChatMessage.create(chatData);
+        await ChatMessage.create(chatData);
+        html.find('.blb-attack .dice-roll .dice-tooltip').style({display: 'block'});
       } else {
         chatData.sound = CONFIG.sounds.dice;
-        ChatMessage.create(chatData);
+        await ChatMessage.create(chatData);
+        html.find('.blb-attack .dice-roll .dice-tooltip').style({display: 'block'});
       }
     });
   }
