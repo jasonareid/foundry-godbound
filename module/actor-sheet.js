@@ -381,19 +381,16 @@ export class GodboundActorSheet extends ActorSheet {
         data: {},
       }
       let roll;
-      let attrValue = this.actor.data.data[attr];
-
+      templateData.attackMod = this.actor.data.data[attr] || 0;
+      templateData.dmgMod = dmgMod || 0;
       if(!odds || odds === 'normal') {
-        roll = new Roll('3d6 + @attr', {
-          attr: attrValue,
+        roll = new Roll('3d6', {
         });
       } else if(odds === 'upperHand') {
-        roll = new Roll('4d6d + @attr', {
-          attr: attrValue,
+        roll = new Roll('4d6d', {
         });
       } else if(odds === 'againstTheOdds') {
-        roll = new Roll('4d6dh + @attr', {
-          attr: attrValue,
+        roll = new Roll('4d6dh', {
         });
       }
       roll.roll();
