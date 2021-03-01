@@ -19,7 +19,8 @@
       "initiativeMod": 0,
       "advancementsTxt": "",
       "equipmentTxt": "",
-      "consqeuencesTxt": ""
+      "consequencesTxt": "",
+      "odds": "normal"
     },
     "blb_npc": {
       "brawn": 0,
@@ -28,7 +29,8 @@
       "vigor": 0,
       "grip": 0,
       "armour": 8,
-      "notes": ""
+      "notes": "",
+      "odds": "normal"
     },
     "pc": {
       "description": "",

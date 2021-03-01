@@ -300,7 +300,7 @@ export class GodboundActorSheet extends ActorSheet {
             actor: this.actor
           },
         };
-        let odds = blbOdds(html);
+        let odds = this.actor.data.data.odds;
         let templateData = {
           title: 'Attribute Roll',
           details: `${Capitalize(attr)} - ${odds}`,
@@ -361,7 +361,6 @@ export class GodboundActorSheet extends ActorSheet {
 
     html.find('.blb_attack-roll').click(async ev => {
       let itemElement = $(ev.currentTarget).parents('.item');
-      let itemId = itemElement.data('itemId')
       let attr = $(itemElement).data('itemAttr');
       let dmgMod = $(itemElement).data('itemDmgMod');
       let itemName = $(itemElement).data('itemName');
@@ -374,7 +373,7 @@ export class GodboundActorSheet extends ActorSheet {
           actor: this.actor
         },
       };
-      let odds = blbOdds(html);
+      let odds = this.actor.data.data.odds;
       let templateData = {
         title: 'Attack Roll',
         details: `${Capitalize(itemName)} - ${odds}`,
@@ -419,9 +418,61 @@ export class GodboundActorSheet extends ActorSheet {
         ChatMessage.create(chatData);
       }
     });
-  }
-}
 
-function blbOdds(html) {
-  return html.find("input[name='blb_odds']:checked").val();
+    html.find('.blb_npc-attack-roll').click(async ev => {
+      let template = 'systems/godbound/templates/chat/blb-attack-roll-result.html';
+      let chatData = {
+        user: game.user._id,
+        speaker: this.actor.token ? {
+          token: this.actor
+        } : {
+          actor: this.actor
+        },
+      };
+      let odds = this.actor.data.data.odds;
+      let templateData = {
+        title: 'NPC Attack Roll',
+        details: `${Capitalize(odds)}`,
+        data: {},
+      }
+      let roll;
+      templateData.attackMod = '?';
+      templateData.dmgMod = '?';
+      if(!odds || odds === 'normal') {
+        roll = new Roll('3d6', {
+        });
+      } else if(odds === 'upperHand') {
+        roll = new Roll('4d6d', {
+        });
+      } else if(odds === 'againstTheOdds') {
+        roll = new Roll('4d6dh', {
+        });
+      }
+      roll.roll();
+
+      let result = {
+      }
+      result.className = 'result-msg-success';
+      templateData.roll = await roll.render();
+      templateData.result = result;
+      templateData.data.actor = this.actor;
+      chatData.content = await renderTemplate(template, templateData);
+      chatData.roll = roll;
+      chatData.isRoll = true;
+      // Dice So Nice
+      if (game.dice3d) {
+        await game.dice3d.showForRoll(
+            roll,
+            game.user,
+            true,
+            chatData.whisper,
+            chatData.blind
+        );
+        ChatMessage.create(chatData);
+      } else {
+        chatData.sound = CONFIG.sounds.dice;
+        ChatMessage.create(chatData);
+      }
+    })
+  }
 }

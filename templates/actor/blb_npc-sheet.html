@@ -76,6 +76,10 @@
                                     <td>Grip</td>
                                     <td><a class="blb_attr-roll" title="Roll" data-attr="grip"><i class="fas fa-dice-d20"></i></a></td>
                                 </tr>
+                                <tr>
+                                    <td>Attack</td>
+                                    <td><a class="blb_npc-attack-roll" title="Roll"><i class="fas fa-dice-d20"></i></a></td>
+                                </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -86,16 +90,15 @@
                             <h3>Odds</h3>
                         </div>
                         <div>
-                            <input type="radio" id="blb_odds_normal" name="blb_odds" value="normal" checked />
-                            <label for="blb_odds_normal">Normal</label>
-                        </div>
-                        <div>
-                            <input type="radio" id="blb_odds_upper_hand" name="blb_odds" value="upperHand" />
-                            <label for="blb_odds_upper_hand">Adv</label>
-                        </div>
-                        <div>
-                            <input type="radio" id="blb_odds_against" name="blb_odds" value="againstTheOdds" />
-                            <label for="blb_odds_against">Dis</label>
+                            <div>
+                                <select name="data.odds">
+                                    {{#select data.odds}}
+                                    <option value="normal">Normal</option>
+                                    <option value="upperHand">Upper Hand</option>
+                                    <option value="againstTheOdds">Against the Odds</option>
+                                    {{/select}}
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
