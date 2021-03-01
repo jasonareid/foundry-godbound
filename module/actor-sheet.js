@@ -303,7 +303,7 @@ export class GodboundActorSheet extends ActorSheet {
         let odds = this.actor.data.data.odds;
         let templateData = {
           title: 'Attribute Roll',
-          details: `${Capitalize(attr)} - ${odds}`,
+          details: `${Capitalize(attr)} - ${Capitalize(odds)}`,
           data: {},
         }
         let roll;
@@ -376,7 +376,7 @@ export class GodboundActorSheet extends ActorSheet {
       let odds = this.actor.data.data.odds;
       let templateData = {
         title: 'Attack Roll',
-        details: `${Capitalize(itemName)} - ${odds}`,
+        details: `${Capitalize(itemName)} - ${Capitalize(odds)}`,
         data: {},
       }
       let roll;
