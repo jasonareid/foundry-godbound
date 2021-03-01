@@ -152,6 +152,10 @@ Hooks.once("init", async function () {
     }
     game.Godbound.executeGodboundItemMacro = executeGodboundItemMacro;
     Hooks.on("hotbarDrop", (bar, data, slot) => createGodboundMacro(data, slot));
+
+    Hooks.on("renderChatMessage", (message, html, data) => {
+        html.find('.blb-attack .dice-roll .dice-tooltip').css('display', 'block');
+    });
 });
 async function createGodboundMacro(data, slot) {
     console.log("CREATE GODBOUND MACRO");
