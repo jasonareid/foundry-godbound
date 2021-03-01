@@ -414,11 +414,11 @@ export class GodboundActorSheet extends ActorSheet {
             chatData.blind
         );
         await ChatMessage.create(chatData);
-        html.find('.blb-attack .dice-roll .dice-tooltip').css('display', 'block');
+        $(html.find('.blb-attack .dice-roll .dice-tooltip')).css('display', 'block');
       } else {
         chatData.sound = CONFIG.sounds.dice;
         await ChatMessage.create(chatData);
-        html.find('.blb-attack .dice-roll .dice-tooltip').css('display', 'block');
+        $(html.find('.blb-attack .dice-roll .dice-tooltip')).css('display', 'block');
       }
     });
   }
