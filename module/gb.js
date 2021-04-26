@@ -23,9 +23,14 @@ Hooks.once("init", async function () {
      * @type {String}
      */
     CONFIG.Combat.initiative = {
-        formula: "1d3+@wit",
+        formula: "1d20",
         decimals: 2
     };
+    // Best Left Buried Initiative
+    // CONFIG.Combat.initiative = {
+    //     formula: "1d3+@wit",
+    //     decimals: 2
+    // };
 
     // Define custom Entity classes
     CONFIG.Actor.entityClass = GodboundActor;
