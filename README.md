@@ -1,3 +1,3 @@
-# Simple Worldbuilding System
+# Godbound Foundry Module
 
-A simple game system for Foundry VTT which allows for flexible definition of Actors and Items to assist with worldbuilding or for running games which do not have a more complete system implementation available.
+A very incomplete Foundry system module for running Godbound Games
