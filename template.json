@@ -6,32 +6,6 @@
       "blb_pc",
       "blb_npc"
     ],
-    "blb_pc": {
-      "archetype": "",
-      "brawn": 0,
-      "wit": 0,
-      "will": 0,
-      "xp": 0,
-      "vigor": 0,
-      "grip": 0,
-      "affluence": 0,
-      "armour": 7,
-      "initiativeMod": 0,
-      "advancementsTxt": "",
-      "equipmentTxt": "",
-      "consequencesTxt": "",
-      "odds": "normal"
-    },
-    "blb_npc": {
-      "brawn": 0,
-      "wit": 0,
-      "will": 0,
-      "vigor": 0,
-      "grip": 0,
-      "armour": 8,
-      "notes": "",
-      "odds": "normal"
-    },
     "pc": {
       "description": "",
       "languages": "",
