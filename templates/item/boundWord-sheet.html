@@ -14,12 +14,12 @@
                         </div>
                         <div>
                             <label for="description">Description:</label>
-                            <textarea id="description" name="data.description" class="xtall">{{data.description}}</textarea>
+                            <textarea id="description" name="data.description" class="xtall">{{data.data.description}}</textarea>
                         </div>
                         <div>
                             <label for="pdfCode">PDF:</label>
                             <select id="pdfCode" name="data.pdfCode">
-                                {{#select data.pdfCode}}
+                                {{#select data.data.pdfCode}}
                                 <option value="CORE">Core Rulebook</option>
                                 <option value="LEXICON">Lexicon of the Throne</option>
                                 <option value="FEMPIRES">Fallen Empires</option>
@@ -28,7 +28,7 @@
                         </div>
                         <div>
                             <label for="pdfPage">Page:</label>
-                            <input id="pdfPage" name="data.pdfPage" type="text" value="{{data.pdfPage}}"
+                            <input id="pdfPage" name="data.pdfPage" type="text" value="{{data.data.pdfPage}}"
                                    data-dtype="Number"/>
                         </div>
                         <div>

@@ -168,15 +168,15 @@ export class GodboundActor extends Actor {
         data.computed.dominion = {};
         data.computed.dominion.spent = data.dominion.contributed;
         data.computed.dominion.income = data.dominion.otherIncome;
-        if(actorData.items) {
-            actorData.items.forEach(i => {
-                if(i.type === 'project') {
-                    data.computed.dominion.spent += i.data.committedDominion;
-                    data.computed.influence.spent += i.data.committedInfluence;
-                } else if(i.type === 'artifact') {
-                    data.computed.dominion.spent += i.data.committedDominion;
-                } else if(i.type === 'cult') {
-                    data.computed.dominion.income += i.data.income;
+        if(this.items) {
+            this.items.forEach(i => {
+                if(i.data.type === 'project') {
+                    data.computed.dominion.spent += i.data.data.committedDominion;
+                    data.computed.influence.spent += i.data.data.committedInfluence;
+                } else if(i.data.type === 'artifact') {
+                    data.computed.dominion.spent += i.data.data.committedDominion;
+                } else if(i.data.type === 'cult') {
+                    data.computed.dominion.income += i.data.data.income;
                 }
             });
         }
@@ -190,28 +190,31 @@ export class GodboundActor extends Actor {
 
         let artifactIdx = {};
         data.computed.artifacts = [];
-        if(this.data.items && this.data.items.length > 0) {
-            this.data.items.forEach(i => {
+        console.log("Items")
+        console.log(this.items);
+        if(this.items && this.items.size > 0) {
+            this.items.forEach(i => {
                 let entry = null;
-                if(i.type === 'artifact') {
-                    entry = artifactIdx[i._id];
+                console.log(i.data.type);
+                if(i.data.type === 'artifact') {
+                    entry = artifactIdx[i.id];
                     if(!entry) {
                         entry = {
                             item: null,
                             artifactPowers: []
                         };
-                        artifactIdx[i._id] = entry;
+                        artifactIdx[i.id] = entry;
                     }
                     entry.item = i;
                     data.computed.artifacts.push(entry);
-                } else if(i.type === 'artifactPower') {
-                    entry = artifactIdx[i.data.artifactId];
+                } else if(i.data.type === 'artifactPower') {
+                    entry = artifactIdx[i.data.data.artifactId];
                     if(!entry) {
                         entry = {
                             item: null,
                             artifactPowers: []
                         };
-                        artifactIdx[i.data.artifactId] = entry;
+                        artifactIdx[i.data.data.artifactId] = entry;
                     }
                     entry.artifactPowers.push(i);
                 }
@@ -303,7 +306,7 @@ export class GodboundActor extends Actor {
         let template = 'systems/godbound/templates/chat/attack-roll-result.html';
         // console.log(this);
         let chatData = {
-            user: game.user._id,
+            user: game.user.id,
             speaker: this.token ? {
                 token: this
             } : {
@@ -383,7 +386,7 @@ export class GodboundActor extends Actor {
         }
         let template = 'systems/godbound/templates/chat/damage-roll-result.html';
         let chatData = {
-            user: game.user._id,
+            user: game.user.id,
             speaker: this.token ? {
                 token: this
             } : {
@@ -424,7 +427,7 @@ export class GodboundActor extends Actor {
     async rollMorale() {
         let template = 'systems/godbound/templates/chat/morale-roll-result.html';
         let chatData = {
-            user: game.user._id,
+            user: game.user.id,
             speaker: this.token ? {
                 token: this
             } : {
@@ -478,7 +481,7 @@ export class GodboundActor extends Actor {
     async demonstratePower(item, effortCommitment) {
         let template = 'systems/godbound/templates/chat/power-result.html';
         let chatData = {
-            user: game.user._id,
+            user: game.user.id,
             speaker: this.token ? {
                 token: this
             } : {
@@ -486,7 +489,7 @@ export class GodboundActor extends Actor {
             },
         };
         let templateData = {
-            title: TypeNames(item.type),
+            title: TypeNames(item.data.type),
             data: {},
         };
         templateData.data.actor = this;
@@ -532,28 +535,28 @@ export class GodboundActor extends Actor {
 
     _calcActualEffortCost(item, effortCost) {
         if(effortCost) return effortCost;
-        if(item.type === 'divineMiracle' || item.type === 'artifactPower') {
+        if(item.data.type === 'divineMiracle' || item.data.type === 'artifactPower') {
             return Math.min(item.data.data.effortCost, 1);
         }
         return 1;
     }
 
     _determineEffortTarget(item) {
-        if(item.type !== 'artifactPower') return this;
-        return this.getOwnedItem(item.data.data.artifactId);
+        if(item.data.type !== 'artifactPower') return this;
+        return this.items.get(item.data.data.artifactId);
     }
 
     async commitEffortForDay(item, effortCost) {
         effortCost = this._calcActualEffortCost(item, effortCost);
         let target = this._determineEffortTarget(item);
-        if(item.type === 'artifact' && item.data.data.bound) {
+        if(item.data.type === 'artifact' && item.data.data.bound) {
             ui.notifications.warn("Artifact already bound for the day");
             return;
         }
         if (target.canSpendEffort(effortCost)) {
             await target.update({data: {effort: {day: target.data.data.effort.day + effortCost}}});
             await this.demonstratePower(item, 'day');
-            if(item.type === 'artifact') {
+            if(item.data.type === 'artifact') {
                 item.update({data: {bound: true}});
             }
         }
@@ -581,7 +584,7 @@ export class GodboundActor extends Actor {
         if(items.length < 1) {
             ui.notifications.error("Cannot find Succeed on Save Miracle");
         } else {
-            let ownedItem = this.getOwnedItem(items[0].id);
+            let ownedItem = this.items.get(items[0].id);
             await this.commitEffortForDay(ownedItem, ownedItem.data.data.effortCost);
         }
     }
@@ -620,7 +623,7 @@ export class GodboundActor extends Actor {
         if(this.items) {
             for(let i = 0; i < this.items.entries.length; i++) {
                 let item = this.items.entries[i];
-                if(item.type === 'artifact') {
+                if(item.data.type === 'artifact') {
                     await item.update({data: {effort: {scene: 0}}});
                 }
             }
@@ -632,7 +635,7 @@ export class GodboundActor extends Actor {
         if(this.items) {
             for(let i = 0; i < this.items.entries.length; i++) {
                 let item = this.items.entries[i];
-                if(item.type === 'artifact') {
+                if(item.data.type === 'artifact') {
                     await item.update({data: {bound: false, effort: {day: 0, scene: 0, atWill: 0}}});
                 }
             }

@@ -16,7 +16,7 @@
                             <label for="damageRoll">Damage:</label>
                             <div style="display: flex; align-items: center">
                                 <select name="data.damageRoll" id="damageRoll" >
-                                    {{#select item.data.damageRoll}}
+                                    {{#select item.data.data.damageRoll}}
                                     <option value="1d4">1d4</option>
                                     <option value="1d6">1d6</option>
                                     <option value="1d8">1d8</option>
@@ -26,13 +26,13 @@
                                     {{/select}}
                                 </select>
                                 +
-                                <input id="damageBonus" name="data.damageBonus" type="text" value="{{item.data.damageBonus}}" data-dtype="Number" class="compact"/>
+                                <input id="damageBonus" name="data.damageBonus" type="text" value="{{item.data.data.damageBonus}}" data-dtype="Number" class="compact"/>
                             </div>
                         </div>
                         <div>
                             <label></label>
                             <div style="display: flex; align-items: center">
-                                <input type="checkbox" name="data.magic" {{checked data.magic}} style="margin-left:0" />Magic Weapon
+                                <input type="checkbox" name="data.magic" {{checked data.data.magic}} style="margin-left:0" />Magic Weapon
                             </div>
                         </div>
                         <div>

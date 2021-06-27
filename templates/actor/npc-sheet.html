@@ -20,47 +20,47 @@
                             <label for="name">Name:</label> <input id="name" name="name" type="text" value="{{actor.name}}"/>
                         </div>
                         <div>
-                            <label for="description">Description:</label> <textarea id="description" name="data.description">{{data.description}}</textarea>
+                            <label for="description">Description:</label> <textarea id="description" name="data.description">{{data.data.description}}</textarea>
                         </div>
                         <div>
-                            <label for="goal">Goals:</label> <textarea id="goal" name="data.goal">{{data.goal}}</textarea>
+                            <label for="goal">Goals:</label> <textarea id="goal" name="data.goal">{{data.data.goal}}</textarea>
                         </div>
                         <div>
                             <label for="hdCurrent">HD:</label>
-                            <input id="hdCurrent" type="text" name="data.hd.current" value="{{data.hd.current}}" data-dtype="Number" />
+                            <input id="hdCurrent" type="text" name="data.hd.current" value="{{data.data.hd.current}}" data-dtype="Number" />
                         </div>
                         <div>
                             <label for="hdMax">Max:</label>
-                            <input id="hdMax" type="text" name="data.hd.max" value="{{data.hd.max}}" data-dtype="Number" />
+                            <input id="hdMax" type="text" name="data.hd.max" value="{{data.data.hd.max}}" data-dtype="Number" />
                         </div>
                         <div>
                             <label for="save">Save:</label>
-                            <input id="save" type="text" name="data.save" value="{{data.save}}" data-dtype="Number" />
+                            <input id="save" type="text" name="data.save" value="{{data.data.save}}" data-dtype="Number" />
                         </div>
                         <div>
                             <label for="move">Move:</label>
-                            <input id="move" type="text" name="data.move" value="{{data.move}}" />
+                            <input id="move" type="text" name="data.move" value="{{data.data.move}}" />
                         </div>
                         <div>
                             <label for="morale">Morale:</label>
-                            <input id="morale" type="text" name="data.morale" value="{{data.morale}}" data-dtype="Number" />
+                            <input id="morale" type="text" name="data.morale" value="{{data.data.morale}}" data-dtype="Number" />
                         </div>
                         <div>
                             <label for="ac">AC:</label>
-                            <input id="ac" type="text" name="data.ac" value="{{data.ac}}" data-dtype="Number" />
+                            <input id="ac" type="text" name="data.ac" value="{{data.data.ac}}" data-dtype="Number" />
                         </div>
                         <div>
                             <label for="numActions">Actns:</label>
-                            <input id="numActions" type="text" name="data.numActions" value="{{data.numActions}}" data-dtype="Number" />
+                            <input id="numActions" type="text" name="data.numActions" value="{{data.data.numActions}}" data-dtype="Number" />
                         </div>
                         <div>
                             <label for="numAttacks">Attks:</label>
-                            <input id="numAttacks" type="text" name="data.numAttacks" value="{{data.numAttacks}}" data-dtype="Number" />
+                            <input id="numAttacks" type="text" name="data.numAttacks" value="{{data.data.numAttacks}}" data-dtype="Number" />
                         </div>
                         <div>
                             <label for="cardinality">Cardinality:</label>
                             <select id="cardinality" name="data.cardinality">
-                                {{#select data.cardinality}}
+                                {{#select data.data.cardinality}}
                                     <option value="Individual">Individual</option>
                                     <option value="SmallMob">Small Mob</option>
                                     <option value="LargeMob">Large Mob</option>
@@ -91,9 +91,9 @@
                     <tbody>
                     <tr>
                         <td>Effort</td>
-                        <td><input type="text" data-dtype="Number" name="data.effort.total" value="{{data.effort.total}}" /></td>
-                        <td>{{data.computed.effort.spent}}</td>
-                        <td>{{data.computed.effort.available}}</td>
+                        <td><input type="text" data-dtype="Number" name="data.effort.total" value="{{data.data.effort.total}}" /></td>
+                        <td>{{data.data.computed.effort.spent}}</td>
+                        <td>{{data.data.computed.effort.available}}</td>
                         <td></td>
                     </tr>
                     </tbody>
@@ -102,19 +102,19 @@
                     <div>
                         <span style="padding-right: 4px;">At Will:</span>
                         <i class="fas fa-minus effortSpend" data-effort-category="atWill" data-effort-change="-1"></i>
-                        {{data.effort.atWill}}
+                        {{data.data.effort.atWill}}
                         <i class="fas fa-plus effortSpend" data-effort-category="atWill" data-effort-change="1"></i>
                     </div>
                     <div style="margin-left: 32px;">
                         <span style="padding-right: 4px;">Scene:</span>
                         <i class="fas fa-minus effortSpend" data-effort-category="scene" data-effort-change="-1"></i>
-                        {{data.effort.scene}}
+                        {{data.data.effort.scene}}
                         <i class="fas fa-plus effortSpend" data-effort-category="scene" data-effort-change="1"></i>
                     </div>
                     <div style="margin-left: 32px;">
                         <span style="padding-right: 4px;">Day:</span>
                         <i class="fas fa-minus effortSpend" data-effort-category="day" data-effort-change="-1"></i>
-                        {{data.effort.day}}
+                        {{data.data.effort.day}}
                         <i class="fas fa-plus effortSpend" data-effort-category="day" data-effort-change="1"></i>
                     </div>
                 </div>
@@ -128,8 +128,8 @@
                         </h2>
                         <ol class="item-list">
                             {{#each actor.items as |item id|}}
-                            {{#ifeq item.type "boundWord"}}
-                            <li class="item flexrow" data-item-id="{{item._id}}">
+                            {{#ifeq item.data.type "boundWord"}}
+                            <li class="item flexrow" data-item-id="{{item.id}}">
                                 <h4 class="item-name">{{item.name}}</h4>
                                 <div class="item-controls">
                                     <a class="item-control item-pdf" title="Show Documentation"><i class="fas fa-file-pdf"></i></a>
@@ -146,21 +146,21 @@
                         </h2>
                         <ol class="item-list">
                             {{#each actor.items as |item id|}}
-                            {{#ifeq item.type "divineMiracle"}}
-                            <li class="item flexrow" data-item-id="{{item._id}}">
+                            {{#ifeq item.data.type "divineMiracle"}}
+                            <li class="item flexrow" data-item-id="{{item.id}}">
                                 <h4 class="item-name">
                                     {{item.name}}
                                     <span class="item-tags">
-                                    {{#if item.data.instant}}
+                                    {{#if item.data.data.instant}}
                                         <a title="Instant"><i class="fas fa-bolt"></i></a>
                                     {{/if}}
-                                    {{#if item.data.onTurn}}
+                                    {{#if item.data.data.onTurn}}
                                         <a title="On Turn"><i class="fas fa-redo-alt"></i></a>
                                     {{/if}}
-                                    {{#if item.data.action}}
+                                    {{#if item.data.data.action}}
                                         <a title="Action"><i class="fas fa-hourglass-end"></i></a>
                                     {{/if}}
-                                    {{#if item.data.smite}}
+                                    {{#if item.data.data.smite}}
                                         <a title="Smite"><i class="fas fa-meteor"></i></a>
                                     {{/if}}
                                     </span>
@@ -181,44 +181,44 @@
                     </h2>
                     <ol class="item-list">
                         {{#each actor.items as |item id|}}
-                        {{#ifeq item.type "divineGift"}}
-                        <li class="item flexrow" data-item-id="{{item._id}}">
+                        {{#ifeq item.data.type "divineGift"}}
+                        <li class="item flexrow" data-item-id="{{item.id}}">
                             <h4 class="item-name">
-                                {{#if item.data.greater}}
+                                {{#if item.data.data.greater}}
                                 <span style="font-style: italic">{{item.name}}</span>
                                 {{/if}}
-                                {{#unless item.data.greater}}
+                                {{#unless item.data.data.greater}}
                                 {{item.name}}
                                 {{/unless}}
                                 <span class="item-tags">
-                                {{#if item.data.instant}}
+                                {{#if item.data.data.instant}}
                                     <a title="Instant"><i class="fas fa-bolt"></i></a>
                                 {{/if}}
-                                {{#if item.data.onTurn}}
+                                {{#if item.data.data.onTurn}}
                                     <a title="On Turn"><i class="fas fa-redo-alt"></i></a>
                                 {{/if}}
-                                {{#if item.data.action}}
+                                {{#if item.data.data.action}}
                                     <a title="Action"><i class="fas fa-hourglass-end"></i></a>
                                 {{/if}}
-                                {{#if item.data.smite}}
+                                {{#if item.data.data.smite}}
                                     <a title="Smite"><i class="fas fa-meteor"></i></a>
                                 {{/if}}
                                 </span>
                             </h4>
                             <div class="item-controls">
-                                {{#if item.data.constant}}
+                                {{#if item.data.data.constant}}
                                 <a class="item-control item-chat" title="Constant Effect"><i class="fas fa-infinity"></i></a>
                                 {{/if}}
-                                {{#if item.data.noEffort}}
+                                {{#if item.data.data.noEffort}}
                                 <a class="item-control item-chat" title="Effortless Effect"><i class="far fa-play-circle"></i></a>
                                 {{/if}}
-                                {{#if item.data.atWill}}
+                                {{#if item.data.data.atWill}}
                                 <a class="item-control item-atWill-effort" title="Commit Effort At Will"><i class="fas fa-power-off"></i></a>
                                 {{/if}}
-                                {{#if item.data.scene}}
+                                {{#if item.data.data.scene}}
                                 <a class="item-control item-scene-effort" title="Commit Effort for Scene"><i class="fas fa-clock"></i></a>
                                 {{/if}}
-                                {{#if item.data.day}}
+                                {{#if item.data.data.day}}
                                 <a class="item-control item-day-effort" title="Commit Effort for Day"><i class="fas fa-sun"></i></a>
                                 {{/if}}
                             </div>
@@ -234,11 +234,11 @@
             <div class="container col">
                 <div>
                     <h3>Facts:</h3>
-                    <textarea name="data.facts" style="height:128px;font-size:14px">{{data.facts}}</textarea>
+                    <textarea name="data.facts" style="height:128px;font-size:14px">{{data.data.facts}}</textarea>
                 </div>
                 <div>
                     <h3>Notes:</h3>
-                    <textarea name="data.notes" style="height:128px;font-size:14px">{{data.notes}}</textarea>
+                    <textarea name="data.notes" style="height:128px;font-size:14px">{{data.data.notes}}</textarea>
                 </div>
             </div>
         </div>
@@ -246,7 +246,7 @@
         <div class="tab combat" data-group="primary" data-tab="combat">
             <div class="container col">
                 <h2>
-                    Armor AC {{data.ac}}
+                    Armor AC {{data.data.ac}}
                 </h2>
             </div>
             <div class="container row" style="margin-top:32px;">
@@ -254,35 +254,35 @@
                     <div class="container col">
                         <h2 style="display:flex;justify-content: space-between;">
                             <span>Attacks
-                                {{#if (gt data.computed.extraActions 0)}}
-                                    ({{data.numAttacks}} + {{data.computed.extraActions}} actn)
+                                {{#if (gt data.data.computed.extraActions 0)}}
+                                    ({{data.data.numAttacks}} + {{data.data.computed.extraActions}} actn)
                                 {{/if}}
-                                {{#unless (gt data.computed.extraActions 0)}}
-                                    ({{data.numAttacks}})
+                                {{#unless (gt data.data.computed.extraActions 0)}}
+                                    ({{data.data.numAttacks}})
                                 {{/unless}}
                             </span>
                             <i class="fas fa-plus itemAdder" data-item-type="attack"></i>
                         </h2>
                         <ol class="item-list">
                             {{#each actor.items as |item id|}}
-                            {{#ifeq item.type "attack"}}
-                            <li class="item flexrow" data-item-id="{{item._id}}">
+                            {{#ifeq item.data.type "attack"}}
+                            <li class="item flexrow" data-item-id="{{item.id}}">
                                 <h4 class="item-name">
-                                    {{#if item.data.magic}}
+                                    {{#if item.data.data.magic}}
                                     {{item.name}}*
                                     {{/if}}
-                                    {{#unless item.data.magic}}
+                                    {{#unless item.data.data.magic}}
                                     {{item.name}}
                                     {{/unless}}
                                     <span class="item-tags">
-                                    {{#ifneq item.data.hitBonus 0}}
-                                        +{{item.data.hitBonus}}
+                                    {{#ifneq item.data.data.hitBonus 0}}
+                                        +{{item.data.data.hitBonus}}
                                     {{/ifneq}}
-                                    {{#ifneq item.data.damageBonus 0}}
-                                        {{item.data.damageRoll}}+{{item.data.damageBonus}}
+                                    {{#ifneq item.data.data.damageBonus 0}}
+                                        {{item.data.data.damageRoll}}+{{item.data.data.damageBonus}}
                                     {{/ifneq}}
-                                    {{#ifeq item.data.damageBonus 0}}
-                                        {{item.data.damageRoll}}
+                                    {{#ifeq item.data.data.damageBonus 0}}
+                                        {{item.data.data.damageRoll}}
                                     {{/ifeq}}
                                     </span>
                                 </h4>
@@ -295,7 +295,7 @@
                         </ol>
                         <div>
                             <label for="toHitBonus">To Hit Bonus:</label>
-                            <input id="toHitBonus" name="data.toHitBonus" value="{{data.toHitBonus}}" type="text" data-dtype="Number" class="compact" style="margin-left:8px;" />
+                            <input id="toHitBonus" name="data.toHitBonus" value="{{data.data.toHitBonus}}" type="text" data-dtype="Number" class="compact" style="margin-left:8px;" />
                         </div>
                     </div>
 
@@ -306,17 +306,17 @@
                         </h2>
                         <ol class="item-list">
                             {{#each actor.items as |item id|}}
-                            {{#ifeq item.type "autoHitAttack"}}
-                            <li class="item flexrow" data-item-id="{{item._id}}">
+                            {{#ifeq item.data.type "autoHitAttack"}}
+                            <li class="item flexrow" data-item-id="{{item.id}}">
                                 <h4 class="item-name">
                                     {{item.name}}
                                     <span class="item-tags">
-                                    {{#ifneq item.data.damageBonus 0}}
-                                        {{item.data.damageRoll}}+{{item.data.damageBonus}}
+                                    {{#ifneq item.data.data.damageBonus 0}}
+                                        {{item.data.data.damageRoll}}+{{item.data.data.damageBonus}}
                                     {{/ifneq}}
 
-                                    {{#ifeq item.data.damageBonus 0}}
-                                        {{item.data.damageRoll}}
+                                    {{#ifeq item.data.data.damageBonus 0}}
+                                        {{item.data.data.damageRoll}}
                                     {{/ifeq}}
                                     </span>
                                 </h4>
@@ -335,7 +335,7 @@
                         </h2>
                         <div style="display:flex;justify-content: space-between;margin:0;">
                             <h3>
-                                HD: {{actor.data.hd.current}}
+                                HD: {{actor.data.data.hd.current}}
                             </h3>
                             <div>
                                 <input class="compact" id="hdadjust" />
@@ -344,7 +344,7 @@
                         </div>
                         <div style="display:flex;justify-content: space-between;align-items:flex-start;margin:0;">
                             <h3>
-                                Save: {{actor.data.save}}
+                                Save: {{actor.data.data.save}}
                             </h3>
                             <div>
                                 <a class="save-roll" title="Roll" data-save="npc"><i class="fas fa-dice-d20"></i></a>
@@ -352,7 +352,7 @@
                         </div>
                         <div style="display:flex;justify-content: space-between;align-items:flex-start;margin:0;">
                             <h3>
-                                Morale: {{actor.data.morale}}
+                                Morale: {{actor.data.data.morale}}
                             </h3>
                             <div>
                                 <a class="morale-roll" title="Roll"><i class="fas fa-dice-d20"></i></a>
@@ -368,48 +368,48 @@
                         </h2>
                         <ol class="item-list">
                             {{#each actor.items as |item id|}}
-                            {{#ifcombatpower ../actor._id item._id}}
-                            <li class="item flexrow" data-item-id="{{item._id}}">
+                            {{#ifcombatpower ../actor.id item.id}}
+                            <li class="item flexrow" data-item-id="{{item.id}}">
                                 <h4 class="item-name">
-                                    {{#if item.data.greater}}
+                                    {{#if item.data.data.greater}}
                                     <span style="font-style: italic">{{item.name}}</span>
                                     {{/if}}
-                                    {{#unless item.data.greater}}
+                                    {{#unless item.data.data.greater}}
                                     {{item.name}}
                                     {{/unless}}
                                     <span class="item-tags">
-                                {{#if item.data.instant}}
+                                {{#if item.data.data.instant}}
                                     <a title="Instant"><i class="fas fa-bolt"></i></a>
                                 {{/if}}
-                                {{#if item.data.onTurn}}
+                                {{#if item.data.data.onTurn}}
                                     <a title="On Turn"><i class="fas fa-redo-alt"></i></a>
                                 {{/if}}
-                                {{#if item.data.action}}
+                                {{#if item.data.data.action}}
                                     <a title="Action"><i class="fas fa-hourglass-end"></i></a>
                                 {{/if}}
-                                {{#if item.data.smite}}
+                                {{#if item.data.data.smite}}
                                     <a title="Smite"><i class="fas fa-meteor"></i></a>
                                 {{/if}}
                                 </span>
                                 </h4>
                                 <div class="item-controls">
-                                    {{#ifeq item.type "divineMiracle"}}
+                                    {{#ifeq item.data.type "divineMiracle"}}
                                     <a class="item-control item-day-effort" title="Commit Effort for Day"><i class="fas fa-sun"></i></a>
                                     {{/ifeq}}
-                                    {{#if (or (eq item.type "divineGift") (eq item.type "artifactPower"))}}
-                                    {{#if item.data.constant}}
+                                    {{#if (or (eq item.data.type "divineGift") (eq item.data.type "artifactPower"))}}
+                                    {{#if item.data.data.constant}}
                                     <a class="item-control item-chat" title="Constant Effect"><i class="fas fa-infinity"></i></a>
                                     {{/if}}
-                                    {{#if item.data.noEffort}}
+                                    {{#if item.data.data.noEffort}}
                                     <a class="item-control item-chat" title="Effortless Effect"><i class="far fa-play-circle"></i></a>
                                     {{/if}}
-                                    {{#if item.data.atWill}}
+                                    {{#if item.data.data.atWill}}
                                     <a class="item-control item-atWill-effort" title="Commit Effort At Will"><i class="fas fa-power-off"></i></a>
                                     {{/if}}
-                                    {{#if item.data.scene}}
+                                    {{#if item.data.data.scene}}
                                     <a class="item-control item-scene-effort" title="Commit Effort for Scene"><i class="fas fa-clock"></i></a>
                                     {{/if}}
-                                    {{#if item.data.day}}
+                                    {{#if item.data.data.day}}
                                     <a class="item-control item-day-effort" title="Commit Effort for Day"><i class="fas fa-sun"></i></a>
                                     {{/if}}
                                     {{/if}}
@@ -418,7 +418,7 @@
                             {{/ifcombatpower}}
                             {{/each}}
                         </ol>
-                        <h3>Free Effort: {{data.computed.effort.available}}</h3>
+                        <h3>Free Effort: {{data.data.computed.effort.available}}</h3>
                     </div>
 
                     <div class="container col" style="margin-top: 32px;">
@@ -428,8 +428,8 @@
                         </h2>
                         <ol class="item-list">
                             {{#each actor.items as |item id|}}
-                            {{#ifeq item.type "tactic"}}
-                            <li class="item flexrow" data-item-id="{{item._id}}">
+                            {{#ifeq item.data.type "tactic"}}
+                            <li class="item flexrow" data-item-id="{{item.id}}">
                                 <h4 class="item-name">
                                     {{item.name}}
                                 </h4>
@@ -449,7 +449,7 @@
                 <div class="container col">
                     <div>
                         <h3>Combat Notes:</h3>
-                        <textarea name="data.combatNotes" style="height:128px;font-size:14px">{{data.combatNotes}}</textarea>
+                        <textarea name="data.combatNotes" style="height:128px;font-size:14px">{{data.data.combatNotes}}</textarea>
                     </div>
                 </div>
                 <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100"

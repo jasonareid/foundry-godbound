@@ -14,16 +14,16 @@
                         </div>
                         <div>
                             <label for="description">Description:</label>
-                            <textarea id="description" name="data.description">{{data.description}}</textarea>
+                            <textarea id="description" name="data.description">{{data.data.description}}</textarea>
                         </div>
                         <div>
                             <label for="deeds">Req. Deeds:</label>
-                            <textarea id="deeds" name="data.deeds">{{data.deeds}}</textarea>
+                            <textarea id="deeds" name="data.deeds">{{data.data.deeds}}</textarea>
                         </div>
                         <div>
                             <label for="scope">Scope:</label>
                             <select id="scope" name="data.scope" data-dtype="Number">
-                                {{#select data.scope}}
+                                {{#select data.data.scope}}
                                 <option value="1">Village</option>
                                 <option value="2">City</option>
                                 <option value="4">Region</option>
@@ -35,7 +35,7 @@
                         <div>
                             <label for="difficulty">Difficulty:</label>
                             <select id="difficulty" name="data.difficulty" data-dtype="Number">
-                                {{#select data.difficulty}}
+                                {{#select data.data.difficulty}}
                                 <option value="1">Plausible</option>
                                 <option value="2">Improbable</option>
                                 <option value="4">Impossible</option>
@@ -45,7 +45,7 @@
                         <div>
                             <label for="resistance">Resistance:</label>
                             <select id="resistance" name="data.resistance" data-dtype="Number">
-                                {{#select data.resistance}}
+                                {{#select data.data.resistance}}
                                 <option value="0">0</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -70,38 +70,38 @@
                         </div>
                         <div>
                             <label>Dom Cost:</label>
-                            <span style="padding:4px 0;">{{data.computed.cost}}</span>
+                            <span style="padding:4px 0;">{{data.data.computed.cost}}</span>
                         </div>
                         <div>
                             <label>Paid:</label>
                             <div style="display: flex; align-items: center;justify-content: space-around">
                                 <div style="width:25%;text-align:center">
                                     Dom:
-                                    <input id="committedDominion" name="data.committedDominion" type="text" value="{{data.committedDominion}}" data-dtype="Number" class="compact"/>
+                                    <input id="committedDominion" name="data.committedDominion" type="text" value="{{data.data.committedDominion}}" data-dtype="Number" class="compact"/>
                                 </div>
                                 <div style="width:25%;text-align:center">
                                     DCtrb:
-                                    <input id="contributedDominion" name="data.contributedDominion" type="text" value="{{data.contributedDominion}}" data-dtype="Number" class="compact"/>
+                                    <input id="contributedDominion" name="data.contributedDominion" type="text" value="{{data.data.contributedDominion}}" data-dtype="Number" class="compact"/>
                                 </div>
                                 <div style="width:25%;text-align:center">
                                     Inf:
-                                    <input id="committedInfluence" name="data.committedInfluence" type="text" value="{{data.committedInfluence}}" data-dtype="Number" class="compact"/>
+                                    <input id="committedInfluence" name="data.committedInfluence" type="text" value="{{data.data.committedInfluence}}" data-dtype="Number" class="compact"/>
                                 </div>
                                 <div style="width:25%;text-align:center">
                                     ICtrb:
-                                    <input id="contributedInfluence" name="data.contributedInfluence" type="text" value="{{data.contributedInfluence}}" data-dtype="Number" class="compact"/>
+                                    <input id="contributedInfluence" name="data.contributedInfluence" type="text" value="{{data.data.contributedInfluence}}" data-dtype="Number" class="compact"/>
                                 </div>
                             </div>
                         </div>
                         <div>
                             <label>Remaining:</label>
-                            <span style="padding:4px 0;">{{data.computed.remaining}}</span>
+                            <span style="padding:4px 0;">{{data.data.computed.remaining}}</span>
                         </div>
                         <div>
                             <label></label>
                             <div style="display: flex; align-items: center">
-                                <input type="checkbox" name="data.active" {{checked data.active}} style="margin-left:0" />Active
-                                <input type="checkbox" name="data.completed" {{checked data.completed}} style="margin-left:16px" />Completed
+                                <input type="checkbox" name="data.active" {{checked data.data.active}} style="margin-left:0" />Active
+                                <input type="checkbox" name="data.completed" {{checked data.data.completed}} style="margin-left:16px" />Completed
                             </div>
                         </div>
                         <div>

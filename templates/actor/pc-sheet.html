@@ -23,20 +23,20 @@
                             <label for="name">Name:</label> <input id="name" name="name" type="text" value="{{actor.name}}"/>
                         </div>
                         <div>
-                            <label for="description">Description:</label> <textarea id="description" name="data.description" class="med">{{data.description}}</textarea>
+                            <label for="description">Description:</label> <textarea id="description" name="data.description" class="med">{{data.data.description}}</textarea>
                         </div>
                         <div>
-                            <label for="languages">Languages:</label> <input id="languages" name="data.languages" type="text" value="{{data.languages}}"/>
+                            <label for="languages">Languages:</label> <input id="languages" name="data.languages" type="text" value="{{data.data.languages}}"/>
                         </div>
                         <div>
-                            <label for="goal">Goals:</label> <textarea id="goal" name="data.goal" class="med">{{data.goal}}</textarea>
+                            <label for="goal">Goals:</label> <textarea id="goal" name="data.goal" class="med">{{data.data.goal}}</textarea>
                         </div>
                         <div>
                             <label for="level">Level:</label>
                             <div>
-                                <input id="level" name="data.level" type="text" value="{{data.level}}" class="shares"/>
+                                <input id="level" name="data.level" type="text" value="{{data.data.level}}" class="shares"/>
                                 <label for="xp" style="padding-left:16px">XP:</label>
-                                <input id="xp" name="data.xp" type="text" value="{{data.xp}}" class="shares"/>
+                                <input id="xp" name="data.xp" type="text" value="{{data.data.xp}}" class="shares"/>
                             </div>
                         </div>
                         <div>
@@ -64,44 +64,44 @@
                                 <tbody>
                                 <tr>
                                     <td>Str</td>
-                                    <td><input type="text" name="data.attributes.str.score" value="{{data.attributes.str.score}}" data-dtype="Number" /></td>
-                                    <td>{{data.computed.attributes.str.mod}}</td>
-                                    <td>{{data.computed.attributes.str.check}}</td>
+                                    <td><input type="text" name="data.attributes.str.score" value="{{data.data.attributes.str.score}}" data-dtype="Number" /></td>
+                                    <td>{{data.data.computed.attributes.str.mod}}</td>
+                                    <td>{{data.data.computed.attributes.str.check}}</td>
                                     <td><a class="attr-roll" title="Roll" data-attr="str"><i class="fas fa-dice-d20"></i></a></td>
                                 </tr>
                                 <tr>
                                     <td>Dex</td>
-                                    <td><input type="text" name="data.attributes.dex.score" value="{{data.attributes.dex.score}}" data-dtype="Number" /></td>
-                                    <td>{{data.computed.attributes.dex.mod}}</td>
-                                    <td>{{data.computed.attributes.dex.check}}</td>
+                                    <td><input type="text" name="data.attributes.dex.score" value="{{data.data.attributes.dex.score}}" data-dtype="Number" /></td>
+                                    <td>{{data.data.computed.attributes.dex.mod}}</td>
+                                    <td>{{data.data.computed.attributes.dex.check}}</td>
                                     <td><a class="attr-roll" title="Roll" data-attr="dex"><i class="fas fa-dice-d20"></i></a></td>
                                 </tr>
                                 <tr>
                                     <td>Con</td>
-                                    <td><input type="text" name="data.attributes.con.score" value="{{data.attributes.con.score}}" data-dtype="Number" /></td>
-                                    <td>{{data.computed.attributes.con.mod}}</td>
-                                    <td>{{data.computed.attributes.con.check}}</td>
+                                    <td><input type="text" name="data.attributes.con.score" value="{{data.data.attributes.con.score}}" data-dtype="Number" /></td>
+                                    <td>{{data.data.computed.attributes.con.mod}}</td>
+                                    <td>{{data.data.computed.attributes.con.check}}</td>
                                     <td><a class="attr-roll" title="Roll" data-attr="con"><i class="fas fa-dice-d20"></i></a></td>
                                 </tr>
                                 <tr>
                                     <td>Int</td>
-                                    <td><input type="text" name="data.attributes.int.score" value="{{data.attributes.int.score}}" data-dtype="Number" /></td>
-                                    <td>{{data.computed.attributes.int.mod}}</td>
-                                    <td>{{data.computed.attributes.int.check}}</td>
+                                    <td><input type="text" name="data.attributes.int.score" value="{{data.data.attributes.int.score}}" data-dtype="Number" /></td>
+                                    <td>{{data.data.computed.attributes.int.mod}}</td>
+                                    <td>{{data.data.computed.attributes.int.check}}</td>
                                     <td><a class="attr-roll" title="Roll" data-attr="int"><i class="fas fa-dice-d20"></i></a></td>
                                 </tr>
                                 <tr>
                                     <td>Wis</td>
-                                    <td><input type="text" name="data.attributes.wis.score" value="{{data.attributes.wis.score}}" data-dtype="Number" /></td>
-                                    <td>{{data.computed.attributes.wis.mod}}</td>
-                                    <td>{{data.computed.attributes.wis.check}}</td>
+                                    <td><input type="text" name="data.attributes.wis.score" value="{{data.data.attributes.wis.score}}" data-dtype="Number" /></td>
+                                    <td>{{data.data.computed.attributes.wis.mod}}</td>
+                                    <td>{{data.data.computed.attributes.wis.check}}</td>
                                     <td><a class="attr-roll" title="Roll" data-attr="wis"><i class="fas fa-dice-d20"></i></a></td>
                                 </tr>
                                 <tr>
                                     <td>Cha</td>
-                                    <td><input type="text" name="data.attributes.cha.score" value="{{data.attributes.cha.score}}" data-dtype="Number" /></td>
-                                    <td>{{data.computed.attributes.cha.mod}}</td>
-                                    <td>{{data.computed.attributes.cha.check}}</td>
+                                    <td><input type="text" name="data.attributes.cha.score" value="{{data.data.attributes.cha.score}}" data-dtype="Number" /></td>
+                                    <td>{{data.data.computed.attributes.cha.mod}}</td>
+                                    <td>{{data.data.computed.attributes.cha.check}}</td>
                                     <td><a class="attr-roll" title="Roll" data-attr="cha"><i class="fas fa-dice-d20"></i></a></td>
                                 </tr>
                                 </tbody>
@@ -124,23 +124,23 @@
                                 <tbody>
                                 <tr>
                                     <td>Hardiness</td>
-                                    <td>{{data.computed.saves.hardiness.base}}</td>
-                                    <td><input type="text" name="data.saves.hardiness.bonus" value="{{data.saves.hardiness.bonus}}" data-dtype="Number" /></td>
-                                    <td>{{data.computed.saves.hardiness.penalty}}</td>
+                                    <td>{{data.data.computed.saves.hardiness.base}}</td>
+                                    <td><input type="text" name="data.saves.hardiness.bonus" value="{{data.data.saves.hardiness.bonus}}" data-dtype="Number" /></td>
+                                    <td>{{data.data.computed.saves.hardiness.penalty}}</td>
                                     <td><a class="save-roll" title="Roll" data-save="hardiness"><i class="fas fa-dice-d20"></i></a></td>
                                 </tr>
                                 <tr>
                                     <td>Evasion</td>
-                                    <td>{{data.computed.saves.evasion.base}}</td>
-                                    <td><input type="text" name="data.saves.evasion.bonus" value="{{data.saves.evasion.bonus}}" data-dtype="Number" /></td>
-                                    <td>{{data.computed.saves.evasion.penalty}}</td>
+                                    <td>{{data.data.computed.saves.evasion.base}}</td>
+                                    <td><input type="text" name="data.saves.evasion.bonus" value="{{data.data.saves.evasion.bonus}}" data-dtype="Number" /></td>
+                                    <td>{{data.data.computed.saves.evasion.penalty}}</td>
                                     <td><a class="save-roll" title="Roll" data-save="evasion"><i class="fas fa-dice-d20"></i></a></td>
                                 </tr>
                                 <tr>
                                     <td>Spirit</td>
-                                    <td>{{data.computed.saves.spirit.base}}</td>
-                                    <td><input type="text" name="data.saves.spirit.bonus" value="{{data.saves.spirit.bonus}}" data-dtype="Number" /></td>
-                                    <td>{{data.computed.saves.spirit.penalty}}</td>
+                                    <td>{{data.data.computed.saves.spirit.base}}</td>
+                                    <td><input type="text" name="data.saves.spirit.bonus" value="{{data.data.saves.spirit.bonus}}" data-dtype="Number" /></td>
+                                    <td>{{data.data.computed.saves.spirit.penalty}}</td>
                                     <td><a class="save-roll" title="Roll" data-save="spirit"><i class="fas fa-dice-d20"></i></a></td>
                                 </tr>
                                 </tbody>
@@ -152,17 +152,17 @@
                                 <tbody>
                                 <tr>
                                     <td style="width:30%">Current HP</td>
-                                    <td style="width:20%"><input type="text" name="data.hp.current" value="{{data.hp.current}}" data-dtype="Number" /></td>
+                                    <td style="width:20%"><input type="text" name="data.hp.current" value="{{data.data.hp.current}}" data-dtype="Number" /></td>
                                     <td style="width:10%">AC</td>
-                                    <td>{{data.computed.armor.ac}}</td>
+                                    <td>{{data.data.computed.armor.ac}}</td>
                                 </tr>
                                 <tr>
                                     <td>Bonus HP</td>
-                                    <td colspan="3"><input type="text" name="data.hp.bonus" value="{{data.hp.bonus}}" data-dtype="Number" /></td>
+                                    <td colspan="3"><input type="text" name="data.hp.bonus" value="{{data.data.hp.bonus}}" data-dtype="Number" /></td>
                                 </tr>
                                 <tr>
                                     <td>Max HP</td>
-                                    <td colspan="3" style="padding-left: 4px;">{{data.computed.hp.max}}</td>
+                                    <td colspan="3" style="padding-left: 4px;">{{data.data.computed.hp.max}}</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -189,24 +189,24 @@
                     <tbody>
                         <tr>
                             <td>Effort</td>
-                            <td><input type="text" data-dtype="Number" name="data.effort.total" value="{{data.effort.total}}" /></td>
-                            <td>{{data.computed.effort.spent}}</td>
-                            <td>{{data.computed.effort.available}}</td>
+                            <td><input type="text" data-dtype="Number" name="data.effort.total" value="{{data.data.effort.total}}" /></td>
+                            <td>{{data.data.computed.effort.spent}}</td>
+                            <td>{{data.data.computed.effort.available}}</td>
                             <td></td>
                         </tr>
                         <tr>
                             <td>Influence</td>
-                            <td><input type="text" data-dtype="Number" name="data.influence.total" value="{{data.influence.total}}" /></td>
-                            <td>{{data.computed.influence.spent}}</td>
-                            <td>{{data.computed.influence.available}}</td>
+                            <td><input type="text" data-dtype="Number" name="data.influence.total" value="{{data.data.influence.total}}" /></td>
+                            <td>{{data.data.computed.influence.spent}}</td>
+                            <td>{{data.data.computed.influence.available}}</td>
                             <td></td>
                         </tr>
                         <tr>
                             <td>Dominion</td>
-                            <td><input type="text" data-dtype="Number" name="data.dominion.total" value="{{data.dominion.total}}" /></td>
-                            <td>{{data.computed.dominion.spent}}</td>
-                            <td>{{data.computed.dominion.available}}</td>
-                            <td>{{data.computed.dominion.income}}</td>
+                            <td><input type="text" data-dtype="Number" name="data.dominion.total" value="{{data.data.dominion.total}}" /></td>
+                            <td>{{data.data.computed.dominion.spent}}</td>
+                            <td>{{data.data.computed.dominion.available}}</td>
+                            <td>{{data.data.computed.dominion.income}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -214,19 +214,19 @@
                     <div>
                         <span style="padding-right: 4px;">At Will:</span>
                         <i class="fas fa-minus effortSpend" data-effort-category="atWill" data-effort-change="-1"></i>
-                        {{data.effort.atWill}}
+                        {{data.data.effort.atWill}}
                         <i class="fas fa-plus effortSpend" data-effort-category="atWill" data-effort-change="1"></i>
                     </div>
                     <div style="margin-left: 32px;">
                         <span style="padding-right: 4px;">Scene:</span>
                         <i class="fas fa-minus effortSpend" data-effort-category="scene" data-effort-change="-1"></i>
-                        {{data.effort.scene}}
+                        {{data.data.effort.scene}}
                         <i class="fas fa-plus effortSpend" data-effort-category="scene" data-effort-change="1"></i>
                     </div>
                     <div style="margin-left: 32px;">
                         <span style="padding-right: 4px;">Day:</span>
                         <i class="fas fa-minus effortSpend" data-effort-category="day" data-effort-change="-1"></i>
-                        {{data.effort.day}}
+                        {{data.data.effort.day}}
                         <i class="fas fa-plus effortSpend" data-effort-category="day" data-effort-change="1"></i>
                     </div>
                 </div>
@@ -240,8 +240,8 @@
                         </h2>
                         <ol class="item-list">
                             {{#each actor.items as |item id|}}
-                            {{#ifeq item.type "boundWord"}}
-                            <li class="item flexrow" data-item-id="{{item._id}}">
+                            {{#ifeq item.data.type "boundWord"}}
+                            <li class="item flexrow" data-item-id="{{item.id}}">
                                 <h4 class="item-name">{{item.name}}</h4>
                                 <div class="item-controls">
                                     <a class="item-control item-pdf" title="Show Documentation"><i class="fas fa-file-pdf"></i></a>
@@ -258,21 +258,21 @@
                         </h2>
                         <ol class="item-list">
                             {{#each actor.items as |item id|}}
-                            {{#ifeq item.type "divineMiracle"}}
-                            <li class="item flexrow" data-item-id="{{item._id}}">
+                            {{#ifeq item.data.type "divineMiracle"}}
+                            <li class="item flexrow" data-item-id="{{item.id}}">
                                 <h4 class="item-name">
                                     {{item.name}}
                                     <span class="item-tags">
-                                    {{#if item.data.instant}}
+                                    {{#if item.data.data.instant}}
                                         <a title="Instant"><i class="fas fa-bolt"></i></a>
                                     {{/if}}
-                                    {{#if item.data.onTurn}}
+                                    {{#if item.data.data.onTurn}}
                                         <a title="On Turn"><i class="fas fa-redo-alt"></i></a>
                                     {{/if}}
-                                    {{#if item.data.action}}
+                                    {{#if item.data.data.action}}
                                         <a title="Action"><i class="fas fa-hourglass-end"></i></a>
                                     {{/if}}
-                                    {{#if item.data.smite}}
+                                    {{#if item.data.data.smite}}
                                         <a title="Smite"><i class="fas fa-meteor"></i></a>
                                     {{/if}}
                                     </span>
@@ -293,44 +293,44 @@
                     </h2>
                     <ol class="item-list">
                         {{#each actor.items as |item id|}}
-                        {{#ifeq item.type "divineGift"}}
-                        <li class="item flexrow" data-item-id="{{item._id}}">
+                        {{#ifeq item.data.type "divineGift"}}
+                        <li class="item flexrow" data-item-id="{{item.id}}">
                             <h4 class="item-name">
-                                {{#if item.data.greater}}
+                                {{#if item.data.data.greater}}
                                     <span style="font-style: italic">{{item.name}}</span>
                                 {{/if}}
-                                {{#unless item.data.greater}}
+                                {{#unless item.data.data.greater}}
                                     {{item.name}}
                                 {{/unless}}
                                 <span class="item-tags">
-                                {{#if item.data.instant}}
+                                {{#if item.data.data.instant}}
                                     <a title="Instant"><i class="fas fa-bolt"></i></a>
                                 {{/if}}
-                                {{#if item.data.onTurn}}
+                                {{#if item.data.data.onTurn}}
                                     <a title="On Turn"><i class="fas fa-redo-alt"></i></a>
                                 {{/if}}
-                                {{#if item.data.action}}
+                                {{#if item.data.data.action}}
                                     <a title="Action"><i class="fas fa-hourglass-end"></i></a>
                                 {{/if}}
-                                {{#if item.data.smite}}
+                                {{#if item.data.data.smite}}
                                     <a title="Smite"><i class="fas fa-meteor"></i></a>
                                 {{/if}}
                                 </span>
                             </h4>
                             <div class="item-controls">
-                                {{#if item.data.constant}}
+                                {{#if item.data.data.constant}}
                                 <a class="item-control item-chat" title="Constant Effect"><i class="fas fa-infinity"></i></a>
                                 {{/if}}
-                                {{#if item.data.noEffort}}
+                                {{#if item.data.data.noEffort}}
                                 <a class="item-control item-chat" title="Effortless Effect"><i class="far fa-play-circle"></i></a>
                                 {{/if}}
-                                {{#if item.data.atWill}}
+                                {{#if item.data.data.atWill}}
                                 <a class="item-control item-atWill-effort" title="Commit Effort At Will"><i class="fas fa-power-off"></i></a>
                                 {{/if}}
-                                {{#if item.data.scene}}
+                                {{#if item.data.data.scene}}
                                 <a class="item-control item-scene-effort" title="Commit Effort for Scene"><i class="fas fa-clock"></i></a>
                                 {{/if}}
-                                {{#if item.data.day}}
+                                {{#if item.data.data.day}}
                                 <a class="item-control item-day-effort" title="Commit Effort for Day"><i class="fas fa-sun"></i></a>
                                 {{/if}}
                             </div>
@@ -346,11 +346,11 @@
             <div class="container col">
                 <div>
                     <h3>Facts:</h3>
-                    <textarea name="data.facts" style="height:128px;font-size:14px">{{data.facts}}</textarea>
+                    <textarea name="data.facts" style="height:128px;font-size:14px">{{data.data.facts}}</textarea>
                 </div>
                 <div>
                     <h3>Notes:</h3>
-                    <textarea name="data.notes" style="height:128px;font-size:14px">{{data.notes}}</textarea>
+                    <textarea name="data.notes" style="height:128px;font-size:14px">{{data.data.notes}}</textarea>
                 </div>
             </div>
         </div>
@@ -361,20 +361,20 @@
                     Armor
                 </h2>
                 <select name="data.armor.type" id="armorType">
-                    {{#select data.armor.type}}
+                    {{#select data.data.armor.type}}
                     <option value="none">None AC 9(skin or clothing)</option>
                     <option value="light">Light AC 7 (leathers or hides)</option>
                     <option value="medium">Medium AC 5 (mail or lt plate; -4 to 1 save)</option>
                     <option value="heavy">Heavy AC 3 (hvy plate; -4 to 2 saves)</option>
-                    <option value="divine">Divine Gift AC 3)</option>
+                    <option value="divine">Divine Gift (AC 3)</option>
                     {{/select}}
                 </select>
                 <div style="display:flex;align-items:center;justify-content: flex-start">
-                    <input id="armorShield" type="checkbox" name="data.armor.shield" {{checked data.armor.shield}} style="margin-right:0" />
+                    <input id="armorShield" type="checkbox" name="data.armor.shield" {{checked data.data.armor.shield}} style="margin-right:0" />
                     <label for="armorShield">Shield</label>
 
                     <select name="data.armor.attribute" id="armorAttribute"  style="margin-left:16px" >
-                        {{#select data.armor.attribute}}
+                        {{#select data.data.armor.attribute}}
                         <option value="str">Str</option>
                         <option value="dex">Dex</option>
                         <option value="con">Con</option>
@@ -385,15 +385,15 @@
                     </select>
 
                     <label for="armorBonus"  style="margin-left:16px" >Bonus</label>
-                    <input id="armorBonus" type="text" name="data.armor.bonus" value="{{data.armor.bonus}}" data-dtype="Number" class="compact" style="margin-left:4px;"/>
+                    <input id="armorBonus" type="text" name="data.armor.bonus" value="{{data.data.armor.bonus}}" data-dtype="Number" class="compact" style="margin-left:4px;"/>
 
-                    <label  style="margin-left:16px;margin-right:4px;font-weight:bold;" >AC</label> <span style="font-weight:bold">{{data.computed.armor.ac}}</span>
+                    <label  style="margin-left:16px;margin-right:4px;font-weight:bold;" >AC</label> <span style="font-weight:bold">{{data.data.computed.armor.ac}}</span>
 
-                    <input id="penalizeHardiness" type="checkbox" name="data.armor.penalizeHardiness" {{checked data.armor.penalizeHardiness}} style="margin-left:32px;margin-right:0" />
+                    <input id="penalizeHardiness" type="checkbox" name="data.armor.penalizeHardiness" {{checked data.data.armor.penalizeHardiness}} style="margin-left:32px;margin-right:0" />
                     <label for="penalizeHardiness">-Hardiness</label>
-                    <input id="penalizeEvasion" type="checkbox" name="data.armor.penalizeEvasion" {{checked data.armor.penalizeEvasion}} style="margin-left:16px;margin-right:0" />
+                    <input id="penalizeEvasion" type="checkbox" name="data.armor.penalizeEvasion" {{checked data.data.armor.penalizeEvasion}} style="margin-left:16px;margin-right:0" />
                     <label for="penalizeEvasion">-Evasion</label>
-                    <input id="penalizeSpirit" type="checkbox" name="data.armor.penalizeSpirit" {{checked data.armor.penalizeSpirit}} style="margin-left:16px;margin-right:0" />
+                    <input id="penalizeSpirit" type="checkbox" name="data.armor.penalizeSpirit" {{checked data.data.armor.penalizeSpirit}} style="margin-left:16px;margin-right:0" />
                     <label for="penalizeSpirit">-Spirit</label>
 
                 </div>
@@ -407,24 +407,24 @@
                         </h2>
                         <ol class="item-list">
                             {{#each actor.items as |item id|}}
-                            {{#ifeq item.type "attack"}}
-                            <li class="item flexrow" data-item-id="{{item._id}}">
+                            {{#ifeq item.data.type "attack"}}
+                            <li class="item flexrow" data-item-id="{{item.id}}">
                                 <h4 class="item-name">
-                                    {{#if item.data.magic}}
+                                    {{#if item.data.data.magic}}
                                     {{item.name}}*
                                     {{/if}}
-                                    {{#unless item.data.magic}}
+                                    {{#unless item.data.data.magic}}
                                     {{item.name}}
                                     {{/unless}}
                                     <span class="item-tags">
-                                    {{#ifneq item.data.hitBonus 0}}
-                                        +{{item.data.hitBonus}}
+                                    {{#ifneq item.data.data.hitBonus 0}}
+                                        +{{item.data.data.hitBonus}}
                                     {{/ifneq}}
-                                    {{#ifneq item.data.damageBonus 0}}
-                                        {{item.data.damageRoll}}+{{item.data.damageBonus}}
+                                    {{#ifneq item.data.data.damageBonus 0}}
+                                        {{item.data.data.damageRoll}}+{{item.data.data.damageBonus}}
                                     {{/ifneq}}
-                                    {{#ifeq item.data.damageBonus 0}}
-                                        {{item.data.damageRoll}}
+                                    {{#ifeq item.data.data.damageBonus 0}}
+                                        {{item.data.data.damageRoll}}
                                     {{/ifeq}}
                                     </span>
                                 </h4>
@@ -437,7 +437,7 @@
                         </ol>
                         <div>
                             <label for="toHitBonus">To Hit Bonus:</label>
-                            <input id="toHitBonus" name="data.toHitBonus" value="{{data.toHitBonus}}" type="text" data-dtype="Number" class="compact" style="margin-left:8px;" />
+                            <input id="toHitBonus" name="data.toHitBonus" value="{{data.data.toHitBonus}}" type="text" data-dtype="Number" class="compact" style="margin-left:8px;" />
                         </div>
                     </div>
 
@@ -448,17 +448,17 @@
                         </h2>
                         <ol class="item-list">
                             {{#each actor.items as |item id|}}
-                            {{#ifeq item.type "autoHitAttack"}}
-                            <li class="item flexrow" data-item-id="{{item._id}}">
+                            {{#ifeq item.data.type "autoHitAttack"}}
+                            <li class="item flexrow" data-item-id="{{item.id}}">
                                 <h4 class="item-name">
                                     {{item.name}}
                                     <span class="item-tags">
-                                    {{#ifneq item.data.damageBonus 0}}
-                                        {{item.data.damageRoll}}+{{item.data.damageBonus}}
+                                    {{#ifneq item.data.data.damageBonus 0}}
+                                        {{item.data.data.damageRoll}}+{{item.data.data.damageBonus}}
                                     {{/ifneq}}
 
-                                    {{#ifeq item.data.damageBonus 0}}
-                                        {{item.data.damageRoll}}
+                                    {{#ifeq item.data.data.damageBonus 0}}
+                                        {{item.data.data.damageRoll}}
                                     {{/ifeq}}
                                     </span>
                                 </h4>
@@ -477,9 +477,9 @@
                         </h2>
                         <div style="display:flex;justify-content: space-between">
                             <h3>
-                                HP: {{actor.data.hp.current}}
-                                {{#unlesseq actor.data.hp.bonus 0}}
-                                ({{actor.data.hp.bonus}})
+                                HP: {{actor.data.data.hp.current}}
+                                {{#unlesseq actor.data.data.hp.bonus 0}}
+                                ({{actor.data.data.hp.bonus}})
                                 {{/unlesseq}}
                             </h3>
                             <div>
@@ -496,48 +496,48 @@
                     </h2>
                     <ol class="item-list">
                         {{#each actor.items as |item id|}}
-                        {{#ifcombatpower ../actor._id item._id}}
-                        <li class="item flexrow" data-item-id="{{item._id}}">
+                        {{#ifcombatpower ../actor.id item.id}}
+                        <li class="item flexrow" data-item-id="{{item.id}}">
                             <h4 class="item-name">
-                                {{#if item.data.greater}}
+                                {{#if item.data.data.greater}}
                                 <span style="font-style: italic">{{item.name}}</span>
                                 {{/if}}
-                                {{#unless item.data.greater}}
+                                {{#unless item.data.data.greater}}
                                 {{item.name}}
                                 {{/unless}}
                                 <span class="item-tags">
-                                {{#if item.data.instant}}
+                                {{#if item.data.data.instant}}
                                     <a title="Instant"><i class="fas fa-bolt"></i></a>
                                 {{/if}}
-                                {{#if item.data.onTurn}}
+                                {{#if item.data.data.onTurn}}
                                     <a title="On Turn"><i class="fas fa-redo-alt"></i></a>
                                 {{/if}}
-                                {{#if item.data.action}}
+                                {{#if item.data.data.action}}
                                     <a title="Action"><i class="fas fa-hourglass-end"></i></a>
                                 {{/if}}
-                                {{#if item.data.smite}}
+                                {{#if item.data.data.smite}}
                                     <a title="Smite"><i class="fas fa-meteor"></i></a>
                                 {{/if}}
                                 </span>
                             </h4>
                             <div class="item-controls">
-                                {{#ifeq item.type "divineMiracle"}}
+                                {{#ifeq item.data.type "divineMiracle"}}
                                     <a class="item-control item-day-effort" title="Commit Effort for Day"><i class="fas fa-sun"></i></a>
                                 {{/ifeq}}
-                                {{#if (or (eq item.type "divineGift") (eq item.type "artifactPower"))}}
-                                    {{#if item.data.constant}}
+                                {{#if (or (eq item.data.type "divineGift") (eq item.data.type "artifactPower"))}}
+                                    {{#if item.data.data.constant}}
                                     <a class="item-control item-chat" title="Constant Effect"><i class="fas fa-infinity"></i></a>
                                     {{/if}}
-                                    {{#if item.data.noEffort}}
+                                    {{#if item.data.data.noEffort}}
                                     <a class="item-control item-chat" title="Effortless Effect"><i class="far fa-play-circle"></i></a>
                                     {{/if}}
-                                    {{#if item.data.atWill}}
+                                    {{#if item.data.data.atWill}}
                                     <a class="item-control item-atWill-effort" title="Commit Effort At Will"><i class="fas fa-power-off"></i></a>
                                     {{/if}}
-                                    {{#if item.data.scene}}
+                                    {{#if item.data.data.scene}}
                                     <a class="item-control item-scene-effort" title="Commit Effort for Scene"><i class="fas fa-clock"></i></a>
                                     {{/if}}
-                                    {{#if item.data.day}}
+                                    {{#if item.data.data.day}}
                                     <a class="item-control item-day-effort" title="Commit Effort for Day"><i class="fas fa-sun"></i></a>
                                     {{/if}}
                                 {{/if}}
@@ -546,7 +546,7 @@
                         {{/ifcombatpower}}
                         {{/each}}
                     </ol>
-                    <h3>Free Effort: {{data.computed.effort.available}}</h3>
+                    <h3>Free Effort: {{data.data.computed.effort.available}}</h3>
                 </div>
 
             </div>
@@ -559,12 +559,12 @@
                     <div>
                         <label for="wealthTotal">Wealth Total:</label>
                         <div>
-                            <input id="wealthTotal" name="data.wealth.total" value="{{data.wealth.total}}" type="text" data-dtype="Number" class="compact" />
+                            <input id="wealthTotal" name="data.wealth.total" value="{{data.data.wealth.total}}" type="text" data-dtype="Number" class="compact" />
                         </div>
                     </div>
                     <div>
                         <label for="wealthDescription">Description:</label>
-                        <textarea id="wealthDescription" name="data.wealth.description">{{data.wealth.description}}</textarea>
+                        <textarea id="wealthDescription" name="data.wealth.description">{{data.data.wealth.description}}</textarea>
                     </div>
                 </div>
             </div>
@@ -575,9 +575,9 @@
                 </h2>
                 <ol class="item-list">
                     {{#each actor.items as |item id|}}
-                    {{#ifeq item.type "treasure"}}
-                    <li class="item flexrow" data-item-id="{{item._id}}">
-                        <h4 class="item-name">{{item.name}} (Value {{item.data.value}})</h4>
+                    {{#ifeq item.data.type "treasure"}}
+                    <li class="item flexrow" data-item-id="{{item.id}}">
+                        <h4 class="item-name">{{item.name}} (Value {{item.data.data.value}})</h4>
                         <div class="item-controls">
                             <a class="item-control item-chat" title="Chat Description"><i class="fas fa-comment"></i></a>
                         </div>
@@ -595,12 +595,12 @@
                     <i class="fas fa-plus itemAdder" data-item-type="artifact"></i>
                 </h2>
                 <ol class="item-list">
-                    {{#each data.computed.artifacts as |artifact id|}}
-                    <li class="item flexrow" data-item-id="{{artifact.item._id}}">
+                    {{#each data.data.computed.artifacts as |artifact id|}}
+                    <li class="item flexrow" data-item-id="{{artifact.item.id}}">
                         <h4 class="item-name">
-                            {{artifact.item.name}} (Effort {{artifact.item.data.computed.effort.available}})
+                            {{artifact.item.name}} (Effort {{artifact.item.data.data.computed.effort.available}})
                             <span class="item-tags">
-                            {{#if artifact.item.data.bound}}
+                            {{#if artifact.item.data.data.bound}}
                                 Bound
                             {{/if}}
                             </span>
@@ -609,46 +609,46 @@
                             <a class="item-control item-day-effort" title="Commit Effort for Day"><i class="fas fa-sun"></i></a>
                         </div>
                     </li>
-                    {{#if artifact.item.data.bound}}
+                    {{#if artifact.item.data.data.bound}}
                         {{#each artifact.artifactPowers as |power id|}}
-                        {{#ifeq power.type "artifactPower"}}
-                        <li class="item flexrow" data-item-id="{{power._id}}">
+                        {{#ifeq power.data.type "artifactPower"}}
+                        <li class="item flexrow" data-item-id="{{power.id}}">
                             <h4 class="item-name" style="padding-left:16px;">
-                                {{#if power.data.greater}}
+                                {{#if power.data.data.greater}}
                                 <span style="font-style: italic">{{power.name}}</span>
                                 {{/if}}
-                                {{#unless power.data.greater}}
+                                {{#unless power.data.data.greater}}
                                 {{power.name}}
                                 {{/unless}}
                                 <span class="item-tags">
-                                {{#if power.data.instant}}
+                                {{#if power.data.data.instant}}
                                     <a title="Instant"><i class="fas fa-bolt"></i></a>
                                 {{/if}}
-                                {{#if power.data.onTurn}}
+                                {{#if power.data.data.onTurn}}
                                     <a title="On Turn"><i class="fas fa-redo-alt"></i></a>
                                 {{/if}}
-                                {{#if power.data.action}}
+                                {{#if power.data.data.action}}
                                     <a title="Action"><i class="fas fa-hourglass-end"></i></a>
                                 {{/if}}
-                                {{#if power.data.smite}}
+                                {{#if power.data.data.smite}}
                                     <a title="Smite"><i class="fas fa-meteor"></i></a>
                                 {{/if}}
                             </span>
                             </h4>
                             <div class="item-controls">
-                                {{#if power.data.constant}}
+                                {{#if power.data.data.constant}}
                                 <a class="item-control item-chat" title="Constant Effect"><i class="fas fa-infinity"></i></a>
                                 {{/if}}
-                                {{#if power.data.noEffort}}
+                                {{#if power.data.data.noEffort}}
                                 <a class="item-control item-chat" title="Effortless Effect"><i class="far fa-play-circle"></i></a>
                                 {{/if}}
-                                {{#if power.data.atWill}}
+                                {{#if power.data.data.atWill}}
                                 <a class="item-control item-atWill-effort" title="Commit Effort At Will"><i class="fas fa-power-off"></i></a>
                                 {{/if}}
-                                {{#if power.data.scene}}
+                                {{#if power.data.data.scene}}
                                 <a class="item-control item-scene-effort" title="Commit Effort for Scene"><i class="fas fa-clock"></i></a>
                                 {{/if}}
-                                {{#if power.data.day}}
+                                {{#if power.data.data.day}}
                                 <a class="item-control item-day-effort" title="Commit Effort for Day"><i class="fas fa-sun"></i></a>
                                 {{/if}}
                             </div>
@@ -658,7 +658,7 @@
                     {{/if}}
                     {{/each}}
                 </ol>
-                <h3>Free Effort: {{data.computed.effort.available}}</h3>
+                <h3>Free Effort: {{data.data.computed.effort.available}}</h3>
             </div>
         </div>
 
@@ -670,17 +670,17 @@
                 </h2>
                 <ol class="item-list">
                     {{#each actor.items as |item id|}}
-                    {{#ifeq item.type "project"}}
-                    <li class="item flexrow" data-item-id="{{item._id}}">
+                    {{#ifeq item.data.type "project"}}
+                    <li class="item flexrow" data-item-id="{{item.id}}">
                         <h4 class="item-name">
                             {{item.name}}
                             <span class="item-tags">
-                                {{#if item.data.completed}}
+                                {{#if item.data.data.completed}}
                                     Completed
                                 {{/if}}
-                                {{#unless item.data.completed}}
+                                {{#unless item.data.data.completed}}
                                     In Progress
-                                    {{#if item.data.active}}
+                                    {{#if item.data.data.active}}
                                         / In Effect
                                     {{/if}}
                                 {{/unless}}
@@ -696,11 +696,11 @@
                 <div style="display:flex;align-items:center;justify-content: space-around">
                     <div>
                         <label for="influenceContributed">Other Influence Spent:</label>
-                        <input id="influenceContributed" name="data.influence.contributed" value="{{data.influence.contributed}}" type="text" data-dtype="Number" class="compact" style="margin-left:8px" />
+                        <input id="influenceContributed" name="data.influence.contributed" value="{{data.data.influence.contributed}}" type="text" data-dtype="Number" class="compact" style="margin-left:8px" />
                     </div>
                     <div>
                         <label for="dominionContributed">Other Dominion Spent:</label>
-                        <input id="dominionContributed" name="data.dominion.contributed" value="{{data.dominion.contributed}}" type="text" data-dtype="Number" class="compact" style="margin-left:8px" />
+                        <input id="dominionContributed" name="data.dominion.contributed" value="{{data.data.dominion.contributed}}" type="text" data-dtype="Number" class="compact" style="margin-left:8px" />
                     </div>
                 </div>
             </div>
@@ -711,8 +711,8 @@
                 </h2>
                 <ol class="item-list">
                     {{#each actor.items as |item id|}}
-                    {{#ifeq item.type "cult"}}
-                    <li class="item flexrow" data-item-id="{{item._id}}">
+                    {{#ifeq item.data.type "cult"}}
+                    <li class="item flexrow" data-item-id="{{item.id}}">
                         <h4 class="item-name">
                             {{item.name}}
                             <span class="item-tags">
@@ -728,7 +728,7 @@
                 <div style="display:flex;align-items:center;justify-content: space-around">
                     <div>
                         <label for="dominionOtherIncome">Other Domain Income :</label>
-                        <input id="dominionOtherIncome" name="data.dominion.otherIncome" value="{{data.dominion.otherIncome}}" type="text" data-dtype="Number" class="compact" style="margin-left:8px" />
+                        <input id="dominionOtherIncome" name="data.dominion.otherIncome" value="{{data.data.dominion.otherIncome}}" type="text" data-dtype="Number" class="compact" style="margin-left:8px" />
                     </div>
                 </div>
             </div>

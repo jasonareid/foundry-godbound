@@ -15,7 +15,7 @@
                         <div>
                             <label for="word">Word:</label>
                             <select id="word" name="data.word">
-                                {{#select data.word}}
+                                {{#select data.data.word}}
                                 {{#each actorBoundWordNames as |wordName i|}}
                                     <option value="{{wordName}}">{{wordName}}</option>
                                 {{/each}}
@@ -24,37 +24,37 @@
                         </div>
                         <div>
                             <label for="description">Description:</label>
-                            <textarea id="description" name="data.description" class="xtall">{{data.description}}</textarea>
+                            <textarea id="description" name="data.description" class="xtall">{{data.data.description}}</textarea>
                         </div>
                         <div>
                             <label></label>
                             <div style="display:flex; align-items: center">
-                                <input type="checkbox" name="data.greater" {{checked data.greater}} style="margin-left:0" />Greater
+                                <input type="checkbox" name="data.greater" {{checked data.data.greater}} style="margin-left:0" />Greater
                             </div>
                         </div>
                         <div>
                             <label>Activation:</label>
                             <div style="display: flex; align-items: center">
-                                <input type="checkbox" name="data.constant" {{checked data.constant}} style="margin-left:0" />Constant
-                                <input type="checkbox" name="data.instant" {{checked data.instant}} />Instant
-                                <input type="checkbox" name="data.onTurn" {{checked data.onTurn}} />On Turn
-                                <input type="checkbox" name="data.action" {{checked data.action}} />Action
+                                <input type="checkbox" name="data.constant" {{checked data.data.constant}} style="margin-left:0" />Constant
+                                <input type="checkbox" name="data.instant" {{checked data.data.instant}} />Instant
+                                <input type="checkbox" name="data.onTurn" {{checked data.data.onTurn}} />On Turn
+                                <input type="checkbox" name="data.action" {{checked data.data.action}} />Action
                             </div>
                         </div>
                         <div>
                             <label>Effort:</label>
                             <div style="display: flex; align-items: center">
-                                <input type="checkbox" name="data.noEffort" {{checked data.noEffort}} style="margin-left:0" />None
-                                <input type="checkbox" name="data.atWill" {{checked data.atWill}} />At Will
-                                <input type="checkbox" name="data.scene" {{checked data.scene}} />Scene
-                                <input type="checkbox" name="data.day" {{checked data.day}} />Day
+                                <input type="checkbox" name="data.noEffort" {{checked data.data.noEffort}} style="margin-left:0" />None
+                                <input type="checkbox" name="data.atWill" {{checked data.data.atWill}} />At Will
+                                <input type="checkbox" name="data.scene" {{checked data.data.scene}} />Scene
+                                <input type="checkbox" name="data.day" {{checked data.data.day}} />Day
                             </div>
                         </div>
                         <div>
                             <label></label>
                             <div style="display: flex; align-items: center">
-                                <input type="checkbox" name="data.combatPower" {{checked data.combatPower}} style="margin-left:0" />Combat Power
-                                <input type="checkbox" name="data.smite" {{checked data.smite}} style="margin-left:16px;" />Smite
+                                <input type="checkbox" name="data.combatPower" {{checked data.data.combatPower}} style="margin-left:0" />Combat Power
+                                <input type="checkbox" name="data.smite" {{checked data.data.smite}} style="margin-left:16px;" />Smite
                             </div>
                         </div>
                         <div>

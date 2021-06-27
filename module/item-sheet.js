@@ -29,8 +29,8 @@ export class GodboundItemSheet extends ItemSheet {
   getData() {
     const data = super.getData();
     data.dtypes = ["String", "Number", "Boolean"];
-    if(this.item.type === 'artifact' && this.item.actor) {
-      let lookup = this.item.actor.data.data.computed.artifactIdx[this.item._id];
+    if(this.item.data.type === 'artifact' && this.item.actor) {
+      let lookup = this.item.actor.data.data.computed.artifactIdx[this.item.id];
       if(lookup) {
         data.artifactPowers = lookup.artifactPowers;
       } else {
@@ -39,8 +39,8 @@ export class GodboundItemSheet extends ItemSheet {
       console.log("Artifact powers");
       console.log(data.artifactPowers);
     }
-    if(this.item.type === 'divineGift' && this.item.actor) {
-      data.actorBoundWordNames = this.item.actor.items.filter(i => i.type === 'boundWord').map(i => i.name);
+    if(this.item.data.type === 'divineGift' && this.item.actor) {
+      data.actorBoundWordNames = this.item.actor.items.filter(i => i.data.type === 'boundWord').map(i => i.name);
     }
     return data;
   }
@@ -79,7 +79,7 @@ export class GodboundItemSheet extends ItemSheet {
 
     html.find('.item-name').click(ev => {
       const li = $(ev.currentTarget).parents('.item');
-      const item = this.actor.getOwnedItem(li.data("itemId"));
+      const item = this.actor.items.get(li.data("itemId"));
       item.sheet.render(true);
     });
 
@@ -87,7 +87,7 @@ export class GodboundItemSheet extends ItemSheet {
       const li = $(ev.currentTarget).parents('.item');
       let item;
       if(li && li.data("itemId") && this.actor) {
-        item = this.actor.getOwnedItem(li.data("itemId"));
+        item = this.actor.items.get(li.data("itemId"));
       } else {
         item = this.item;
       }
@@ -112,7 +112,7 @@ export class GodboundItemSheet extends ItemSheet {
       }
     });
     html.find('.item-delete').click(ev => {
-      if(this.item.type === 'artifact') {
+      if(this.item.data.type === 'artifact') {
         if(this.item.actor && this.item.actor.hasArtifactPowersUnder(this.item.id)) {
           ui.notifications.warn("Please delete artifact powers individually before deleting artifact.");
           return;
@@ -125,7 +125,7 @@ export class GodboundItemSheet extends ItemSheet {
 
     html.find('.itemAdder').click(async ev => {
       const $i = $(ev.currentTarget);
-      if(!this.item.type === 'artifact') {
+      if(!this.item.data.type === 'artifact') {
         ui.notifications.error("Only artifacts should be creating sub-items");
         return;
       }
@@ -133,7 +133,7 @@ export class GodboundItemSheet extends ItemSheet {
         ui.notifications.error("Cannot add powers to an unowned artifact");
         return;
       }
-      this.actor.createOwnedItem({name: TypeNames($i.data('itemType')), type: $i.data('itemType'), data: {artifactId: this.item._id}}, {renderSheet: true});
+      this.actor.createOwnedItem({name: TypeNames($i.data('itemType')), type: $i.data('itemType'), data: {artifactId: this.item.id}}, {renderSheet: true});
     });
 
   }

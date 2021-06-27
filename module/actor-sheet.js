@@ -67,37 +67,37 @@ export class GodboundActorSheet extends ActorSheet {
 
     html.find('.item-name').click(ev => {
       const li = $(ev.currentTarget).parents('.item');
-      const item = this.actor.getOwnedItem(li.data("itemId"));
+      const item = this.actor.items.get(li.data("itemId"));
       item.sheet.render(true);
     });
 
     html.find('.item-pdf').click(ev => {
       const li = $(ev.currentTarget).parents('.item');
-      const item = this.actor.getOwnedItem(li.data("itemId"));
+      const item = this.actor.items.get(li.data("itemId"));
       this.actor.demonstrateDoc(item);
     });
 
     html.find('.item-chat').click(ev => {
       const li = $(ev.currentTarget).parents('.item');
-      const item = this.actor.getOwnedItem(li.data("itemId"));
+      const item = this.actor.items.get(li.data("itemId"));
       this.actor.demonstratePower(item);
     });
 
     html.find('.item-day-effort').click(ev => {
       const li = $(ev.currentTarget).parents('.item');
-      const item = this.actor.getOwnedItem(li.data("itemId"));
+      const item = this.actor.items.get(li.data("itemId"));
       this.actor.commitEffortForDay(item);
     });
 
     html.find('.item-scene-effort').click(ev => {
       const li = $(ev.currentTarget).parents('.item');
-      const item = this.actor.getOwnedItem(li.data("itemId"));
+      const item = this.actor.items.get(li.data("itemId"));
       this.actor.commitEffortForScene(item);
     });
 
     html.find('.item-atWill-effort').click(ev => {
       const li = $(ev.currentTarget).parents('.item');
-      const item = this.actor.getOwnedItem(li.data("itemId"));
+      const item = this.actor.items.get(li.data("itemId"));
       this.actor.commitEffortAtWill(item);
     });
 
@@ -129,7 +129,7 @@ export class GodboundActorSheet extends ActorSheet {
       PlayerRollDialog.create(this.actor, {rollType: `${Capitalize(attr)} check`}, async (data) => {
         let template = 'systems/godbound/templates/chat/attr-roll-result.html';
         let chatData = {
-          user: game.user._id,
+          user: game.user.id,
           speaker: this.actor.token ? {
             token: this.actor
           } : {
@@ -178,7 +178,7 @@ export class GodboundActorSheet extends ActorSheet {
 
     html.find('.attack-roll').click(async ev => {
       const li = $(ev.currentTarget).parents('.item');
-      const item = this.actor.getOwnedItem(li.data("itemId"));
+      const item = this.actor.items.get(li.data("itemId"));
       this.actor.rollAttack(item);
     });
 
@@ -188,7 +188,7 @@ export class GodboundActorSheet extends ActorSheet {
 
     html.find('.autoattack-roll').click(ev => {
       const li = $(ev.currentTarget).parents('.item');
-      const item = this.actor.getOwnedItem(li.data("itemId"));
+      const item = this.actor.items.get(li.data("itemId"));
       this.actor.rollDamage(item)
     });
 
@@ -197,7 +197,7 @@ export class GodboundActorSheet extends ActorSheet {
       PlayerRollDialog.create(this.actor, {rollType: `${Capitalize(save)} save`}, async (data) => {
         let template = 'systems/godbound/templates/chat/saving-throw-result.html';
         let chatData = {
-          user: game.user._id,
+          user: game.user.id,
           speaker: this.actor.token ? {
             token: this.actor
           } : {
@@ -266,16 +266,16 @@ export class GodboundActorSheet extends ActorSheet {
     });
 
     html.find('#chooseTactic').click(ev => {
-      console.log(this.actor.data.items);
-      let tactics = this.actor.data.items.filter(i =>
-        i.type === 'tactic'
+      console.log(this.actor.items);
+      let tactics = this.actor.items.filter(i =>
+        i.data.type === 'tactic'
       );
-      console.log(tactics);
+
       if(tactics.length > 0) {
         var chosen = tactics[Math.floor(Math.random() * tactics.length)];
         console.log(chosen);
         html.find('#chosenTactic #chosenTactic-name').text(`${chosen.name} -`);
-        html.find('#chosenTactic #chosenTactic-desc').text(chosen.data.description);
+        html.find('#chosenTactic #chosenTactic-desc').text(chosen.data.data.description);
       }
     });
     html.find('#chosenTactic').click(ev => {
@@ -293,7 +293,7 @@ export class GodboundActorSheet extends ActorSheet {
       let attr = $(ev.currentTarget).data('attr');
         let template = 'systems/godbound/templates/chat/attr-roll-result.html';
         let chatData = {
-          user: game.user._id,
+          user: game.user.id,
           speaker: this.actor.token ? {
             token: this.actor
           } : {
@@ -366,7 +366,7 @@ export class GodboundActorSheet extends ActorSheet {
       let itemName = $(itemElement).data('itemName');
       let template = 'systems/godbound/templates/chat/blb-attack-roll-result.html';
       let chatData = {
-        user: game.user._id,
+        user: game.user.id,
         speaker: this.actor.token ? {
           token: this.actor
         } : {
@@ -422,7 +422,7 @@ export class GodboundActorSheet extends ActorSheet {
     html.find('.blb_npc-attack-roll').click(async ev => {
       let template = 'systems/godbound/templates/chat/blb-attack-roll-result.html';
       let chatData = {
-        user: game.user._id,
+        user: game.user.id,
         speaker: this.actor.token ? {
           token: this.actor
         } : {

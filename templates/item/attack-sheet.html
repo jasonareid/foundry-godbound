@@ -15,7 +15,7 @@
                         <div>
                             <label for="attr">Attr:</label>
                             <select name="data.attr" id="attr" >
-                                {{#select item.data.attr}}
+                                {{#select item.data.data.attr}}
                                 <option value="str">Str</option>
                                 <option value="dex">Dex</option>
                                 <option value="con">Con</option>
@@ -27,33 +27,33 @@
                         </div>
                         <div>
                             <label for="hitBonus">Hit Bonus:</label>
-                            <input id="hitBonus" name="data.hitBonus" type="text" value="{{item.data.hitBonus}}" data-dtype="Number"/>
+                            <input id="hitBonus" name="data.hitBonus" type="text" value="{{item.data.data.hitBonus}}" data-dtype="Number"/>
                         </div>
                         <div>
                             <label for="range">Range:</label>
-                            <input id="range" name="data.range" type="text" value="{{item.data.range}}"/>
+                            <input id="range" name="data.range" type="text" value="{{item.data.data.range}}"/>
                         </div>
                         <div>
                             <label for="area">Area:</label>
-                            <input id="area" name="data.area" type="text" value="{{item.data.area}}"/>
+                            <input id="area" name="data.area" type="text" value="{{item.data.data.area}}"/>
                         </div>
                         <div>
                             <label for="damageRoll">Damage:</label>
                             <div style="display: flex; align-items: center">
-                                <input id="damageRoll" name="data.damageRoll" type="text" value="{{item.data.damageRoll}}" class="compactplus"/>
+                                <input id="damageRoll" name="data.damageRoll" type="text" value="{{item.data.data.damageRoll}}" class="compactplus"/>
                                 +
-                                <input id="damageBonus" name="data.damageBonus" type="text" value="{{item.data.damageBonus}}" data-dtype="Number" class="compact"/>
+                                <input id="damageBonus" name="data.damageBonus" type="text" value="{{item.data.data.damageBonus}}" data-dtype="Number" class="compact"/>
                             </div>
                         </div>
                         <div>
                             <label></label>
                             <div style="display: flex; align-items: center">
-                                <input type="checkbox" name="data.magic" {{checked data.magic}} style="margin-left:0" />Magic Weapon
+                                <input type="checkbox" name="data.magic" {{checked data.data.magic}} style="margin-left:0" />Magic Weapon
                             </div>
                         </div>
                         <div>
                             <label for="notes">Notes:</label>
-                            <textarea id="notes" name="data.notes" style="height:128px;font-size:14px">{{data.notes}}</textarea>
+                            <textarea id="notes" name="data.notes" style="height:128px;font-size:14px">{{data.data.notes}}</textarea>
                         </div>
                         <div>
                             <label style="vertical-align: center">Actions:</label>

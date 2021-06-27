@@ -5,11 +5,11 @@
             <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
             <div class="resource">
             	<label>Quantity</label>
-                <input type="text" name="data.quantity" value="{{data.quantity}}" data-dtype="Number"/>
+                <input type="text" name="data.quantity" value="{{data.data.quantity}}" data-dtype="Number"/>
             </div>
             <div class="resource">
             	<label>Weight</label>
-                <input type="text" name="data.weight" value="{{data.weight}}" data-dtype="Number"/>
+                <input type="text" name="data.weight" value="{{data.data.weight}}" data-dtype="Number"/>
             </div>
         </div>
     </header>
@@ -24,7 +24,7 @@
 
         {{!-- Description Tab --}}
         <div class="tab" data-group="primary" data-tab="description">
-            {{editor content=data.description target="data.description" button=true owner=owner editable=editable}}
+            {{editor content=data.data.description target="data.description" button=true owner=owner editable=editable}}
         </div>
     </section>
 </form>

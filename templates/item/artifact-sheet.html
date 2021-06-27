@@ -20,26 +20,26 @@
                         </div>
                         <div>
                             <label for="description">Description:</label>
-                            <textarea id="description" name="data.description">{{data.description}}</textarea>
+                            <textarea id="description" name="data.description">{{data.data.description}}</textarea>
                         </div>
                         <div>
                             <label for="effortTotal">Effort:</label>
-                            <input id="effortTotal" name="data.effort.total" type="text" value="{{data.effort.total}}" data-dtype="Number"/>
+                            <input id="effortTotal" name="data.effort.total" type="text" value="{{data.data.effort.total}}" data-dtype="Number"/>
                         </div>
                         <div>
                             <label>Committed:</label>
                             <div style="display: flex; align-items: center;padding-bottom:16px;">
                                 <div style="width:22%;text-align: right;">
                                     <i class="fas fa-stopwatch"></i>:
-                                    <input id="effortAtWill" name="data.effort.atWill" type="text" value="{{data.effort.atWill}}" data-dtype="Number" class="compact" />
+                                    <input id="effortAtWill" name="data.effort.atWill" type="text" value="{{data.data.effort.atWill}}" data-dtype="Number" class="compact" />
                                 </div>
                                 <div style="width:25%;text-align: right;">
                                     <i class="fas fa-clock"></i>:
-                                    <input id="effortScene" name="data.effort.scene" type="text" value="{{data.effort.scene}}" data-dtype="Number" class="compact"/>
+                                    <input id="effortScene" name="data.effort.scene" type="text" value="{{data.data.effort.scene}}" data-dtype="Number" class="compact"/>
                                 </div>
                                 <div style="width:28%;text-align: right;">
                                     <i class="fas fa-sun"></i>:
-                                    <input id="effortDay" name="data.effort.day" type="text" value="{{data.effort.day}}" data-dtype="Number" class="compact"/>
+                                    <input id="effortDay" name="data.effort.day" type="text" value="{{data.data.effort.day}}" data-dtype="Number" class="compact"/>
                                 </div>
                             </div>
                         </div>
@@ -48,31 +48,31 @@
                             <div style="display: flex; align-items: center;justify-content: space-around">
                                 <div style="width:22%;text-align: right;">
                                     Cost:
-                                    <input id="dominionCost" name="data.dominionCost" type="text" value="{{data.dominionCost}}" data-dtype="Number" class="compact"/>
+                                    <input id="dominionCost" name="data.dominionCost" type="text" value="{{data.data.dominionCost}}" data-dtype="Number" class="compact"/>
                                 </div>
                                 <div style="width:25%;text-align: right;">
                                     Paid:
-                                    <input id="committedDominion" name="data.committedDominion" type="text" value="{{data.committedDominion}}" data-dtype="Number" class="compact"/>
+                                    <input id="committedDominion" name="data.committedDominion" type="text" value="{{data.data.committedDominion}}" data-dtype="Number" class="compact"/>
                                 </div>
                                 <div style="width:28%;text-align: right;">
                                     Ctrb:
-                                    <input id="contributedDominion" name="data.contributedDominion" type="text" value="{{data.contributedDominion}}" data-dtype="Number" class="compact"/>
+                                    <input id="contributedDominion" name="data.contributedDominion" type="text" value="{{data.data.contributedDominion}}" data-dtype="Number" class="compact"/>
                                 </div>
                                 <div style="width:22%;text-align: right;padding-right:8px;">
-                                    <label>Rem: {{data.computed.remaining}}</label>
+                                    <label>Rem: {{data.data.computed.remaining}}</label>
                                 </div>
                             </div>
                         </div>
                         <div>
                             <label></label>
                             <div style="display: flex; align-items: center;padding-top:16px;">
-                                <input type="checkbox" name="data.completed" {{checked data.completed}} style="margin-left:0" />Completed
-                                <input type="checkbox" name="data.bound" {{checked data.bound}} style="margin-left:16px" />Bound for Day
+                                <input type="checkbox" name="data.completed" {{checked data.data.completed}} style="margin-left:0" />Completed
+                                <input type="checkbox" name="data.bound" {{checked data.data.bound}} style="margin-left:16px" />Bound for Day
                             </div>
                         </div>
                         <div>
                             <label for="mortalEffect">Mortal Effect:</label>
-                            <textarea id="mortalEffect" name="data.mortalEffect">{{data.mortalEffect}}</textarea>
+                            <textarea id="mortalEffect" name="data.mortalEffect">{{data.data.mortalEffect}}</textarea>
                         </div>
                         <div>
                             <label style="vertical-align: center">Actions:</label>
@@ -95,26 +95,26 @@
             </h2>
             <ol class="item-list">
                     {{#each artifactPowers as |power id|}}
-                    {{#ifeq power.type "artifactPower"}}
-                    <li class="item flexrow" data-item-id="{{power._id}}">
+                    {{#ifeq power.data.type "artifactPower"}}
+                    <li class="item flexrow" data-item-id="{{power.id}}">
                         <h4 class="item-name">
-                            {{#if power.data.greater}}
+                            {{#if power.data.data.greater}}
                             <span style="font-style: italic">{{power.name}}</span>
                             {{/if}}
-                            {{#unless power.data.greater}}
+                            {{#unless power.data.data.greater}}
                             {{power.name}}
                             {{/unless}}
                             <span class="item-tags">
-                                {{#if power.data.instant}}
+                                {{#if power.data.data.instant}}
                                     <a title="Instant"><i class="fas fa-bolt"></i></a>
                                 {{/if}}
-                                {{#if power.data.onTurn}}
+                                {{#if power.data.data.onTurn}}
                                     <a title="On Turn"><i class="fas fa-redo-alt"></i></a>
                                 {{/if}}
-                                {{#if power.data.action}}
+                                {{#if power.data.data.action}}
                                     <a title="Action"><i class="fas fa-hourglass-end"></i></a>
                                 {{/if}}
-                                {{#if power.data.smite}}
+                                {{#if power.data.data.smite}}
                                     <a title="Smite"><i class="fas fa-meteor"></i></a>
                                 {{/if}}
                             </span>

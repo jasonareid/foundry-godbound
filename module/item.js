@@ -62,7 +62,7 @@ export class GodboundItem extends Item {
     }
 
     canSpendEffort(amount) {
-        if (!this.type === 'artifact') {
+        if (!this.data.type === 'artifact') {
             ui.notifications.warn("Item is not powered by effort");
             return false;
         }

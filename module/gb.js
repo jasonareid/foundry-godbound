@@ -33,8 +33,8 @@ Hooks.once("init", async function () {
     // };
 
     // Define custom Entity classes
-    CONFIG.Actor.entityClass = GodboundActor;
-    CONFIG.Item.entityClass = GodboundItem;
+    CONFIG.Actor.documentClass = GodboundActor;
+    CONFIG.Item.documentClass = GodboundItem;
 
     // Register sheet application classes
     Actors.unregisterSheet("core", ActorSheet);
@@ -96,12 +96,12 @@ Hooks.once("init", async function () {
     Handlebars.registerHelper("ifcombatpower", function(actorId, itemId, options) {
         let actor = game.actors.get(actorId);
         if(actor) {
-            let item = actor.getOwnedItem(itemId);
+            let item = actor.items.get(itemId);
             if(item) {
                 if(item.data.data.combatPower) {
-                    if(item.type === 'artifactPower') {
+                    if(item.data.type === 'artifactPower') {
                         let artifactId = item.data.data.artifactId;
-                        let artifact = actor.getOwnedItem(artifactId);
+                        let artifact = actor.items.get(artifactId);
                         if(!artifact.data.data.completed || !artifact.data.data.bound) {
                             return;
                         }
@@ -137,7 +137,7 @@ Hooks.once("init", async function () {
         let span = $(ev.currentTarget);
         let formula = span.data('formula');
         let actor = game.actors.get(span.data('actorId'));
-        let damageSource = actor.getOwnedItem(span.data('damageSource'));
+        let damageSource = actor.items.get(span.data('damageSource'));
         if (actor) {
             actor.rollDamage(damageSource, formula);
         }
@@ -165,12 +165,12 @@ Hooks.once("init", async function () {
 async function createGodboundMacro(data, slot) {
     console.log("CREATE GODBOUND MACRO");
     console.log(data);
-    if (data.type !== "Item") return;
+    if (data.data.type !== "Item") return;
     if (!("data" in data)) return ui.notifications.warn("You can only create macro buttons for owned Items");
     const item = data.data;
 
     //Create the macro command
-    const command = `game.Godbound.executeGodboundItemMacro("${item._id}", "${item.name}", "${data.actorId}");`;
+    const command = `game.Godbound.executeGodboundItemMacro("${item.id}", "${item.name}", "${data.actorId}");`;
     let macro = game.macros.entities.find(m => (m.name === item.name) && (m.command === command));
     if (!macro) {
         macro = await Macro.create({
@@ -190,18 +190,18 @@ async function executeGodboundItemMacro(itemId, itemName, actorId) {
     if (speaker.token) actor = game.actors.tokens[speaker.token];
     if (!actor) actor = game.actors.get(actorId);
     if (!actor) actor = game.actors.get(speaker.actor);
-    let item = actor ? actor.items.find(i => i._id === itemId) : null;
+    let item = actor ? actor.items.find(i => i.id === itemId) : null;
     if(!item) {
         return ui.notifications.warn(`Your controlled Actor does not have an item named ${itemName} with id ${itemId}`);
     }
 
-    if(item.type === 'autoHitAttack') {
+    if(item.data.type === 'autoHitAttack') {
         actor.rollDamage(item);
-    } else if(item.type === 'attack') {
+    } else if(item.data.type === 'attack') {
         actor.rollAttack(item);
-    } else if(item.type === 'divineMiracle') {
+    } else if(item.data.type === 'divineMiracle') {
         actor.commitEffortForDay(item);
-    } else if(item.type === 'divineGift' || item.type === 'artifactPower') {
+    } else if(item.data.type === 'divineGift' || item.data.type === 'artifactPower') {
         let options = item.getCommitmentOptions();
         if(options.length === 1) {
             await actor[options[0].actorFnRef](item);
